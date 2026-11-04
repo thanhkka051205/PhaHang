@@ -20,15 +20,15 @@ public class UserService {
     }
 
     // Xóa người dùng
-    public void handleDeleteUser(Integer userId) {
+    public void handleDeleteUser(Long userId) {
         this.userRepository.deleteById(userId);
     }
 
     // Tìm người dùng theo id và tất cả người dùng khác
-    public User fetchUserById(Integer userId) {
-        Optional<User> userOptional = this.userRepository.findById(userId);
-        return userOptional.orElse(null);
-    }
+    public User fetchUserById(Long userId) {
+    return this.userRepository.findById(userId)
+            .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+        }
 
     public List<User> fetchAllUsers(){
         return this.userRepository.findAll();
@@ -38,7 +38,7 @@ public class UserService {
     public User handleUpdateUser(User reqUser){
         User currentUser = this.fetchUserById(reqUser.getUserId());
         if (currentUser != null) {
-            currentUser.setFullname(reqUser.getFullname());
+            currentUser.setFullName(reqUser.getFullName());
             currentUser.setEmail(reqUser.getEmail());
             currentUser.setPhone(reqUser.getPhone());
             currentUser.setPassword(reqUser.getPassword());

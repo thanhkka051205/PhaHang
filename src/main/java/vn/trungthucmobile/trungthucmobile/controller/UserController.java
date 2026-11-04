@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
-
 import vn.trungthucmobile.trungthucmobile.domain.User;
 
 import java.util.*;
@@ -34,7 +33,7 @@ public class UserController {
     }
     
     @DeleteMapping("/users/{userId}")
-    public ResponseEntity<Void> deleteUser(@PathVariable("userId") Integer userId) throws IdInvalidException {
+    public ResponseEntity<Void> deleteUser(@PathVariable("userId") Long userId) throws IdInvalidException {
         if(userId>=1500){
             throw new IdInvalidException("User ID is invalid. It must be less than 1500.");
         }
@@ -43,7 +42,7 @@ public class UserController {
     }
 
     @GetMapping("/users/{userId}")
-    public ResponseEntity<User> fetchUserById(@PathVariable("userId") Integer userId) {
+    public ResponseEntity<User> fetchUserById(@PathVariable("userId") Long userId) {
         User user = this.userService.fetchUserById(userId);
         return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     }
@@ -55,7 +54,7 @@ public class UserController {
     }
 
     @PutMapping("/users/{userId}")
-    public ResponseEntity<User> updateUser(@PathVariable("userId") Integer userId, @RequestBody User updatedUser) {
+    public ResponseEntity<User> updateUser(@PathVariable("userId") Long userId, @RequestBody User updatedUser) {
         updatedUser.setUserId(userId);
         User updated = this.userService.handleUpdateUser(updatedUser);
         return ResponseEntity.ok(updated);

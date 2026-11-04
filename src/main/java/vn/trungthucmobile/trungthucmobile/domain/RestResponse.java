@@ -6,6 +6,9 @@ public class RestResponse<T> {
     private String error;
     private T data;
 
+    public RestResponse() {
+    }
+    
     public RestResponse(int statusCode, Object message, String error, T data) {
         this.statusCode = statusCode;
         this.message = message;
