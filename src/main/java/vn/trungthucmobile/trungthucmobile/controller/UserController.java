@@ -39,16 +39,18 @@ public class UserController {
     }
     
     @DeleteMapping("/users/{userId}")
-    public ResponseEntity<Void> deleteUser(@PathVariable("userId") Long userId) throws IdInvalidException {
-        if(userId>=1500){
-            throw new IdInvalidException("User ID is invalid. It must be less than 1500.");
+    public ResponseEntity<Void> deleteUser(@PathVariable("userId") Integer userId) throws IdInvalidException {
+        User currentUser = this.userService.fetchUserById(userId);
+        if (currentUser == null) {
+            throw new IdInvalidException("User ID " + userId + " kh\u00F4ng t\u1ED3n t\u1EA1i trong h\u1EC7 th\u1ED1ng.");
+        }else {
+            this.userService.handleDeleteUser(userId);
+            return ResponseEntity.noContent().build(); 
         }
-        this.userService.handleDeleteUser(userId);
-        return ResponseEntity.noContent().build(); 
     }
 
     @GetMapping("/users/{userId}")
-    public ResponseEntity<User> fetchUserById(@PathVariable("userId") Long userId) {
+    public ResponseEntity<User> fetchUserById(@PathVariable("userId") Integer userId) {
         User user = this.userService.fetchUserById(userId);
         return user != null ? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     }
@@ -60,8 +62,20 @@ public class UserController {
     }
 
     @PutMapping("/users/{userId}")
-    public ResponseEntity<User> updateUser(@PathVariable("userId") Long userId, @RequestBody User updatedUser) {
+    public ResponseEntity<User> updateUser(@PathVariable("userId") Integer userId, @RequestBody User updatedUser) {
         updatedUser.setUserId(userId);
+
+        //Lấy mật khẩu mới từ yêu cầu và mã hóa nó trước khi cập nhật
+        User currentUser = this.userService.fetchUserById(userId);
+        if (currentUser != null) {
+            if(updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
+                String encodedPassword = passwordEncoder.encode(updatedUser.getPassword());
+                updatedUser.setPassword(encodedPassword);
+            } else {
+                // Nếu không có mật khẩu mới, giữ nguyên mật khẩu hiện tại
+                updatedUser.setPassword(currentUser.getPassword());
+            }
+        }
         User updated = this.userService.handleUpdateUser(updatedUser);
         return ResponseEntity.ok(updated);
     }
