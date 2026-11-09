@@ -16,11 +16,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
+// import org.springframework.security.oauth2.server.resource.web.access.BearerTokenAccessDeniedHandler;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
-import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
 import org.springframework.security.web.SecurityFilterChain;
-
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import com.nimbusds.jose.util.Base64;
 
@@ -33,6 +34,12 @@ public class SecurityConfig {
 
     @Value("${phahang.jwt.base64-secret}")
     private String jwtKey;
+
+    private final CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
+
+    public SecurityConfig(CustomAuthenticationEntryPoint customAuthenticationEntryPoint) {
+        this.customAuthenticationEntryPoint = customAuthenticationEntryPoint;
+    }
 
     @Bean 
     public PasswordEncoder passwordEncoder() {
@@ -49,14 +56,32 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/api/users").permitAll()
-                .anyRequest().permitAll()
+                .requestMatchers("/", "/api/users", "/api/auth/login", "/api/auth/register").permitAll()
+                .anyRequest().authenticated()
             )
-            .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()));
+            // .exceptionHandling(exceptions -> exceptions
+            //     .authenticationEntryPoint(this.customAuthenticationEntryPoint)
+            //     .accessDeniedHandler(new BearerTokenAccessDeniedHandler())
+            // )
+            .oauth2ResourceServer(oauth2 -> oauth2
+                .jwt(Customizer.withDefaults())
+                .authenticationEntryPoint(this.customAuthenticationEntryPoint)
+            );
             
         return http.build();
     }
     
+    @Bean
+    public JwtAuthenticationConverter jwtAuthenticationConverter() {
+        JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
+        grantedAuthoritiesConverter.setAuthorityPrefix("ROLE_"); 
+        grantedAuthoritiesConverter.setAuthoritiesClaimName("thanhkka"); 
+
+        JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
+        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
+        return jwtAuthenticationConverter;
+    }
+
     @Bean 
     public JwtEncoder jwtEncoder() {
         return new NimbusJwtEncoder(new ImmutableSecret<>(getJwtSecretKey()));
@@ -64,9 +89,16 @@ public class SecurityConfig {
 
     @Bean
     public JwtDecoder jwtDecoder() {
-        return NimbusJwtDecoder.withSecretKey(getJwtSecretKey())
-                .macAlgorithm(MacAlgorithm.HS512) 
+        NimbusJwtDecoder jwtDecoder = NimbusJwtDecoder.withSecretKey(getJwtSecretKey())
+                .macAlgorithm(SecurityUtil.JWT_ALGORITHM)
                 .build();
+        return token -> {
+            try {
+                return jwtDecoder.decode(token);
+            } catch (Exception e) {
+                throw new RuntimeException("Invalid JWT token: " + e.getMessage(), e);
+            }
+        };
     }
 
     private SecretKey getJwtSecretKey() {

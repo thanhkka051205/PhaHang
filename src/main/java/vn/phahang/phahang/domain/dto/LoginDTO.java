@@ -1,4 +1,4 @@
-package vn.phahang.phahang.domain.dto; // hoặc package dto của bạn
+package vn.phahang.phahang.domain.dto; 
 
 import jakarta.validation.constraints.NotBlank;
 
