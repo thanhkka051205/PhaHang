@@ -1,4 +1,4 @@
-    package vn.phahang.phahang.ultil;
+package vn.phahang.phahang.util;
 
     import org.springframework.http.server.ServletServerHttpResponse;
     import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -28,13 +28,18 @@
             HttpServletResponse serletResponse = ((ServletServerHttpResponse) response).getServletResponse();
             int status = serletResponse.getStatus();
 
-            RestResponse<Object> res = new RestResponse<Object>();
+            if (body instanceof RestResponse) {
+                return body;
+            }
+
+            RestResponse<Object> res = new RestResponse<>();
             res.setStatusCode(status);
             //case error
             if (status >= 400) {
-                res.setError(body.toString());
+                res.setError(body != null ? body.toString() : "Error");
                 res.setMessage("Error");
-            }else{
+                res.setData(null);
+            } else {
                 res.setMessage("Success");
                 res.setData(body);
             }

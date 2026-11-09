@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class PhaHangApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PhaHangApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(PhaHangApplication.class, args);
+    }
 }
