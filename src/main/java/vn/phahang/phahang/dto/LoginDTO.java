@@ -1,4 +1,4 @@
-package vn.phahang.phahang.domain.dto; 
+package vn.phahang.phahang.dto; 
 
 import jakarta.validation.constraints.NotBlank;
 

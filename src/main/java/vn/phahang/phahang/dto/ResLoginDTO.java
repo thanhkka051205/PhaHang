@@ -1,4 +1,4 @@
-package vn.phahang.phahang.domain.dto;
+package vn.phahang.phahang.dto;
 
 public class ResLoginDTO {
     private String accessToken;

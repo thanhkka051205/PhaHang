@@ -75,7 +75,7 @@ public class UserController {
         return ResponseEntity.ok(users);    
     }
 
-        @PutMapping("/{userId}")
+    @PutMapping("/{userId}")
     public ResponseEntity<RestResponse<Object>> updateUser(@PathVariable("userId") Integer userId, @RequestBody User updatedUser) throws IdInvalidException {
         User currentUser = this.userService.fetchUserById(userId);
         if (currentUser == null) {

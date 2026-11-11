@@ -1,6 +1,14 @@
 package vn.phahang.phahang.domain;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
@@ -12,7 +20,7 @@ public class Product {
     @Column(name = "product_id")
     private Integer productId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
@@ -29,7 +37,7 @@ public class Product {
     private Integer warrantyMonths = 0;
 
     @Column(name = "track_serial")
-    private Boolean trackSerializable = false;
+    private Boolean trackSerial = false;
 
     @Column(name = "is_visible")
     private Boolean isVisible = true;
