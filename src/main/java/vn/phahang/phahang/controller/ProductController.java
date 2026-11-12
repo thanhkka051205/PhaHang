@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,6 +52,7 @@ public class ProductController {
     // API 9: Thêm sản phẩm
     // POST /api/products
     @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
     public ResponseEntity<ProductResponseDTO> saveProduct(@RequestBody Product product) {
         Product savedProduct = productService.saveProduct(product);
         return ResponseEntity.ok(
@@ -60,6 +62,7 @@ public class ProductController {
     // API 10: Cập nhật sản phẩm
     // PUT /api/products/1
     @PutMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
     public ResponseEntity<ProductResponseDTO> updateProduct(
         @PathVariable Integer id,
         @RequestBody Product product) {
@@ -82,6 +85,7 @@ public class ProductController {
     // API 11: Xóa sản phẩm
     // DELETE /api/products/1
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyRole('ADMIN')") //Chỉ admin, nhân viên mới có quyền xóa sản phẩm
     public ResponseEntity<Void> deleteProduct(
             @PathVariable Integer id) {
         if (productService.getProductById(id).isEmpty()) {

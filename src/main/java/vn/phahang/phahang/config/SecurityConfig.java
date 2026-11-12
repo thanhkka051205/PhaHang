@@ -55,8 +55,16 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable())
+            
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/", "/api/users", "/api/auth/login", "/api/auth/register").permitAll()
+                //Đường dẫn công khai
+                .requestMatchers("/", "/api/users", "/api/auth/login", "/api/auth/register", "/api/products/**").permitAll()
+
+                //Đường dẫn riêng tư
+                .requestMatchers("/api/admin/**").hasRole("Admin")
+                .requestMatchers("/api/order/**").permitAll()
+
+                //Bắt buộc login
                 .anyRequest().authenticated()
             )
             // .exceptionHandling(exceptions -> exceptions
@@ -74,7 +82,7 @@ public class SecurityConfig {
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
         JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
-        grantedAuthoritiesConverter.setAuthorityPrefix("ROLE_"); 
+        grantedAuthoritiesConverter.setAuthorityPrefix(""); 
         grantedAuthoritiesConverter.setAuthoritiesClaimName("thanhkka"); 
 
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
