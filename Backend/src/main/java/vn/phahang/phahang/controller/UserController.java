@@ -36,7 +36,7 @@ public class UserController {
     }
 
     // 1. Tạo user mới
-    @PostMapping("/auth/register")
+    @PostMapping("/users/register")
     //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<RestResponse<UserResponseDTO>> createUser(@Valid @RequestBody User postUser) throws IdInvalidException {
         if (postUser.getEmail() == null || postUser.getEmail().isBlank()) {

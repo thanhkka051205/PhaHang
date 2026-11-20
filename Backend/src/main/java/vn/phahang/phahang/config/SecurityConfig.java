@@ -62,7 +62,7 @@ public class SecurityConfig {
                 .requestMatchers("/", "/api/users", "/api/auth/login", "/api/auth/register", "/api/products/**").permitAll()
 
                 //Đường dẫn riêng tư
-                .requestMatchers("/api/admin/**").hasRole("Admin")
+                .requestMatchers("/api/admin/**").hasRole("ADMIN")
                 .requestMatchers("/api/order/**").permitAll()
 
                 //Bắt buộc login

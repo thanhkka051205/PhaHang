@@ -7,7 +7,6 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +24,6 @@ import vn.phahang.phahang.util.error.SecurityUtil;
 
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "*")
 public class AuthController {
 
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
@@ -63,36 +61,28 @@ public class AuthController {
             resLoginDTO.setUser(userLogin);
         }
         // craete a token
-        String access_token=this.securityUtil.createToken(authentication);
+        String accessToken=this.securityUtil.createToken(authentication);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        resLoginDTO.setAccessToken(access_token);
+        resLoginDTO.setAccessToken(accessToken);
         
         return ResponseEntity.ok().body(resLoginDTO);
     }
 
     @PostMapping("/register")
-    public ResponseEntity<RestResponse<UserResponseDTO>> register(@Valid @RequestBody RegisterDTO registerDTO){
-
-        //Tao thong tin nguoi dung
-        User newUser= new User();
+    public ResponseEntity<RestResponse<UserResponseDTO>> register(@Valid @RequestBody RegisterDTO registerDTO) {
+        User newUser = new User();
         newUser.setFullName(registerDTO.getFullName());
         newUser.setEmail(registerDTO.getEmail());
-        newUser.setPassword(registerDTO.getPassword());
-
-        //Ma hoa password
         newUser.setPassword(this.passwordEncoder.encode(registerDTO.getPassword()));
-
-        newUser.setRole("ROLE_CUSTOM");
+        newUser.setRole("CUSTOMER");
         newUser.setStatus(true);
 
-        //luu db
-        User createUser=this.userService.handleCreateUser(newUser);
+        User createdUser = this.userService.handleCreateUser(newUser);
 
-        //tra ve DTO
         RestResponse<UserResponseDTO> res = new RestResponse<>();
         res.setStatusCode(HttpStatus.CREATED.value());
-        res.setData(this.userService.convertToDTO(createUser));
+        res.setData(this.userService.convertToDTO(createdUser));
         res.setMessage("Đăng ký thành công");
 
         return ResponseEntity.status(HttpStatus.CREATED).body(res);

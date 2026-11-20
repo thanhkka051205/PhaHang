@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.Data;
-import vn.phahang.phahang.backend1.domain.Order;
 
 @Entity
 @Table(name = "payments")

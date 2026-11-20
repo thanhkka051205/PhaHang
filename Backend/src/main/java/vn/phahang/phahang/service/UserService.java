@@ -104,7 +104,7 @@ public class UserService {
 
 
     public User handleGetUserByUsername(String username) {
-        return this.userRepository.findByEmail(username);
+    return this.userRepository.findByEmail(username).orElse(null);
     }
 
     public UserResponseDTO convertToDTO(User user) {

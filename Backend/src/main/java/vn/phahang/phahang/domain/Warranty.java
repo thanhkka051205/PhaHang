@@ -2,7 +2,6 @@ package vn.phahang.phahang.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import vn.phahang.phahang.backend1.domain.OrderItem;
 
 import java.time.LocalDate;
 
