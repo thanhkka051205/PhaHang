@@ -2,11 +2,11 @@
  * Script Đăng Nhập Cổng Quản Trị (admin/login.html)
  * Tái tạo 100% diện mạo và class Tailwind từ AdminLoginView.vue (commit 1a9e3c2)
  */
-import { authStore } from '../stores/authStore.js';
-import { toast } from '../components/toast.js';
+import { authStore } from "../stores/authStore.js";
+import { toast } from "../components/toast.js";
 
 export function initAdminLoginPage() {
-  const container = document.getElementById('admin-login-container');
+  const container = document.getElementById("admin-login-container");
   if (!container) return;
 
   container.innerHTML = `
@@ -101,21 +101,21 @@ export function initAdminLoginPage() {
 }
 
 function bindEvents() {
-  const form = document.getElementById('admin-login-form');
-  const emailInput = document.getElementById('admin-email');
-  const passInput = document.getElementById('admin-password');
+  const form = document.getElementById("admin-login-form");
+  const emailInput = document.getElementById("admin-email");
+  const passInput = document.getElementById("admin-password");
 
-  document.getElementById('btn-fill-admin')?.addEventListener('click', () => {
+  document.getElementById("btn-fill-admin")?.addEventListener("click", () => {
     if (emailInput && passInput) {
-      emailInput.value = 'admin@phahang.vn';
-      passInput.value = 'admin123';
+      emailInput.value = "";
+      passInput.value = "";
     }
   });
 
-  document.getElementById('btn-fill-staff')?.addEventListener('click', () => {
+  document.getElementById("btn-fill-staff")?.addEventListener("click", () => {
     if (emailInput && passInput) {
-      emailInput.value = 'nhanvien@phahang.vn';
-      passInput.value = 'staff123';
+      emailInput.value = "";
+      passInput.value = "";
     }
   });
 
@@ -129,7 +129,7 @@ function bindEvents() {
       const pass = passInput?.value?.trim();
 
       if (!email || !pass) {
-        toast.error('Vui lòng nhập đầy đủ email và mật khẩu.');
+        toast.error("Vui lòng nhập đầy đủ email và mật khẩu.");
         return;
       }
 
@@ -145,10 +145,10 @@ function bindEvents() {
         const user = await authStore.loginAdmin(email, pass);
         toast.success(`Đăng nhập cổng quản trị thành công (${user.role})!`);
         setTimeout(() => {
-          if (user.role === 'ADMIN') {
-            window.location.href = '/admin/index.html';
+          if (user.role === "ADMIN") {
+            window.location.href = "/admin/index.html";
           } else {
-            window.location.href = '/admin/orders.html';
+            window.location.href = "/admin/orders.html";
           }
         }, 300);
       } catch (err) {
@@ -157,7 +157,10 @@ function bindEvents() {
           submitBtn.innerHTML = defaultBtnHtml;
           window.lucide?.createIcons();
         }
-        toast.error(err?.message || 'Email hoặc mật khẩu không chính xác hoặc không có quyền truy cập cổng Quản Trị!');
+        toast.error(
+          err?.message ||
+            "Email hoặc mật khẩu không chính xác hoặc không có quyền truy cập cổng Quản Trị!",
+        );
       }
     };
   }

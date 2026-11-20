@@ -2,18 +2,18 @@
  * Script Quản Lý Voucher Khuyến Mãi (admin/coupons.html)
  * Tái tạo 100% diện mạo và class Tailwind từ CouponListView.vue (commit 1a9e3c2)
  */
-import { mountAdminLayout } from '../components/adminLayout.js';
-import { mockService } from '../services/mockService.js';
-import { formatVND, formatDate } from '../core/format.js';
-import { esc } from '../core/dom.js';
-import { openModal } from '../components/modal.js';
-import { toast } from '../components/toast.js';
-import { renderBackendGapBanner } from '../core/backendGaps.js';
+import { mountAdminLayout } from "../components/adminLayout.js";
+import { mockService } from "../services/mockService.js";
+import { formatVND, formatDate } from "../core/format.js";
+import { esc } from "../core/dom.js";
+import { openModal } from "../components/modal.js";
+import { toast } from "../components/toast.js";
+import { renderBackendGapBanner } from "../core/backendGaps.js";
 
 let coupons = [];
 
 export async function initAdminCouponsPage() {
-  const allowed = mountAdminLayout('coupons');
+  const allowed = mountAdminLayout("coupons");
   if (!allowed) return;
 
   await loadCoupons();
@@ -24,9 +24,32 @@ async function loadCoupons() {
   renderCouponsTable();
 }
 
+function normalizeCoupon(c) {
+  const discountValue = c.discountValue ?? c.discountAmount ?? 0;
+  const minOrderAmount = c.minOrderAmount ?? c.minOrderValue ?? 0;
+  const usedCount = c.usedCount ?? 0;
+  const usageLimit = c.usageLimit ?? c.maxUsage ?? 100;
+  const endDate = c.endDate ?? c.expiryDate ?? null;
+  const isActive =
+    typeof c.status === "boolean" ? c.status : Boolean(c.isActive);
+
+  return {
+    code: c.code,
+    discountType: c.discountType || "FIXED",
+    discountValue,
+    minOrderAmount,
+    usedCount,
+    usageLimit,
+    endDate,
+    isActive,
+  };
+}
+
 function renderCouponsTable() {
-  const content = document.getElementById('coupons-content');
+  const content = document.getElementById("coupons-content");
   if (!content) return;
+
+  const rows = coupons.map(normalizeCoupon);
 
   content.innerHTML = `
     <!-- Header -->
@@ -34,7 +57,7 @@ function renderCouponsTable() {
       <div>
         <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2.5">
           <i data-lucide="tag" class="w-6 h-6 text-[#DC2626]"></i>
-          <span>Quản Lý Mã Khuyến Mãi & Voucher (${coupons.length})</span>
+          <span>Quản Lý Mã Khuyến Mãi & Voucher (${rows.length})</span>
         </h1>
         <p class="text-xs text-slate-500 mt-1">
           Thiết lập mã giảm giá trực tiếp cho khách hàng mua hàng tại website hoặc showroom Pha Hằng
@@ -66,7 +89,9 @@ function renderCouponsTable() {
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-100">
-            ${coupons.map(c => `
+            ${rows
+              .map(
+                (c) => `
               <tr class="hover:bg-slate-50/60 transition-colors">
                 <td class="p-3.5">
                   <span class="px-2.5 py-1 rounded-lg bg-red-50 text-[#DC2626] font-mono font-black border border-red-200 text-xs">
@@ -74,24 +99,26 @@ function renderCouponsTable() {
                   </span>
                 </td>
                 <td class="p-3.5 font-bold text-slate-900 font-mono">
-                  ${formatVND(c.discountAmount)}
+                  ${c.discountType === "PERCENT" ? `${c.discountValue}%` : formatVND(c.discountValue)}
                 </td>
                 <td class="p-3.5 text-slate-600 font-mono">
-                  ${formatVND(c.minOrderValue || 0)}
+                  ${formatVND(c.minOrderAmount)}
                 </td>
                 <td class="p-3.5 text-center font-mono font-semibold text-slate-700">
-                  ${c.usedCount || 0} / ${c.maxUsage || 100}
+                  ${c.usedCount} / ${c.usageLimit}
                 </td>
                 <td class="p-3.5 text-center font-mono text-slate-600">
-                  ${formatDate(c.expiryDate)}
+                  ${c.endDate ? formatDate(c.endDate) : "—"}
                 </td>
                 <td class="p-3.5 text-center">
-                  <span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${c.isActive ? 'bg-emerald-100 text-emerald-800 border border-emerald-200' : 'bg-slate-100 text-slate-500'}">
-                    ${c.isActive ? 'ĐANG KÍCH HOẠT' : 'HẾT HẠN'}
+                  <span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${c.isActive ? "bg-emerald-100 text-emerald-800 border border-emerald-200" : "bg-slate-100 text-slate-500"}">
+                    ${c.isActive ? "ĐANG KÍCH HOẠT" : "HẾT HẠN"}
                   </span>
                 </td>
               </tr>
-            `).join('')}
+            `,
+              )
+              .join("")}
           </tbody>
         </table>
       </div>
@@ -103,9 +130,9 @@ function renderCouponsTable() {
 }
 
 function bindCouponEvents() {
-  document.getElementById('btn-add-coupon')?.addEventListener('click', () => {
+  document.getElementById("btn-add-coupon")?.addEventListener("click", () => {
     const modal = openModal({
-      title: 'Tạo Mã Giảm Giá Voucher Mới',
+      title: "Tạo Mã Giảm Giá Voucher Mới",
       bodyHtml: `
         <form id="new-coupon-form" class="space-y-3.5 text-xs">
           <div>
@@ -127,33 +154,51 @@ function bindCouponEvents() {
           Lưu & Phát Hành Voucher
         </button>
       `,
-      maxWidth: '460px'
+      maxWidth: "460px",
     });
 
-    modal.element.querySelector('#btn-save-coupon')?.addEventListener('click', async () => {
-      const code = modal.element.querySelector('#cp-code')?.value?.trim().toUpperCase();
-      const amount = Number(modal.element.querySelector('#cp-amount')?.value) || 0;
-      const minOrder = Number(modal.element.querySelector('#cp-min')?.value) || 0;
+    modal.element
+      .querySelector("#btn-save-coupon")
+      ?.addEventListener("click", async () => {
+        const code = modal.element
+          .querySelector("#cp-code")
+          ?.value?.trim()
+          .toUpperCase();
+        const amount =
+          Number(modal.element.querySelector("#cp-amount")?.value) || 0;
+        const minOrder =
+          Number(modal.element.querySelector("#cp-min")?.value) || 0;
 
-      if (!code || amount <= 0) {
-        toast.warning('Vui lòng nhập mã và số tiền giảm hợp lệ!');
-        return;
-      }
+        if (!code || amount <= 0) {
+          toast.warning("Vui lòng nhập mã và số tiền giảm hợp lệ!");
+          return;
+        }
 
-      await mockService.createCoupon({
-        code,
-        discountAmount: amount,
-        minOrderValue: minOrder,
-        expiryDate: '2026-12-31',
-        isActive: true,
-        usedCount: 0,
-        maxUsage: 100
+        const nowIso = new Date().toISOString().slice(0, 19);
+
+        const payload = {
+          code,
+          discountType: "FIXED",
+          discountValue: amount,
+          minOrderAmount: minOrder,
+          usageLimit: 100,
+          startDate: nowIso,
+          endDate: "2026-12-31T23:59:59",
+          status: true,
+        };
+
+        try {
+          await mockService.createCoupon(payload);
+          toast.success(`Đã tạo và kích hoạt mã giảm giá ${code} thành công!`);
+          modal.close();
+          await loadCoupons();
+        } catch (error) {
+          console.error("Lỗi tạo mã giảm giá:", error);
+          toast.error(
+            error?.message || "Không thể tạo mã giảm giá. Vui lòng thử lại!",
+          );
+        }
       });
-
-      toast.success(`Đã tạo và kích hoạt mã giảm giá ${code} thành công!`);
-      modal.close();
-      loadCoupons();
-    });
   });
 }
 
