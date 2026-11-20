@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "buildCommand": "node scripts/build.js",
+  "outputDirectory": "dist",
+  "cleanUrls": false,
+  "rewrites": [
+    { "source": "/login", "destination": "/login.html" },
+    { "source": "/register", "destination": "/register.html" },
+    { "source": "/cart", "destination": "/cart.html" },
+    { "source": "/checkout", "destination": "/checkout.html" },
+    { "source": "/order-success", "destination": "/order-success.html" },
+    { "source": "/my-orders", "destination": "/my-orders.html" },
+    { "source": "/warranty", "destination": "/warranty.html" },
+    { "source": "/product-detail", "destination": "/product-detail.html" },
+    { "source": "/admin", "destination": "/admin/index.html" },
+    { "source": "/admin/login", "destination": "/admin/login.html" },
+    { "source": "/admin/products", "destination": "/admin/products.html" },
+    { "source": "/admin/orders", "destination": "/admin/orders.html" },
+    { "source": "/admin/warranties", "destination": "/admin/warranties.html" },
+    { "source": "/admin/users", "destination": "/admin/users.html" },
+    { "source": "/admin/coupons", "destination": "/admin/coupons.html" }
+  ]
+}

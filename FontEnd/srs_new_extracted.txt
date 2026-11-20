@@ -1,0 +1,2236 @@
+
+KHOA CÔNG NGHỆ THÔNG TIN
+BỘ MÔN CÔNG NGHỆ PHẦN MỀM
+
+BÁO CÁO BÀI TẬP LỚN
+HỌC PHẦN PHÂN TÍCH YÊU CẦU PHẦN MỀM
+TÊN ĐỀ TÀI: XÂY DỰNG TÀI LIỆU ĐẶC TẢ YÊU CẦU PHẦN MỀM WEBSITE BÁN THIẾT BỊ ĐIỆN TỬ PHA HẰNG
+Nhóm sinh viên thực hiện:
+STT
+Họ tên
+Mã SV
+Mã lớp
+Điểm
+1
+
+
+
+
+2
+
+
+
+
+3
+
+
+
+
+4
+
+
+
+
+5
+
+
+
+
+HÀ NỘI - 2026
+NHẬN XÉT CỦA GIÁO VIÊN
+BẢNG PHÂN CÔNG NHIỆM VỤ
+Chú ý: Nhiệm vụ 1 cả nhóm làm chung; các nhiệm vụ 2, 3, 4, 5, 6 mỗi sinh viên trong nhóm đảm nhận 1 nhiệm vụ. Tuy nhiên cả nhóm cần thường xuyên trao đổi, hỗ trợ, góp ý cho nhau trong quá trình làm để đạt được kết quả tốt nhất cho cả nhóm.
+STT
+Nhiệm vụ
+Sinh viên thực hiện
+
+
+Họ tên
+Mã sinh viên
+1
+Phát hiện và phân tích yêu cầu
+Cả nhóm
+
+2
+Viết tài liệu đặc tả yêu cầu - phần 1, 2 (Giới thiệu, Mô tả tổng quan)
+
+
+3
+Viết tài liệu đặc tả yêu cầu - phần 3 (Các tính năng của hệ thống)
+
+
+4
+Viết tài liệu đặc tả yêu cầu - phần 4 (Yêu cầu dữ liệu)
+
+
+5
+Viết tài liệu đặc tả yêu cầu - phần 5, 6 (Giao diện, Chất lượng)
+
+
+6
+Viết tài liệu đặc tả yêu cầu - phần 7, 8 và Phụ lục
+
+
+
+DỰ ÁN
+XÂY DỰNG WEBSITE BÁN THIẾT BỊ ĐIỆN TỬ PHA HẰNG
+TÀI LIỆU ĐẶC TẢ YÊU CẦU PHẦN MỀM
+Mã dự án
+PROJ-PH-WEB
+Mã tài liệu
+SRS-V1.0.0
+Ngày lập tài liệu
+02/11/2026
+
+
+NỘI DUNG SỬA ĐỔI
+*A - Added (Thêm mới)     M - Modified (Chỉnh sửa)     D - Deleted (Xóa)
+Ngày thực hiện
+Mục sửa đổi
+A*, M, D
+Nội dung sửa đổi
+Người thực hiện
+Mã phiên bản
+02/11/2026
+Toàn bộ
+A
+Lập bản đầu tiên của tài liệu
+BA của nhóm
+V1.0.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+NGƯỜI THỰC HIỆN
+Người lập tài liệu:
+Họ tên: ……………………  Vị trí/Chức vụ: ……………………
+Ngày lập: ………………  Chữ ký: ……………………
+Người kiểm tra:
+Họ tên: ……………………  Vị trí/Chức vụ: ……………………
+Ngày kiểm tra: ………………  Chữ ký: ……………………
+Họ tên: ……………………  Vị trí/Chức vụ: ……………………
+Ngày kiểm tra: ………………  Chữ ký: ……………………
+Họ tên: ……………………  Vị trí/Chức vụ: ……………………
+Ngày kiểm tra: ………………  Chữ ký: ……………………
+Người phê duyệt:
+Họ tên: ……………………  Vị trí/Chức vụ: ……………………
+Ngày phê duyệt: ………………  Chữ ký: ……………………
+MỤC LỤC
+
+1. GIỚI THIỆU5
+1.1. Mục đích5
+1.2. Các quy ước trong tài liệu5
+1.2.1. Quy ước đặt mã5
+1.2.2. Quy ước viết yêu cầu6
+1.2.3. Quy ước trình bày6
+1.3. Phạm vi dự án6
+1.3.1. Mục tiêu6
+1.3.2. Phạm vi thực hiện7
+1.4. Tài liệu tham khảo7
+2. MÔ TẢ TỔNG QUAN8
+2.1. Bối cảnh sản phẩm8
+2.1.1. Đơn vị khảo sát8
+2.1.2. Cơ cấu tổ chức9
+2.1.3. Quy trình bán hàng hiện tại (AS-IS) và vấn đề9
+2.1.4. Hệ thống đề xuất và các đối tượng tương tác11
+2.2. Các lớp người dùng và đặc điểm13
+2.3. Môi trường vận hành13
+2.4. Các ràng buộc thiết kế và triển khai15
+2.5. Các giả định và sự phụ thuộc15
+2.5.1. Giả định15
+2.5.2. Sự phụ thuộc16
+3. CÁC TÍNH NĂNG CỦA HỆ THỐNG16
+3.1. Đăng ký và đăng nhập21
+3.1.1. Mô tả21
+3.1.2. Các yêu cầu chức năng22
+3.2. Xem, tìm kiếm, lọc sản phẩm và xem chi tiết23
+3.2.1. Mô tả23
+3.2.2. Các yêu cầu chức năng24
+3.3. Quản lý giỏ hàng25
+3.3.1. Mô tả25
+3.3.2. Các yêu cầu chức năng26
+3.4. Đặt hàng và thanh toán27
+3.4.1. Mô tả27
+3.4.2. Các yêu cầu chức năng28
+3.5. Theo dõi và hủy đơn hàng28
+3.5.1. Mô tả28
+3.5.2. Các yêu cầu chức năng29
+3.6. Xử lý đơn hàng30
+3.6.1. Mô tả30
+3.6.2. Các yêu cầu chức năng31
+3.7. Quản lý sản phẩm và tồn kho31
+3.7.1. Mô tả31
+3.7.2. Các yêu cầu chức năng32
+3.8. Quản lý khuyến mãi33
+3.8.1. Mô tả33
+3.8.2. Các yêu cầu chức năng33
+3.9. Thống kê doanh thu34
+3.9.1. Mô tả34
+3.9.2. Các yêu cầu chức năng34
+3.10. Quản lý tài khoản và phân quyền35
+3.10.1. Mô tả35
+3.10.2. Các yêu cầu chức năng35
+3.11. Tra cứu bảo hành36
+3.11.1. Mô tả36
+3.11.2. Các yêu cầu chức năng36
+4. CÁC YÊU CẦU DỮ LIỆU37
+4.1. Mô hình dữ liệu logic37
+4.2. Từ điển dữ liệu39
+4.3. Các báo cáo43
+4.4. Thu thập dữ liệu, tính toàn vẹn, lưu trữ và xử lý dữ liệu44
+4.4.1. Thu thập dữ liệu44
+4.4.2. Tính toàn vẹn dữ liệu44
+4.4.3. Lưu trữ và xử lý dữ liệu44
+5. CÁC YÊU CẦU GIAO DIỆN BÊN NGOÀI45
+5.1. Giao diện người dùng45
+5.1.1. Danh sách màn hình45
+5.1.2. Quy tắc chung cho giao diện45
+5.1.3. Wireframe46
+5.2. Giao diện phần mềm48
+5.3. Giao diện phần cứng49
+5.4. Giao diện truyền thông49
+6. CÁC THUỘC TÍNH CHẤT LƯỢNG49
+6.1. Khả năng sử dụng49
+6.2. Hiệu suất50
+6.3. Độ bảo mật50
+6.4. Độ an toàn51
+6.5. Tính tương thích51
+6.6. Khả năng bảo trì52
+7. CÁC YÊU CẦU QUỐC TẾ HÓA VÀ NỘI ĐỊA HÓA52
+8. CÁC YÊU CẦU KHÁC (NẾU CÓ)53
+8.1. Yêu cầu pháp lý53
+8.2. Yêu cầu cài đặt và bàn giao53
+8.3. Tiêu chí nghiệm thu53
+PHỤ LỤC A. BẢNG THUẬT NGỮ54
+PHỤ LỤC B. MA TRẬN TRUY VẾT55
+PHỤ LỤC C. CÁC VẤN ĐỀ CẦN XÁC NHẬN56
+
+
+1. GIỚI THIỆU
+1.1. Mục đích
+Tài liệu này đặc tả yêu cầu phần mềm cho website bán thiết bị điện tử của cửa hàng điện tử - điện lạnh - đồ gia dụng Pha Hằng (sau đây gọi là "hệ thống"), phiên bản V1.0.0. Cửa hàng chuyên bán ti vi, điều hòa, tủ lạnh, quạt và nồi cơm điện tại xóm 8, đường Đình Xuyên, Gia Lâm, Hà Nội.
+Tài liệu được lập từ kết quả khảo sát thực tế tại cửa hàng (phỏng vấn chủ cửa hàng, quan sát nhân viên bán hàng, thu thập sổ theo dõi hàng và phiếu bảo hành). Tài liệu dùng để:
+Thống nhất với chủ cửa hàng về những gì website phải làm trước khi lập trình.
+Làm căn cứ để các thành viên thiết kế cơ sở dữ liệu, giao diện, viết mã và kiểm thử.
+Làm căn cứ nghiệm thu: mỗi yêu cầu được viết sao cho kiểm tra được là đạt hay không đạt.
+Đối tượng đọc tài liệu gồm: chủ cửa hàng (xác nhận yêu cầu), nhóm sinh viên phát triển (thiết kế, lập trình, kiểm thử) và giảng viên hướng dẫn (đánh giá).
+1.2. Các quy ước trong tài liệu
+1.2.1. Quy ước đặt mã
+Bảng 1. Quy ước đặt mã các mục trong tài liệu
+Tiền tố
+Ý nghĩa
+Ví dụ
+FR-xx
+Tính năng (nhóm yêu cầu chức năng), lấy theo danh sách yêu cầu sơ bộ trong báo cáo khảo sát
+FR-05: Đặt hàng và thanh toán
+FR-xx.y
+Một yêu cầu chức năng cụ thể thuộc tính năng FR-xx
+FR-05.3
+UC-xx
+Use case (ca sử dụng): một việc người dùng làm với hệ thống
+UC-05: Đặt hàng và thanh toán
+BR-xx
+Quy tắc nghiệp vụ: luật của cửa hàng mà hệ thống phải tuân theo
+BR-02: Giá lưu theo thời điểm mua
+BC-xx
+Báo cáo do hệ thống tạo ra
+BC-01: Doanh thu theo ngày
+NFR-xx.y
+Yêu cầu phi chức năng (chất lượng), xx là số mục trong phần 6
+NFR-02.1
+TBD-xx
+Nội dung còn thiếu, cần cửa hàng xác nhận (xem Phụ lục C)
+TBD-01: Thời hạn bảo hành
+
+1.2.2. Quy ước viết yêu cầu
+"Hệ thống phải" chỉ yêu cầu bắt buộc. "Hệ thống nên" chỉ yêu cầu mong muốn, có thể làm sau nếu hết thời gian. "Hệ thống có thể" chỉ yêu cầu tùy chọn.
+Mức ưu tiên của yêu cầu gồm ba mức: Cao (thiếu thì website không dùng được), Trung bình (cần có nhưng có cách làm tạm), Thấp (bổ sung nếu còn thời gian).
+Mỗi yêu cầu chỉ nói về một việc và có thể kiểm tra được bằng cách chạy thử hoặc đo. Tài liệu không dùng các từ chung chung như "nhanh", "tốt", "thuận tiện"; thay vào đó dùng con số cụ thể (ví dụ "tải xong trong tối đa 3 giây").
+Tên tác nhân viết hoa chữ cái đầu: Khách hàng, Nhân viên, Quản trị viên. Tên trạng thái đơn hàng viết hoa chữ cái đầu: Chờ xác nhận, Đã xác nhận, Đang giao, Hoàn thành, Đã hủy.
+Tên bảng và tên cột dữ liệu viết bằng tiếng Anh, in nguyên văn như trong mã nguồn (ví dụ PRODUCT_VARIANTS, stock_qty).
+1.2.3. Quy ước trình bày
+Tài liệu dùng phông Times New Roman cỡ 13, căn đều hai lề, thụt dòng đầu đoạn 1,27 cm, giãn đoạn trên và dưới 6 pt, giãn dòng 1,15. Hình và bảng được đánh số liên tục theo thứ tự xuất hiện. Các sơ đồ được vẽ bằng draw.io; tệp nguồn kèm theo tài liệu có tên So_do_SRS_Pha_Hang.drawio (mỗi trang trong tệp là một hình).
+1.3. Phạm vi dự án
+1.3.1. Mục tiêu
+Website cho phép khách hàng xem hàng, chọn đúng phiên bản sản phẩm (công suất hoặc dung tích, cỡ màn hình, màu) và đặt mua trực tuyến; đồng thời giúp cửa hàng quản lý tồn kho, đơn hàng, số seri, bảo hành và doanh thu ở một nơi thay cho sổ và bảng Excel. Các mục tiêu đo được gồm:
+Bảng 2. Mục tiêu của hệ thống và cách kiểm tra
+STT
+Mục tiêu
+Cách kiểm tra
+1
+Số lượng tồn kho trên website luôn khớp với số lượng thực tế sau mỗi lần xác nhận hoặc hủy đơn
+Xác nhận một đơn có 1 sản phẩm thì tồn của biến thể giảm đúng 1; hủy đơn thì tăng lại 1
+2
+Giá của mọi sản phẩm được công bố ở một nơi, quản trị viên cập nhật một lần
+Sửa giá một biến thể thì trang danh sách và trang chi tiết hiển thị giá mới ngay ở lần tải trang kế tiếp
+3
+Khách hàng tìm được sản phẩm theo loại, hãng, thông số (công suất, dung tích, cỡ màn hình), màu, khoảng giá mà không cần nhắn tin hỏi
+Chọn bộ lọc thì danh sách chỉ còn sản phẩm đúng điều kiện lọc
+4
+Tra cứu bảo hành của một sản phẩm đã bán trong tối đa 2 giây
+Nhập số seri hoặc số điện thoại, kết quả bảo hành hiển thị trong tối đa 2 giây
+5
+Có báo cáo doanh thu tự động thay cho tổng hợp tay cuối tháng
+Báo cáo BC-01, BC-02, BC-03 hiển thị đúng số liệu đối chiếu với đơn hàng mẫu
+
+1.3.2. Phạm vi thực hiện
+Bảng 3. Phạm vi của phiên bản V1.0.0
+Nội dung
+Chi tiết
+Nằm trong phạm vi
+Đăng ký, đăng nhập; xem, tìm kiếm, lọc sản phẩm; giỏ hàng; đặt hàng với hai hình thức thanh toán (thanh toán khi nhận hàng, chuyển khoản); theo dõi và hủy đơn; xử lý đơn hàng, nhập số seri; quản lý sản phẩm, biến thể, tồn kho, danh mục, ảnh; quản lý khuyến mãi; tra cứu bảo hành; thống kê doanh thu; quản lý tài khoản và phân quyền.
+Nằm ngoài phạm vi
+Tích hợp cổng thanh toán trực tuyến (VNPay, Momo); ứng dụng di động riêng; máy chủ và cơ sở dữ liệu riêng (dữ liệu của phiên bản V1.0.0 lưu trong trình duyệt); gửi email hoặc SMS tự động; xác thực email khi đăng ký; quên mật khẩu qua email; tích hợp đơn vị vận chuyển; quản lý nhập hàng từ nhà cung cấp; kế toán; dịch vụ lắp đặt, thu cũ đổi mới trực tuyến; đánh giá, bình luận sản phẩm; chat trực tuyến.
+Phạm vi người dùng
+Khách hàng mua lẻ chủ yếu tại Gia Lâm và các khu vực lân cận của Hà Nội (cửa hàng tự giao hoặc tự liên hệ đơn vị vận chuyển); các nhân sự của cửa hàng.
+
+Hình thức thanh toán qua cổng VNPay có nêu trong danh sách yêu cầu sơ bộ của báo cáo khảo sát nhưng được đưa ra ngoài phạm vi V1.0.0 để phù hợp với định hướng công nghệ và thời gian thực hiện; nội dung này cần chủ cửa hàng xác nhận (TBD-02).
+1.4. Tài liệu tham khảo
+Bảng 4. Danh sách tài liệu tham khảo
+STT
+Tên tài liệu
+Nguồn
+1
+Báo cáo tiến độ: Khảo sát và phân tích sơ bộ đề tài website bán thiết bị điện tử (cửa hàng Pha Hằng)
+Nhóm thực hiện, 2026
+2
+Mẫu báo cáo bài tập lớn học phần Phân tích yêu cầu phần mềm
+Bộ môn Công nghệ phần mềm, Khoa Công nghệ thông tin
+3
+Bài giảng 05 Chương 2 Tiếp: Phân tích và lập tài liệu đặc tả yêu cầu (slide 23 - 56)
+Học phần Phân tích yêu cầu phần mềm
+4
+Bài giảng 06 Chương 2 Tiếp: Làm thế nào để viết được các yêu cầu tốt; 07 Mô hình hóa yêu cầu; 08, 09 Yêu cầu phi chức năng
+Học phần Phân tích yêu cầu phần mềm
+5
+Karl Wiegers, Joy Beatty. Software Requirements, 3rd Edition, Microsoft Press, 2013 (Appendix C: ví dụ tài liệu SRS)
+Tài liệu tham khảo chính
+6
+Nghị định 13/2023/NĐ-CP ngày 17/04/2023 của Chính phủ về bảo vệ dữ liệu cá nhân
+Chính phủ Việt Nam
+
+2. MÔ TẢ TỔNG QUAN
+2.1. Bối cảnh sản phẩm
+2.1.1. Đơn vị khảo sát
+Cửa hàng điện tử - điện lạnh - đồ gia dụng Pha Hằng là cửa hàng bán lẻ thiết bị điện tử, điện lạnh và đồ gia dụng, đặt tại xóm 8, đường Đình Xuyên, Gia Lâm, Hà Nội, chuyên bán ti vi, điều hòa, tủ lạnh, quạt và nồi cơm điện. Cửa hàng bán trực tiếp tại quầy, đồng thời tư vấn và nhận đặt hàng qua điện thoại hoặc Zalo (kênh bán hiện tại cần xác nhận, TBD-09). Người đại diện làm việc với nhóm là chủ cửa hàng (họ tên và số điện thoại liên hệ cần bổ sung, TBD-09).
+Bảng 5. Nhóm sản phẩm, dịch vụ và thuộc tính cần quản lý
+STT
+Nhóm
+Nội dung
+Thuộc tính cần quản lý trên website
+1
+Ti vi
+Smart tivi, tivi thường nhiều cỡ màn hình
+Hãng, cỡ màn hình (inch), màu, giá, số lượng tồn, số seri
+2
+Điều hòa
+Điều hòa một chiều, hai chiều, inverter
+Hãng, loại, công suất (BTU), giá, số lượng tồn, số seri
+3
+Tủ lạnh
+Tủ lạnh ngăn đá trên, nhiều cửa, mini
+Hãng, loại, dung tích (lít), màu, giá, số lượng tồn, số seri
+4
+Quạt
+Quạt đứng, quạt treo tường, quạt bàn, quạt điều hòa
+Hãng, loại, màu, giá, số lượng tồn (không có số seri)
+5
+Nồi cơm điện
+Nồi cơm điện cơ, điện tử, cao tần
+Hãng, loại, dung tích (lít), giá, số lượng tồn (không có số seri)
+6
+Dịch vụ
+Bảo hành sản phẩm
+Thời hạn bảo hành (tháng), điều kiện bảo hành
+
+Một mẫu sản phẩm (ví dụ điều hòa 1 chiều Inverter) có nhiều tổ hợp công suất hoặc dung tích và màu; mỗi tổ hợp có giá và số lượng tồn riêng. Vì vậy hệ thống quản lý sản phẩm (ví dụ Điều hòa 1 chiều Inverter) tách riêng khỏi biến thể (ví dụ 12.000 BTU, màu trắng). Ti vi, điều hòa và tủ lạnh có số seri riêng cho từng chiếc bán ra; mọi sản phẩm bán ra đều có thời hạn bảo hành. Nhóm hàng nêu trong Bảng 5 là dự kiến; danh mục thực tế do cửa hàng xác nhận (TBD-04).
+2.1.2. Cơ cấu tổ chức
+Cửa hàng phân công vai trò theo Hình 1. Một người có thể kiêm nhiều vai trò. Trên website, các vai trò được gộp thành ba nhóm người dùng được mô tả ở mục 2.2.
+
+Hình 1. Cơ cấu tổ chức của cửa hàng Pha Hằng
+2.1.3. Quy trình bán hàng hiện tại (AS-IS) và vấn đề
+Quy trình hiện tại do cửa hàng thực hiện thủ công từ lúc khách hỏi giá đến khi ghi sổ, như Hình 2. Hai khâu tô vàng (đầu và cuối quy trình) là nơi website có thể thay thế thao tác thủ công.
+
+Hình 2. Quy trình bán hàng hiện tại (AS-IS) tại cửa hàng
+Qua phỏng vấn và quan sát, nhóm ghi nhận năm vấn đề trong Bảng 6. Mỗi vấn đề được gắn với yêu cầu chức năng giải quyết nó.
+Bảng 6. Vấn đề tại cửa hàng và hướng giải quyết bằng website
+STT
+Vấn đề hiện tại
+Hệ quả
+Hướng giải quyết bằng website
+Yêu cầu liên quan
+1
+Tồn kho ghi trong sổ hoặc Excel, cập nhật bằng tay
+Số lượng sổ sách lệch với hàng thực tế; có thể báo còn hàng trong khi đã hết
+Quản lý tồn kho theo từng biến thể, tự trừ khi đơn được xác nhận
+FR-07, FR-08
+2
+Báo giá qua tin nhắn từng khách, giá thay đổi theo ngày
+Nhân viên phải trả lời lặp lại cùng một câu hỏi về giá
+Bảng giá hiển thị công khai, quản trị viên cập nhật một nơi
+FR-02, FR-03, FR-08
+3
+Khách chỉ biết hàng qua bài đăng mạng xã hội hoặc đến cửa hàng
+Khách khó so sánh hãng, công suất, dung tích, giá
+Danh mục sản phẩm có tìm kiếm và bộ lọc theo loại, hãng, thông số, màu, mức giá
+FR-02, FR-03
+4
+Số seri và thời hạn bảo hành ghi trên giấy
+Tra cứu bảo hành mất thời gian, dễ thất lạc
+Lưu số seri theo từng dòng đơn hàng và tạo bản ghi bảo hành tự động
+FR-07, FR-12
+5
+Không có thống kê doanh thu tự động
+Tổng hợp cuối tháng làm thủ công
+Báo cáo doanh thu theo ngày, tháng và theo sản phẩm
+FR-10
+
+2.1.4. Hệ thống đề xuất và các đối tượng tương tác
+Website là hệ thống độc lập, không kết nối với phần mềm nào khác của cửa hàng. Hình 3 cho thấy hệ thống trao đổi thông tin với ba tác nhân: Khách hàng, Nhân viên và Quản trị viên.
+
+Hình 3. Sơ đồ ngữ cảnh của hệ thống
+Quy trình bán hàng sau khi có website (TO-BE) được mô tả bằng sơ đồ hoạt động có làn bơi trong Hình 4. Khách hàng tự tìm hàng, đặt đơn; hệ thống kiểm tra tồn kho và tạo đơn; nhân viên xác nhận, nhập số seri và giao hàng.
+
+Hình 4. Quy trình bán hàng trên website (TO-BE)
+Trạng thái của một đơn hàng thay đổi theo Hình 5. Đây là cơ sở để viết các yêu cầu xử lý đơn hàng ở mục 3.6.
+
+Hình 5. Sơ đồ trạng thái đơn hàng
+2.2. Các lớp người dùng và đặc điểm
+Hệ thống có ba lớp người dùng. Khách chưa đăng nhập vẫn xem được sản phẩm nhưng chưa dùng được giỏ hàng và đặt hàng.
+Bảng 7. Các lớp người dùng
+Lớp người dùng
+Đặc điểm
+Chức năng sử dụng
+Ghi chú
+Khách hàng
+Người mua thiết bị điện tử, điện lạnh, đồ gia dụng; dùng điện thoại hoặc máy tính; không có kiến thức kỹ thuật; số lượng không xác định trước
+UC-01 đến UC-06
+Phải đăng nhập mới dùng UC-04, UC-05, UC-06. Màn hình từ 360 px trở lên
+Nhân viên
+Nhân viên bán hàng, giao hàng, thu ngân của cửa hàng; đã quen dùng Zalo, Excel; thao tác trên máy tính tại quầy
+UC-02, UC-07, UC-08, UC-12
+Không có quyền khuyến mãi, thống kê, quản lý tài khoản
+Quản trị viên
+Chủ cửa hàng; là người quyết định giá, khuyến mãi và phân quyền
+UC-02, UC-07 đến UC-12
+Thừa hưởng toàn bộ quyền của Nhân viên (xem Hình 7)
+
+2.3. Môi trường vận hành
+Bảng 8. Môi trường vận hành của hệ thống
+Thành phần
+Yêu cầu
+Máy chủ
+Không có máy chủ riêng: website là các tệp HTML, CSS, JavaScript mở trực tiếp bằng trình duyệt hoặc đặt lên một dịch vụ lưu trữ trang tĩnh (ví dụ GitHub Pages)
+Lưu trữ dữ liệu
+localStorage của trình duyệt (dung lượng khoảng 5 MB); dữ liệu lưu dạng JSON, mã hóa UTF-8 để hiển thị đúng tiếng Việt có dấu
+Máy người dùng
+Máy tính hoặc điện thoại có trình duyệt Chrome, Edge hoặc Safari ở phiên bản mới nhất tại thời điểm nghiệm thu, bật JavaScript; chiều rộng màn hình từ 360 px đến 1920 px
+Mạng
+Chạy được khi không có Internet nếu mở tệp trên máy; khi đặt lên GitHub Pages thì người dùng cần kết nối Internet từ 4G trở lên
+Môi trường chạy thử
+Máy tính của nhóm cài trình soạn thảo Visual Studio Code; chạy thử bằng cách mở tệp index.html trên trình duyệt; triển khai thử trên GitHub Pages hoặc máy của cửa hàng (TBD-03)
+
+Kiến trúc tổng thể của hệ thống được thể hiện trong Hình 6. Trình duyệt mở các trang HTML; tệp CSS định dạng bố cục và màu sắc; các tệp JavaScript xử lý nghiệp vụ (đăng nhập, giỏ hàng, đặt hàng, xử lý đơn, thống kê), đọc và ghi dữ liệu trong localStorage; tệp data.js cung cấp dữ liệu mẫu nạp vào localStorage ở lần mở đầu tiên.
+
+Hình 6. Kiến trúc hệ thống đề xuất
+2.4. Các ràng buộc thiết kế và triển khai
+Bảng 9. Các ràng buộc
+Mã
+Loại
+Nội dung ràng buộc
+CON-01
+Công nghệ
+Dùng HTML, CSS và JavaScript thuần, vì đây là kiến thức cả nhóm đã học. Không dùng framework hoặc thư viện lớn (React, Angular, Bootstrap, jQuery) và không dùng máy chủ hay cơ sở dữ liệu riêng.
+CON-02
+Công nghệ
+Phân quyền bằng JavaScript: khi đăng nhập lưu mã người dùng, vai trò và thời điểm đăng nhập vào sessionStorage; mỗi trang quản trị kiểm tra vai trò trước khi hiển thị nội dung.
+CON-03
+Thanh toán
+Chỉ có hai hình thức thanh toán: khi nhận hàng và chuyển khoản. Không tích hợp cổng thanh toán.
+CON-04
+Lưu trữ
+Ảnh sản phẩm lưu trong thư mục images cùng với website; dữ liệu chỉ lưu đường dẫn ảnh.
+CON-05
+Bảo mật
+Mật khẩu lưu trong localStorage và hiển thị dạng dấu chấm khi nhập; vì chỉ chạy trên trình duyệt nên mức bảo mật chỉ phù hợp với bài tập, không dùng cho cửa hàng thật (xem mục 6.3).
+CON-06
+Thời gian
+Kế hoạch thực hiện 11 tuần: SRS và use case tuần 1 - 3, lập trình tuần 4 - 9, kiểm thử và triển khai thử tuần 9 - 10, báo cáo tuần 10 - 11.
+CON-07
+Nhân lực
+Nhóm sinh viên, mỗi người phụ trách một mảng; công cụ làm việc gồm Visual Studio Code, draw.io, GitHub hoặc Google Drive, Trello.
+CON-08
+Ngôn ngữ
+Giao diện và dữ liệu bằng tiếng Việt; tiền tệ là đồng Việt Nam (VNĐ).
+
+2.5. Các giả định và sự phụ thuộc
+2.5.1. Giả định
+Chủ cửa hàng cung cấp danh sách sản phẩm, giá, số lượng tồn và ảnh để nhập dữ liệu ban đầu.
+Nhân viên của cửa hàng chịu trách nhiệm cập nhật đơn hàng trên website hằng ngày; nếu không cập nhật thì tồn kho và trạng thái đơn không chính xác.
+Cửa hàng tự liên hệ đơn vị vận chuyển và nhập trạng thái giao hàng vào hệ thống; hệ thống không kết nối với đơn vị vận chuyển.
+Với ti vi, điều hòa và tủ lạnh, mỗi dòng đơn hàng chỉ chứa một chiếc (xem BR-11) vì mỗi chiếc có một số seri riêng. Khách mua 2 chiếc thì hệ thống tạo 2 dòng đơn hàng.
+Quạt và nồi cơm điện không có số seri, được gộp theo số lượng trong một dòng đơn hàng; vẫn có bản ghi bảo hành theo dòng đơn.
+Dữ liệu của phiên bản V1.0.0 lưu trong localStorage của từng trình duyệt: đơn hàng đặt trên máy của khách không tự xuất hiện trên máy của nhân viên. Phiên bản này dùng để trình diễn và kiểm thử trên một máy; muốn dùng thật cần bổ sung máy chủ và cơ sở dữ liệu (ngoài phạm vi).
+Cửa hàng chỉ bán hàng mới; hàng đã qua sử dụng không nằm trong phạm vi V1.0.0 (TBD-07).
+2.5.2. Sự phụ thuộc
+Chính sách bảo hành (thời hạn, điều kiện) do cửa hàng quyết định; hệ thống chỉ lưu và tính theo giá trị này (TBD-01).
+Danh sách các hình thức thanh toán đang dùng và số lượng mã hàng thực tế cần được cửa hàng cung cấp thêm ở buổi khảo sát tiếp theo (TBD-02, TBD-04).
+Yêu cầu giao diện chi tiết sẽ được xác nhận sau khi cửa hàng góp ý các wireframe trong mục 5.1 (TBD-05).
+
+3. CÁC TÍNH NĂNG CỦA HỆ THỐNG
+Phần này mô tả 11 tính năng của hệ thống. Mỗi tính năng gồm hai mục: Mô tả (có đặc tả use case) và Các yêu cầu chức năng (danh sách yêu cầu kiểm tra được). Hình 7 là sơ đồ use case tổng quát; Hình 8 và Hình 9 chi tiết hóa các use case theo từng nhóm tác nhân.
+
+Hình 7. Sơ đồ use case tổng quát
+
+Hình 8. Sơ đồ use case của khách hàng
+
+Hình 9. Sơ đồ use case của nhân viên và quản trị viên
+Bảng 10. Danh sách use case
+Mã
+Tên use case
+Tác nhân
+Tính năng
+Mục
+UC-01
+Đăng ký tài khoản
+Khách hàng
+FR-01
+3.1
+UC-02
+Đăng nhập
+Khách hàng, Nhân viên, Quản trị viên
+FR-01
+3.1
+UC-03
+Xem sản phẩm (tìm kiếm, lọc, chi tiết)
+Khách hàng
+FR-02, FR-03
+3.2
+UC-04
+Quản lý giỏ hàng
+Khách hàng
+FR-04
+3.3
+UC-05
+Đặt hàng và thanh toán
+Khách hàng
+FR-05
+3.4
+UC-06
+Theo dõi đơn hàng
+Khách hàng
+FR-06
+3.5
+UC-07
+Xử lý đơn hàng
+Nhân viên, Quản trị viên
+FR-07
+3.6
+UC-08
+Quản lý sản phẩm và tồn kho
+Nhân viên, Quản trị viên
+FR-08
+3.7
+UC-09
+Quản lý khuyến mãi
+Quản trị viên
+FR-09
+3.8
+UC-10
+Thống kê doanh thu
+Quản trị viên
+FR-10
+3.9
+UC-11
+Quản lý tài khoản, phân quyền
+Quản trị viên
+FR-11
+3.10
+UC-12
+Tra cứu bảo hành
+Nhân viên, Quản trị viên
+FR-12
+3.11
+
+Tính năng FR-12 (tra cứu bảo hành) được nhóm bổ sung so với danh sách 11 yêu cầu sơ bộ để giải quyết vấn đề số 4 trong Bảng 6.
+Quy tắc nghiệp vụ chung
+Các quy tắc dưới đây áp dụng cho nhiều tính năng và được viện dẫn bằng mã BR trong các mục sau.
+Bảng 11. Danh sách quy tắc nghiệp vụ
+Mã
+Quy tắc
+BR-01
+Khi đơn chuyển sang trạng thái Đã xác nhận, hệ thống trừ stock_qty của từng biến thể trong đơn; khi đơn chuyển sang Đã hủy sau khi đã trừ thì cộng lại.
+BR-02
+Đơn giá trong ORDER_ITEMS lưu theo giá tại thời điểm đặt hàng; thay đổi giá sau đó không ảnh hưởng đơn cũ.
+BR-03
+Mỗi số seri (serial_no) chỉ xuất hiện một lần trong toàn hệ thống. Bản ghi WARRANTIES được tạo khi đơn chuyển sang Hoàn thành, cho từng dòng đơn hàng; end_date bằng start_date cộng warranty_months của sản phẩm.
+BR-04
+Mã khuyến mãi chỉ áp dụng khi ngày đặt hàng nằm trong khoảng từ start_date đến end_date và mã đang được bật.
+BR-05
+Khách hàng chỉ được hủy đơn khi đơn ở trạng thái Chờ xác nhận.
+BR-06
+Số lượng tồn (stock_qty) không được âm.
+BR-07
+Số lượng đặt của một biến thể không được vượt quá stock_qty tại thời điểm đặt và tại thời điểm xác nhận.
+BR-08
+Chỉ tài khoản có vai trò Nhân viên hoặc Quản trị viên được vào trang quản trị; chỉ Quản trị viên được dùng UC-09, UC-10, UC-11.
+BR-09
+Tổng tiền đơn = tổng (đơn giá x số lượng) trừ số tiền giảm; không nhỏ hơn 0.
+BR-10
+Mỗi sản phẩm bắt buộc có thời hạn bảo hành warranty_months từ 0 đến 60 và thuộc tính track_serial (1 là phải nhập số seri khi giao hàng, 0 là không).
+BR-11
+Một dòng đơn hàng của sản phẩm có track_serial = 1 (ti vi, điều hòa, tủ lạnh) có quantity = 1 vì mỗi chiếc một số seri. Khách mua n chiếc thì hệ thống tạo n dòng đơn hàng. Quạt và nồi cơm điện được gộp theo số lượng và không có số seri.
+BR-12
+Doanh thu chỉ tính các đơn có trạng thái Hoàn thành, theo ngày thanh toán (paid_at).
+BR-13
+Trạng thái đơn chỉ được chuyển theo chiều: Chờ xác nhận, Đã xác nhận, Đang giao, Hoàn thành; được chuyển sang Đã hủy từ ba trạng thái đầu. Đơn Hoàn thành và Đã hủy không được sửa trạng thái.
+
+3.1. Đăng ký và đăng nhập
+3.1.1. Mô tả
+Khách hàng tạo tài khoản bằng email và số điện thoại, đăng nhập bằng email và mật khẩu. Nhân viên và Quản trị viên dùng cùng màn hình đăng nhập; sau khi đăng nhập hệ thống đưa họ đến trang quản trị. Tính năng này thuộc FR-01, gồm UC-01 và UC-02.
+Bảng 12. Đặc tả use case UC-01 Đăng ký tài khoản
+Mã và tên
+UC-01 - Đăng ký tài khoản
+Tác nhân
+Khách hàng (chưa đăng nhập)
+Mô tả
+Khách hàng tạo tài khoản mới để dùng giỏ hàng và đặt hàng.
+Tiền điều kiện
+Khách chưa đăng nhập.
+Luồng chính
+1. Khách chọn "Đăng ký".
+2. Hệ thống hiển thị form gồm: họ tên, email, số điện thoại, mật khẩu, nhập lại mật khẩu.
+3. Khách nhập thông tin và bấm "Đăng ký".
+4. JavaScript kiểm tra định dạng và kiểm tra email chưa tồn tại trong USERS.
+5. Hệ thống lưu tài khoản với vai trò Khách hàng vào localStorage.
+6. Hệ thống thông báo thành công và chuyển sang trang đăng nhập.
+Luồng thay thế
+4a. Dữ liệu sai định dạng: hệ thống hiển thị lỗi ngay dưới ô sai, giữ lại các ô đã nhập (trừ mật khẩu).
+4b. Email đã tồn tại: hiển thị "Email đã được đăng ký".
+Hậu điều kiện
+Có bản ghi mới trong USERS với role = khách hàng và is_active = 1.
+
+Bảng 13. Đặc tả use case UC-02 Đăng nhập
+Mã và tên
+UC-02 - Đăng nhập
+Tác nhân
+Khách hàng, Nhân viên, Quản trị viên
+Mô tả
+Người dùng xác thực để dùng các chức năng cần đăng nhập.
+Tiền điều kiện
+Người dùng đã có tài khoản và chưa đăng nhập.
+Luồng chính
+1. Người dùng nhập email và mật khẩu, bấm "Đăng nhập".
+2. Hệ thống tìm tài khoản theo email và so khớp mật khẩu.
+3. Hệ thống lưu mã người dùng, vai trò và thời điểm đăng nhập vào sessionStorage.
+4. Khách hàng được chuyển về trang trước đó hoặc trang chủ; Nhân viên và Quản trị viên được chuyển đến trang quản trị.
+Luồng thay thế
+2a. Sai email hoặc mật khẩu: hiển thị "Email hoặc mật khẩu không đúng" (không nói rõ sai ô nào).
+2b. Tài khoản bị khóa: hiển thị "Tài khoản đã bị khóa, vui lòng liên hệ cửa hàng".
+5. Đăng xuất: người dùng bấm "Đăng xuất", hệ thống xóa sessionStorage và chuyển về trang chủ.
+Hậu điều kiện
+sessionStorage chứa user_id và role; các trang yêu cầu đăng nhập truy cập được.
+Quy tắc liên quan
+BR-08
+
+3.1.2. Các yêu cầu chức năng
+Bảng 14. Yêu cầu chức năng FR-01 (Đăng ký, đăng nhập)
+Mã
+Yêu cầu
+Ưu tiên
+FR-01.1
+Hệ thống phải cho phép đăng ký bằng họ tên (tối đa 100 ký tự), email, số điện thoại và mật khẩu.
+Cao
+FR-01.2
+Hệ thống phải từ chối email đã tồn tại và email sai định dạng (thiếu @ hoặc tên miền).
+Cao
+FR-01.3
+Hệ thống phải chỉ nhận số điện thoại gồm đúng 10 chữ số, bắt đầu bằng 0.
+Cao
+FR-01.4
+Hệ thống phải yêu cầu mật khẩu có ít nhất 8 ký tự, gồm cả chữ và số, và yêu cầu nhập lại mật khẩu trùng khớp.
+Cao
+FR-01.5
+Hệ thống phải lưu mật khẩu trong localStorage, hiển thị dạng dấu chấm khi nhập và không bao giờ hiển thị lại mật khẩu trên màn hình.
+Cao
+FR-01.6
+Hệ thống phải đăng nhập bằng email và mật khẩu, và từ chối tài khoản có is_active = 0.
+Cao
+FR-01.7
+Hệ thống phải gán vai trò Khách hàng cho mọi tài khoản tự đăng ký.
+Cao
+FR-01.8
+Hệ thống phải xóa phiên đăng nhập khi người dùng đăng xuất, và tự xóa sau 30 phút không thao tác.
+Trung bình
+FR-01.9
+Khi người dùng chưa đăng nhập mở trang cần đăng nhập, hệ thống phải chuyển đến trang đăng nhập và quay lại trang đó sau khi đăng nhập thành công.
+Trung bình
+
+3.2. Xem, tìm kiếm, lọc sản phẩm và xem chi tiết
+3.2.1. Mô tả
+Khách hàng (kể cả chưa đăng nhập) xem danh mục, tìm theo từ khóa, lọc theo loại sản phẩm, hãng, thông số (công suất, dung tích, cỡ màn hình), màu, khoảng giá và sắp xếp theo giá. Trang chi tiết hiển thị ảnh, thông số, các biến thể còn hàng và giá từng biến thể. Tính năng này thuộc FR-02 và FR-03, gồm một use case là UC-03 (xem danh sách và xem chi tiết là hai bước liên tiếp của cùng một việc: tìm và chọn đúng sản phẩm). Hình minh họa nằm ở Hình 11 và Hình 12.
+Danh mục sản phẩm có hai cấp: cấp cha là nhóm hàng (Ti vi, Điều hòa, Tủ lạnh, Quạt, Nồi cơm điện), cấp con là loại sản phẩm (ví dụ Smart tivi, Điều hòa 1 chiều, Quạt đứng). Bộ lọc "loại sản phẩm" chính là danh mục cấp con.
+Bảng 15. Đặc tả use case UC-03 Xem sản phẩm (tìm kiếm, lọc, chi tiết)
+Mã và tên
+UC-03 - Xem sản phẩm (tìm kiếm, lọc, chi tiết)
+Tác nhân
+Khách hàng (kể cả chưa đăng nhập)
+Mô tả
+Khách hàng duyệt danh sách sản phẩm, thu hẹp kết quả bằng tìm kiếm và bộ lọc, rồi xem chi tiết một sản phẩm và chọn biến thể.
+Tiền điều kiện
+Không có.
+Luồng chính
+1. Khách chọn một danh mục hoặc nhập từ khóa vào ô tìm kiếm.
+2. Hệ thống hiển thị danh sách sản phẩm đang hiển thị (is_visible = 1) có ít nhất một biến thể, mỗi sản phẩm gồm ảnh đầu tiên, tên, hãng và giá thấp nhất của các biến thể.
+3. Khách chọn bộ lọc (loại sản phẩm, hãng, thông số, màu, khoảng giá) và kiểu sắp xếp theo giá.
+4. Hệ thống hiển thị lại danh sách theo điều kiện, chia trang.
+5. Khách chọn một sản phẩm trong danh sách.
+6. Hệ thống hiển thị trang chi tiết: ảnh, tên, mô tả, thông số, thời hạn bảo hành và các biến thể.
+7. Khách chọn thông số và màu.
+8. Hệ thống hiển thị giá và số lượng còn của biến thể tương ứng.
+Luồng thay thế
+2a. Không có sản phẩm phù hợp: hiển thị "Không tìm thấy sản phẩm phù hợp" và nút "Xóa bộ lọc".
+3a. Khoảng giá có giá "từ" lớn hơn giá "đến": hiển thị lỗi, giữ nguyên danh sách cũ.
+5a. Sản phẩm không tồn tại hoặc đang ẩn: hiển thị trang "Sản phẩm không tồn tại".
+7a. Tổ hợp đã chọn hết hàng (stock_qty = 0): hiển thị "Hết hàng", vô hiệu hóa nút "Thêm vào giỏ hàng".
+Hậu điều kiện
+Danh sách và chi tiết đúng dữ liệu hiện tại được hiển thị; dữ liệu không thay đổi.
+
+3.2.2. Các yêu cầu chức năng
+Bảng 16. Yêu cầu chức năng FR-02 và FR-03
+Mã
+Yêu cầu
+Ưu tiên
+FR-02.1
+Hệ thống phải hiển thị danh mục hai cấp và danh sách sản phẩm của danh mục được chọn.
+Cao
+FR-02.2
+Hệ thống phải tìm sản phẩm theo từ khóa trong tên sản phẩm, không phân biệt chữ hoa, chữ thường.
+Cao
+FR-02.3
+Hệ thống phải lọc theo loại sản phẩm, hãng, thông số, màu và khoảng giá; có thể chọn nhiều điều kiện cùng lúc.
+Cao
+FR-02.4
+Hệ thống phải sắp xếp theo giá tăng dần hoặc giảm dần.
+Cao
+FR-02.5
+Hệ thống phải chia trang, mỗi trang tối đa 12 sản phẩm, và hiển thị tổng số sản phẩm tìm được.
+Trung bình
+FR-02.6
+Hệ thống phải không hiển thị sản phẩm có is_visible = 0 và sản phẩm chưa có biến thể nào.
+Cao
+FR-02.7
+Hệ thống phải giữ nguyên các điều kiện lọc khi khách chuyển trang kết quả.
+Thấp
+FR-03.1
+Hệ thống phải hiển thị trang chi tiết gồm: tên, tối đa 5 ảnh, mô tả, thông số, chính sách bảo hành.
+Cao
+FR-03.2
+Hệ thống phải hiển thị tất cả biến thể của sản phẩm với thông số, màu và giá của từng biến thể.
+Cao
+FR-03.3
+Hệ thống phải hiển thị số tháng bảo hành của sản phẩm trên trang chi tiết.
+Cao
+FR-03.4
+Hệ thống phải hiển thị "Hết hàng" và chặn thêm vào giỏ với biến thể có stock_qty = 0.
+Cao
+FR-03.5
+Hệ thống phải hiển thị nút "Thêm vào giỏ hàng" và "Mua ngay"; "Mua ngay" thêm biến thể vào giỏ rồi chuyển thẳng đến trang đặt hàng.
+Trung bình
+
+3.3. Quản lý giỏ hàng
+3.3.1. Mô tả
+Khách hàng đã đăng nhập thêm biến thể vào giỏ, sửa số lượng, xóa dòng và xem tổng tiền. Giỏ hàng được lưu trong localStorage (bảng CART_ITEMS) nên không mất khi đăng xuất. Tính năng thuộc FR-04, gồm UC-04.
+Bảng 17. Đặc tả use case UC-04 Quản lý giỏ hàng
+Mã và tên
+UC-04 - Quản lý giỏ hàng
+Tác nhân
+Khách hàng
+Mô tả
+Khách hàng thêm, sửa số lượng, xóa sản phẩm trong giỏ và xem tổng tiền.
+Tiền điều kiện
+Khách hàng đã đăng nhập.
+Luồng chính
+1. Khách chọn biến thể và số lượng ở trang chi tiết, bấm "Thêm vào giỏ hàng".
+2. Hệ thống kiểm tra số lượng không vượt tồn kho, rồi thêm vào giỏ (nếu biến thể đã có trong giỏ thì cộng dồn số lượng).
+3. Khách mở giỏ hàng; hệ thống hiển thị từng dòng gồm ảnh, tên, biến thể, đơn giá, số lượng, thành tiền và tổng tiền.
+4. Khách đổi số lượng hoặc bấm "Xóa"; hệ thống cập nhật và tính lại tổng tiền.
+Luồng thay thế
+2a. Số lượng vượt tồn: hiển thị "Chỉ còn n sản phẩm", không thêm.
+1a. Chưa đăng nhập: chuyển đến trang đăng nhập, sau đó quay lại trang chi tiết.
+4a. Số lượng nhập nhỏ hơn 1 hoặc không phải số nguyên: hiển thị lỗi, giữ số lượng cũ.
+Hậu điều kiện
+CART_ITEMS phản ánh đúng nội dung giỏ hàng.
+Quy tắc liên quan
+BR-06, BR-07, BR-11
+
+3.3.2. Các yêu cầu chức năng
+Bảng 18. Yêu cầu chức năng FR-04 (Giỏ hàng)
+Mã
+Yêu cầu
+Ưu tiên
+FR-04.1
+Hệ thống phải cho phép khách đã đăng nhập thêm một biến thể vào giỏ với số lượng từ 1 trở lên.
+Cao
+FR-04.2
+Hệ thống phải cộng dồn số lượng khi biến thể đã có trong giỏ, và không cho tổng số lượng vượt stock_qty.
+Cao
+FR-04.3
+Hệ thống phải cho phép sửa số lượng và xóa từng dòng trong giỏ.
+Cao
+FR-04.4
+Hệ thống phải tính thành tiền từng dòng và tổng tiền bằng đơn giá hiện tại của biến thể, hiển thị theo định dạng 1.000.000 ₫.
+Cao
+FR-04.5
+Hệ thống phải hiển thị số lượng dòng trong giỏ trên biểu tượng giỏ hàng ở đầu mọi trang.
+Thấp
+FR-04.6
+Hệ thống phải cảnh báo trong giỏ khi biến thể đã hết hàng hoặc bị ẩn, và không cho tiến hành đặt hàng khi giỏ còn dòng như vậy.
+Trung bình
+
+3.4. Đặt hàng và thanh toán
+3.4.1. Mô tả
+Từ giỏ hàng, khách nhập địa chỉ nhận hàng, áp mã khuyến mãi (nếu có), chọn thanh toán khi nhận hàng hoặc chuyển khoản, rồi đặt hàng. Hệ thống tạo đơn ở trạng thái Chờ xác nhận; tồn kho chỉ bị trừ khi nhân viên xác nhận đơn (BR-01). Tính năng thuộc FR-05, gồm UC-05. Các chức năng phụ "nhập địa chỉ", "chọn phương thức thanh toán" luôn nằm trong luồng này (quan hệ include), còn "áp mã khuyến mãi" là tùy chọn (extend), như Hình 8.
+Bảng 19. Đặc tả use case UC-05 Đặt hàng và thanh toán
+Mã và tên
+UC-05 - Đặt hàng và thanh toán
+Tác nhân
+Khách hàng
+Mô tả
+Khách hàng tạo đơn mua các sản phẩm trong giỏ hàng.
+Tiền điều kiện
+Khách hàng đã đăng nhập; giỏ hàng có ít nhất một dòng.
+Luồng chính
+1. Khách bấm "Thanh toán" ở trang giỏ hàng.
+2. Hệ thống hiển thị trang đặt hàng gồm: tóm tắt đơn, chọn địa chỉ đã lưu hoặc nhập địa chỉ mới (họ tên người nhận, số điện thoại, địa chỉ chi tiết), ô mã khuyến mãi, lựa chọn thanh toán khi nhận hàng hoặc chuyển khoản.
+3. Khách nhập thông tin; nếu có mã thì bấm "Áp dụng", hệ thống kiểm tra mã và hiển thị số tiền giảm và tổng tiền mới.
+4. Khách bấm "Đặt hàng".
+5. Hệ thống kiểm tra lại tồn kho của tất cả dòng.
+6. Hệ thống tạo đơn hàng (Chờ xác nhận), các dòng đơn với đơn giá hiện tại, bản ghi thanh toán (Chưa thanh toán) và xóa giỏ hàng, trong cùng một lần ghi vào localStorage.
+7. Hệ thống hiển thị mã đơn; nếu chọn chuyển khoản thì hiển thị thông tin tài khoản của cửa hàng và nội dung chuyển khoản là mã đơn.
+Luồng thay thế
+3a. Mã không tồn tại, hết hạn, chưa đến ngày hoặc đã tắt: hiển thị lý do cụ thể, không áp dụng giảm giá.
+5a. Có dòng vượt tồn hoặc hết hàng: không tạo đơn, hiển thị tên biến thể có vấn đề và đưa khách về giỏ hàng.
+4a. Thiếu thông tin người nhận: hiển thị lỗi tại ô thiếu.
+6a. Lỗi khi lưu: không ghi gì vào localStorage, giỏ hàng giữ nguyên, hiển thị thông báo lỗi.
+Hậu điều kiện
+Có đơn mới ở trạng thái Chờ xác nhận; giỏ hàng trống; tồn kho chưa thay đổi.
+Quy tắc liên quan
+BR-02, BR-04, BR-07, BR-09, BR-11
+
+3.4.2. Các yêu cầu chức năng
+Bảng 20. Yêu cầu chức năng FR-05 (Đặt hàng và thanh toán)
+Mã
+Yêu cầu
+Ưu tiên
+FR-05.1
+Hệ thống phải cho phép nhập địa chỉ nhận hàng mới hoặc chọn địa chỉ đã lưu của tài khoản; họ tên, số điện thoại (10 chữ số) và địa chỉ chi tiết là bắt buộc.
+Cao
+FR-05.2
+Hệ thống phải cho phép áp một mã khuyến mãi cho mỗi đơn, kiểm tra theo BR-04, và hiển thị số tiền giảm trước khi đặt.
+Trung bình
+FR-05.3
+Hệ thống phải cho chọn một trong hai hình thức: thanh toán khi nhận hàng hoặc chuyển khoản.
+Cao
+FR-05.4
+Hệ thống phải kiểm tra tồn kho từng dòng ngay trước khi tạo đơn.
+Cao
+FR-05.5
+Hệ thống phải tạo ORDERS, ORDER_ITEMS và PAYMENTS trong cùng một lần ghi vào localStorage; nếu một bước lỗi thì không tạo gì.
+Cao
+FR-05.6
+Hệ thống phải lưu đơn giá của từng dòng bằng giá tại thời điểm đặt (BR-02) và lưu địa chỉ giao hàng dưới dạng văn bản trong đơn.
+Cao
+FR-05.7
+Hệ thống phải tách mỗi chiếc ti vi, điều hòa, tủ lạnh thành một dòng đơn hàng riêng theo BR-11.
+Cao
+FR-05.8
+Hệ thống phải hiển thị mã đơn sau khi đặt thành công và, với chuyển khoản, hiển thị số tài khoản, tên chủ tài khoản của cửa hàng và nội dung chuyển khoản (TBD-02).
+Cao
+FR-05.9
+Hệ thống phải xóa các dòng đã đặt khỏi giỏ hàng sau khi tạo đơn thành công.
+Cao
+
+3.5. Theo dõi và hủy đơn hàng
+3.5.1. Mô tả
+Khách hàng xem danh sách và chi tiết các đơn của mình, bao gồm trạng thái, số seri và thời hạn bảo hành của sản phẩm đã nhận; được hủy đơn khi đơn còn ở trạng thái Chờ xác nhận. Tính năng thuộc FR-06, gồm UC-06.
+Bảng 21. Đặc tả use case UC-06 Theo dõi đơn hàng
+Mã và tên
+UC-06 - Theo dõi đơn hàng
+Tác nhân
+Khách hàng
+Mô tả
+Khách hàng xem trạng thái, lịch sử đơn và hủy đơn chưa xác nhận.
+Tiền điều kiện
+Khách hàng đã đăng nhập.
+Luồng chính
+1. Khách chọn "Đơn hàng của tôi".
+2. Hệ thống hiển thị danh sách đơn của khách, đơn mới nhất ở đầu, gồm mã đơn, ngày đặt, tổng tiền, trạng thái.
+3. Khách chọn một đơn.
+4. Hệ thống hiển thị chi tiết: sản phẩm, đơn giá, số lượng, địa chỉ nhận, hình thức thanh toán, mã giảm giá, và với đơn Hoàn thành thì số seri (nếu có), ngày bắt đầu và ngày hết hạn bảo hành.
+5. Khách bấm "Hủy đơn" (extend), xác nhận trong hộp thoại.
+6. Hệ thống chuyển đơn sang Đã hủy.
+Luồng thay thế
+2a. Khách chưa có đơn: hiển thị "Bạn chưa có đơn hàng nào".
+5a. Đơn không ở trạng thái Chờ xác nhận: không hiển thị nút "Hủy đơn"; hiển thị số điện thoại cửa hàng để liên hệ.
+5b. Đơn vừa được nhân viên xác nhận trong lúc khách đang xem: hệ thống từ chối hủy và thông báo trạng thái hiện tại.
+Hậu điều kiện
+Đơn bị hủy có trạng thái Đã hủy; tồn kho không đổi vì chưa bị trừ.
+Quy tắc liên quan
+BR-05
+
+3.5.2. Các yêu cầu chức năng
+Bảng 22. Yêu cầu chức năng FR-06 (Theo dõi đơn hàng)
+Mã
+Yêu cầu
+Ưu tiên
+FR-06.1
+Hệ thống phải hiển thị cho khách chỉ các đơn do chính khách đó đặt.
+Cao
+FR-06.2
+Hệ thống phải hiển thị danh sách đơn sắp xếp theo ngày đặt giảm dần, mỗi trang tối đa 10 đơn.
+Trung bình
+FR-06.3
+Hệ thống phải hiển thị chi tiết đơn đúng như lúc đặt (đơn giá, địa chỉ lưu trong đơn).
+Cao
+FR-06.4
+Hệ thống phải cho hủy đơn chỉ khi trạng thái là Chờ xác nhận (BR-05) và yêu cầu khách xác nhận trước khi hủy.
+Cao
+FR-06.5
+Hệ thống phải hiển thị số seri (nếu có) và thời hạn bảo hành của từng dòng trong đơn Hoàn thành.
+Trung bình
+
+3.6. Xử lý đơn hàng
+3.6.1. Mô tả
+Nhân viên và Quản trị viên xem danh sách đơn, xác nhận, nhập số seri khi giao hàng, cập nhật trạng thái giao hàng, hoàn thành hoặc hủy đơn. Khi hoàn thành, hệ thống tự tạo bản ghi bảo hành. Tính năng thuộc FR-07, gồm UC-07; hình minh họa ở Hình 13. Việc nhập số seri là bước tùy chọn theo từng dòng (extend), vì quạt và nồi cơm điện không có số seri.
+Bảng 23. Đặc tả use case UC-07 Xử lý đơn hàng
+Mã và tên
+UC-07 - Xử lý đơn hàng
+Tác nhân
+Nhân viên, Quản trị viên
+Mô tả
+Nhân viên xử lý đơn từ lúc nhận đến khi giao xong.
+Tiền điều kiện
+Đã đăng nhập với vai trò Nhân viên hoặc Quản trị viên.
+Luồng chính
+1. Nhân viên mở "Đơn hàng", lọc theo trạng thái, khoảng ngày, mã đơn hoặc số điện thoại người nhận.
+2. Nhân viên chọn một đơn Chờ xác nhận và bấm "Xác nhận".
+3. Hệ thống kiểm tra tồn kho, trừ tồn từng biến thể, chuyển đơn sang Đã xác nhận.
+4. Nhân viên chuẩn bị hàng, nhập số seri cho từng chiếc ti vi, điều hòa, tủ lạnh, bấm "Giao hàng"; hệ thống chuyển đơn sang Đang giao.
+5. Sau khi khách nhận hàng, nhân viên bấm "Hoàn thành".
+6. Hệ thống chuyển đơn sang Hoàn thành, cập nhật thanh toán thành Đã thanh toán kèm paid_at, và tạo bản ghi bảo hành cho từng dòng đơn.
+Luồng thay thế
+3a. Tồn không đủ: hiển thị tên biến thể thiếu, không xác nhận đơn.
+4a. Số seri không gồm 6 đến 20 ký tự chữ và số, hoặc đã có trong hệ thống: hiển thị lỗi, không chuyển trạng thái.
+*a. Nhân viên bấm "Hủy đơn" ở trạng thái Chờ xác nhận, Đã xác nhận hoặc Đang giao: đơn sang Đã hủy; nếu tồn đã bị trừ thì cộng lại.
+5a. Hình thức chuyển khoản nhưng chưa nhận tiền: nhân viên phải bấm "Đã nhận tiền" trước khi hoàn thành; nếu chưa thì hệ thống không cho hoàn thành.
+Hậu điều kiện
+Trạng thái đơn, tồn kho, số seri, thanh toán và bảo hành được cập nhật nhất quán.
+Quy tắc liên quan
+BR-01, BR-03, BR-07, BR-13
+
+3.6.2. Các yêu cầu chức năng
+Bảng 24. Yêu cầu chức năng FR-07 (Xử lý đơn hàng)
+Mã
+Yêu cầu
+Ưu tiên
+FR-07.1
+Hệ thống phải hiển thị danh sách đơn có lọc theo trạng thái, khoảng ngày, mã đơn, số điện thoại người nhận; mỗi trang tối đa 20 đơn.
+Cao
+FR-07.2
+Hệ thống phải hiển thị chi tiết đơn gồm thông tin người nhận, các dòng đơn, mã giảm giá, tổng tiền, hình thức và trạng thái thanh toán.
+Cao
+FR-07.3
+Hệ thống phải chỉ cho phép chuyển trạng thái theo BR-13 và từ chối mọi chuyển trạng thái khác.
+Cao
+FR-07.4
+Hệ thống phải trừ tồn kho khi xác nhận đơn và cộng lại khi hủy đơn đã xác nhận (BR-01), trong cùng một lần ghi với việc đổi trạng thái.
+Cao
+FR-07.5
+Hệ thống phải bắt buộc nhập số seri cho từng dòng có track_serial = 1 trước khi chuyển sang Đang giao; số seri gồm 6 đến 20 ký tự chữ và số và không trùng (BR-03).
+Cao
+FR-07.6
+Hệ thống phải tạo bản ghi WARRANTIES cho từng dòng đơn hàng khi đơn Hoàn thành, với start_date là ngày hoàn thành và end_date theo warranty_months của sản phẩm (TBD-01).
+Cao
+FR-07.7
+Hệ thống phải cho nhân viên đánh dấu "Đã nhận tiền" với đơn chuyển khoản, và tự đặt thanh toán là Đã thanh toán khi hoàn thành đơn thanh toán khi nhận hàng.
+Cao
+FR-07.8
+Hệ thống phải từ chối xác nhận đơn khi tồn không đủ và hiển thị biến thể thiếu.
+Cao
+
+3.7. Quản lý sản phẩm và tồn kho
+3.7.1. Mô tả
+Nhân viên và Quản trị viên thêm, sửa, ẩn sản phẩm; thêm, sửa biến thể với giá và số lượng tồn; tải ảnh lên; quản lý danh mục. Tính năng thuộc FR-08, gồm UC-08 (include: quản lý danh mục và ảnh sản phẩm).
+Bảng 25. Đặc tả use case UC-08 Quản lý sản phẩm và tồn kho
+Mã và tên
+UC-08 - Quản lý sản phẩm và tồn kho
+Tác nhân
+Nhân viên, Quản trị viên
+Mô tả
+Cập nhật danh mục hàng, giá và số lượng tồn của cửa hàng.
+Tiền điều kiện
+Đã đăng nhập với vai trò Nhân viên hoặc Quản trị viên.
+Luồng chính
+1. Nhân viên mở "Sản phẩm", tìm theo tên hoặc lọc theo danh mục.
+2. Nhân viên bấm "Thêm sản phẩm", nhập danh mục, tên, hãng, mô tả, thông số, số tháng bảo hành, chọn có số seri hay không, chọn hiển thị hoặc ẩn, nhập đường dẫn ảnh.
+3. Hệ thống kiểm tra dữ liệu và lưu sản phẩm.
+4. Nhân viên thêm biến thể: thông số (công suất, dung tích hoặc cỡ màn hình), màu, giá, số lượng tồn.
+5. Hệ thống kiểm tra (BR-06, BR-10) và lưu biến thể.
+6. Khi cần, nhân viên sửa giá hoặc số lượng tồn của biến thể, hoặc ẩn sản phẩm.
+Luồng thay thế
+3a. Thiếu tên hoặc danh mục: hiển thị lỗi tại ô thiếu.
+5a. Giá nhỏ hơn 0, tồn kho nhỏ hơn 0 hoặc bảo hành ngoài khoảng 0 đến 60 tháng: hiển thị lỗi, không lưu.
+2b. Đường dẫn ảnh không có đuôi .jpg hoặc .png: từ chối ảnh đó và giữ các ảnh hợp lệ.
+6a. Sản phẩm đã có trong đơn hàng: không cho xóa, chỉ cho ẩn.
+Hậu điều kiện
+Dữ liệu sản phẩm, biến thể, ảnh được cập nhật; trang khách hàng hiển thị theo dữ liệu mới.
+Quy tắc liên quan
+BR-06, BR-10
+
+3.7.2. Các yêu cầu chức năng
+Bảng 26. Yêu cầu chức năng FR-08 (Quản lý sản phẩm và tồn kho)
+Mã
+Yêu cầu
+Ưu tiên
+FR-08.1
+Hệ thống phải cho thêm, sửa sản phẩm gồm: danh mục, tên (tối đa 150 ký tự), hãng, mô tả, số tháng bảo hành, có số seri hay không, trạng thái hiển thị.
+Cao
+FR-08.2
+Hệ thống phải cho thêm, sửa biến thể gồm: thông số, màu, giá (VNĐ, từ 0), số lượng tồn (từ 0).
+Cao
+FR-08.3
+Hệ thống phải cho ẩn và hiện lại sản phẩm; sản phẩm đã có trong đơn hàng không được xóa.
+Cao
+FR-08.4
+Hệ thống phải cho nhập tối đa 5 đường dẫn ảnh cho mỗi sản phẩm, đuôi tệp .jpg hoặc .png, và cho đổi thứ tự hiển thị; tệp ảnh do nhóm chép vào thư mục images.
+Trung bình
+FR-08.5
+Hệ thống phải cho thêm, sửa, xóa danh mục hai cấp; không cho xóa danh mục còn sản phẩm hoặc còn danh mục con.
+Trung bình
+FR-08.6
+Hệ thống phải hiển thị danh sách biến thể có số lượng tồn từ 0 đến 2 ở đầu bảng cảnh báo tồn thấp.
+Thấp
+FR-08.7
+Hệ thống phải ghi nhận giá mới ngay khi lưu; đơn đã đặt trước đó không bị ảnh hưởng (BR-02).
+Cao
+
+3.8. Quản lý khuyến mãi
+3.8.1. Mô tả
+Quản trị viên tạo mã giảm giá theo phần trăm hoặc theo số tiền cố định, có ngày bắt đầu và ngày kết thúc. Tính năng thuộc FR-09, gồm UC-09.
+Bảng 27. Đặc tả use case UC-09 Quản lý khuyến mãi
+Mã và tên
+UC-09 - Quản lý khuyến mãi
+Tác nhân
+Quản trị viên
+Mô tả
+Tạo, sửa, bật hoặc tắt mã khuyến mãi.
+Tiền điều kiện
+Đã đăng nhập với vai trò Quản trị viên.
+Luồng chính
+1. Quản trị viên mở "Khuyến mãi"; hệ thống hiển thị danh sách mã.
+2. Quản trị viên bấm "Thêm mã", nhập mã, loại giảm (phần trăm hoặc số tiền), giá trị, ngày bắt đầu, ngày kết thúc.
+3. Hệ thống kiểm tra và lưu mã.
+4. Quản trị viên có thể sửa mã hoặc chuyển trạng thái bật, tắt.
+Luồng thay thế
+3a. Mã trùng với mã đã có: hiển thị "Mã đã tồn tại".
+3b. Phần trăm ngoài khoảng 1 đến 100, số tiền không dương, hoặc ngày kết thúc trước ngày bắt đầu: hiển thị lỗi.
+Hậu điều kiện
+Mã khuyến mãi được lưu và áp dụng được theo BR-04.
+Quy tắc liên quan
+BR-04
+
+3.8.2. Các yêu cầu chức năng
+Bảng 28. Yêu cầu chức năng FR-09 (Quản lý khuyến mãi)
+Mã
+Yêu cầu
+Ưu tiên
+FR-09.1
+Hệ thống phải cho tạo mã gồm: mã (tối đa 30 ký tự, không trùng, không phân biệt hoa thường), loại giảm, giá trị, ngày bắt đầu, ngày kết thúc.
+Cao
+FR-09.2
+Hệ thống phải kiểm tra: giảm theo phần trăm từ 1 đến 100; giảm theo số tiền lớn hơn 0; ngày kết thúc không trước ngày bắt đầu.
+Cao
+FR-09.3
+Hệ thống phải cho sửa, bật, tắt mã; mã đã dùng trong đơn không được xóa.
+Trung bình
+FR-09.4
+Hệ thống phải tính số tiền giảm khi áp mã: theo phần trăm là tổng tiền hàng nhân phần trăm làm tròn xuống đồng; theo số tiền là giá trị mã nhưng không vượt tổng tiền hàng.
+Cao
+FR-09.5
+Hệ thống phải hiển thị danh sách mã kèm trạng thái: Đang áp dụng, Chưa bắt đầu, Hết hạn, Đã tắt.
+Thấp
+
+3.9. Thống kê doanh thu
+3.9.1. Mô tả
+Quản trị viên xem doanh thu theo ngày, theo tháng và danh sách sản phẩm bán chạy. Tính năng thuộc FR-10, gồm UC-10; các báo cáo được mô tả ở mục 4.3.
+Bảng 29. Đặc tả use case UC-10 Thống kê doanh thu
+Mã và tên
+UC-10 - Thống kê doanh thu
+Tác nhân
+Quản trị viên
+Mô tả
+Xem số liệu doanh thu của cửa hàng.
+Tiền điều kiện
+Đã đăng nhập với vai trò Quản trị viên.
+Luồng chính
+1. Quản trị viên mở "Thống kê doanh thu".
+2. Quản trị viên chọn loại báo cáo (theo ngày, theo tháng, sản phẩm bán chạy) và khoảng thời gian.
+3. Hệ thống tính toán từ các đơn Hoàn thành và hiển thị bảng kết quả kèm tổng.
+Luồng thay thế
+3a. Không có đơn trong khoảng đã chọn: hiển thị "Không có dữ liệu" và tổng bằng 0.
+2a. Ngày bắt đầu sau ngày kết thúc: hiển thị lỗi.
+Hậu điều kiện
+Không thay đổi dữ liệu.
+Quy tắc liên quan
+BR-12
+
+3.9.2. Các yêu cầu chức năng
+Bảng 30. Yêu cầu chức năng FR-10 (Thống kê doanh thu)
+Mã
+Yêu cầu
+Ưu tiên
+FR-10.1
+Hệ thống phải hiển thị doanh thu theo từng ngày trong khoảng ngày được chọn (BC-01).
+Cao
+FR-10.2
+Hệ thống phải hiển thị doanh thu theo từng tháng của một năm được chọn (BC-02).
+Cao
+FR-10.3
+Hệ thống phải hiển thị 10 sản phẩm có số lượng bán nhiều nhất trong khoảng ngày được chọn (BC-03).
+Cao
+FR-10.4
+Hệ thống phải chỉ tính các đơn có trạng thái Hoàn thành (BR-12).
+Cao
+FR-10.5
+Hệ thống nên hiển thị doanh thu dạng biểu đồ cột bên cạnh bảng số liệu.
+Thấp
+
+3.10. Quản lý tài khoản và phân quyền
+3.10.1. Mô tả
+Quản trị viên xem danh sách tài khoản, khóa hoặc mở khóa, gán vai trò Khách hàng, Nhân viên hoặc Quản trị viên. Tính năng thuộc FR-11, gồm UC-11.
+Bảng 31. Đặc tả use case UC-11 Quản lý tài khoản, phân quyền
+Mã và tên
+UC-11 - Quản lý tài khoản, phân quyền
+Tác nhân
+Quản trị viên
+Mô tả
+Kiểm soát ai được đăng nhập và có quyền gì.
+Tiền điều kiện
+Đã đăng nhập với vai trò Quản trị viên.
+Luồng chính
+1. Quản trị viên mở "Tài khoản"; hệ thống hiển thị danh sách có tìm theo email, họ tên, số điện thoại và lọc theo vai trò.
+2. Quản trị viên chọn một tài khoản.
+3. Quản trị viên bấm "Khóa" hoặc "Mở khóa", hoặc đổi vai trò.
+4. Hệ thống lưu thay đổi và hiển thị thông báo thành công.
+Luồng thay thế
+3a. Quản trị viên khóa hoặc hạ quyền chính tài khoản của mình: hệ thống từ chối.
+3b. Thao tác làm hệ thống không còn Quản trị viên nào đang hoạt động: hệ thống từ chối.
+Hậu điều kiện
+Tài khoản bị khóa không đăng nhập được; vai trò mới có hiệu lực từ lần đăng nhập kế tiếp.
+Quy tắc liên quan
+BR-08
+
+3.10.2. Các yêu cầu chức năng
+Bảng 32. Yêu cầu chức năng FR-11 (Quản lý tài khoản, phân quyền)
+Mã
+Yêu cầu
+Ưu tiên
+FR-11.1
+Hệ thống phải hiển thị danh sách tài khoản (họ tên, email, số điện thoại, vai trò, trạng thái) có tìm kiếm và lọc theo vai trò, mỗi trang tối đa 20 dòng.
+Cao
+FR-11.2
+Hệ thống phải cho khóa, mở khóa tài khoản bằng cách đặt is_active.
+Cao
+FR-11.3
+Hệ thống phải cho gán vai trò Khách hàng, Nhân viên, Quản trị viên.
+Cao
+FR-11.4
+Hệ thống phải từ chối tự khóa, tự hạ quyền chính mình và từ chối làm mất Quản trị viên cuối cùng.
+Trung bình
+FR-11.5
+Hệ thống phải chặn mọi địa chỉ trang quản trị đối với người dùng chưa đăng nhập hoặc có vai trò Khách hàng, và trả về trang "Không có quyền truy cập" (BR-08).
+Cao
+FR-11.6
+Hệ thống phải cho Quản trị viên tạo tài khoản Nhân viên trực tiếp (họ tên, email, số điện thoại, mật khẩu ban đầu).
+Trung bình
+
+3.11. Tra cứu bảo hành
+3.11.1. Mô tả
+Nhân viên và Quản trị viên tra cứu thông tin bảo hành của một sản phẩm theo số seri hoặc số điện thoại khách, thay cho việc tìm phiếu giấy. Tính năng thuộc FR-12, gồm UC-12.
+Bảng 33. Đặc tả use case UC-12 Tra cứu bảo hành
+Mã và tên
+UC-12 - Tra cứu bảo hành
+Tác nhân
+Nhân viên, Quản trị viên
+Mô tả
+Tìm thông tin bảo hành của một sản phẩm đã bán.
+Tiền điều kiện
+Đã đăng nhập với vai trò Nhân viên hoặc Quản trị viên.
+Luồng chính
+1. Nhân viên mở "Tra cứu bảo hành".
+2. Nhân viên nhập số seri hoặc số điện thoại người mua và bấm "Tìm".
+3. Hệ thống hiển thị: số seri (nếu có), tên sản phẩm và biến thể, tên và số điện thoại người mua, mã đơn, ngày bắt đầu, ngày hết hạn, trạng thái Còn hạn hoặc Hết hạn.
+Luồng thay thế
+3a. Không tìm thấy: hiển thị "Không có bản ghi bảo hành phù hợp".
+2a. Ô tìm kiếm để trống hoặc số seri sai định dạng: hiển thị lỗi.
+3b. Số điện thoại có nhiều sản phẩm: hiển thị danh sách, mỗi sản phẩm một dòng.
+Hậu điều kiện
+Không thay đổi dữ liệu (ngoài việc cập nhật trạng thái Hết hạn nếu end_date đã qua).
+Quy tắc liên quan
+BR-03
+
+3.11.2. Các yêu cầu chức năng
+Bảng 34. Yêu cầu chức năng FR-12 (Tra cứu bảo hành)
+Mã
+Yêu cầu
+Ưu tiên
+FR-12.1
+Hệ thống phải tìm bản ghi bảo hành theo số seri chính xác hoặc theo số điện thoại người mua.
+Cao
+FR-12.2
+Hệ thống phải hiển thị trạng thái Còn hạn khi ngày hiện tại không sau end_date, ngược lại hiển thị Hết hạn.
+Cao
+FR-12.3
+Hệ thống phải trả kết quả tra cứu theo số seri trong tối đa 2 giây (NFR-02.3).
+Trung bình
+FR-12.4
+Hệ thống phải hiển thị chính sách và điều kiện bảo hành của cửa hàng ở cuối trang kết quả (TBD-01).
+Thấp
+
+4. CÁC YÊU CẦU DỮ LIỆU
+4.1. Mô hình dữ liệu logic
+Dữ liệu của hệ thống gồm 12 bảng (mỗi bảng là một mảng JSON lưu trong localStorage, mỗi phần tử là một dòng dữ liệu), chuẩn hóa đến dạng chuẩn 3 (3NF). Sản phẩm (PRODUCTS) được tách khỏi biến thể (PRODUCT_VARIANTS) vì mỗi tổ hợp thông số và màu có giá và tồn kho riêng. Sơ đồ quan hệ thực thể (ERD) ở Hình 10 (trang ngang kế tiếp). Bảng 35 giải thích từng quan hệ.
+Bảng 35. Các quan hệ giữa các bảng
+Quan hệ
+Bản số
+Diễn giải
+USERS - ADDRESSES
+1 - N
+Một người dùng có thể lưu nhiều địa chỉ nhận hàng
+USERS - ORDERS
+1 - N
+Một người dùng đặt nhiều đơn; mỗi đơn thuộc đúng một người dùng
+USERS - CART_ITEMS
+1 - N
+Một người dùng có nhiều dòng trong giỏ hàng
+COUPONS - ORDERS
+1 - N
+Một mã khuyến mãi có thể dùng cho nhiều đơn; một đơn dùng tối đa một mã (coupon_id được để trống nếu không dùng)
+ORDERS - ORDER_ITEMS
+1 - N
+Một đơn gồm ít nhất một dòng đơn hàng
+ORDERS - PAYMENTS
+1 - N
+Một đơn có bản ghi thanh toán (thông thường là một bản ghi)
+ORDER_ITEMS - WARRANTIES
+1 - 1
+Mỗi dòng đơn hàng có tối đa một bản ghi bảo hành
+CATEGORIES - CATEGORIES
+1 - N
+Danh mục cha có nhiều danh mục con (cột parent_id, để trống ở danh mục cấp cha)
+CATEGORIES - PRODUCTS
+1 - N
+Một danh mục có nhiều sản phẩm
+PRODUCTS - PRODUCT_VARIANTS
+1 - N
+Một sản phẩm có ít nhất một biến thể
+PRODUCTS - PRODUCT_IMAGES
+1 - N
+Một sản phẩm có nhiều ảnh
+PRODUCT_VARIANTS - CART_ITEMS, ORDER_ITEMS
+1 - N
+Một biến thể xuất hiện trong nhiều dòng giỏ hàng và dòng đơn hàng
+
+
+
+Hình 10. Sơ đồ quan hệ thực thể (ERD)
+
+4.2. Từ điển dữ liệu
+Các bảng dưới đây mô tả từng cột. Ký hiệu: PK là khóa chính, FK là khóa ngoại, NN là không được để trống, AI là tự tăng (JavaScript cấp số kế tiếp). Kiểu dữ liệu dùng ba loại: Số (số nguyên hoặc số thập phân), Chuỗi (văn bản, kèm độ dài tối đa), Ngày (ngày hoặc ngày giờ lưu dạng chuỗi). Các cột is_active, discount_amount, receiver_name, receiver_phone, amount, status của WARRANTIES, sort_order, is_default, brand, warranty_months, track_serial được nhóm bổ sung so với thiết kế sơ bộ trong báo cáo khảo sát.
+Bảng 36. Bảng USERS - tài khoản người dùng
+Cột
+Kiểu dữ liệu
+Ràng buộc
+Mô tả
+user_id
+Số
+PK, AI
+Mã người dùng
+full_name
+Chuỗi (100)
+NN
+Họ tên
+email
+Chuỗi (100)
+NN, UNIQUE
+Email đăng nhập
+phone
+Chuỗi (15)
+NN
+Số điện thoại, 10 chữ số
+password
+Chuỗi (100)
+NN
+Mật khẩu (lưu trong localStorage, xem mục 6.3)
+role
+Chuỗi (20)
+NN
+Vai trò: CUSTOMER (khách hàng), STAFF (nhân viên), ADMIN (quản trị viên)
+is_active
+Số (0 hoặc 1)
+NN, mặc định 1
+1 là hoạt động, 0 là bị khóa
+created_at
+Ngày
+NN
+Thời điểm tạo tài khoản
+
+Bảng 37. Bảng ADDRESSES - địa chỉ nhận hàng
+Cột
+Kiểu dữ liệu
+Ràng buộc
+Mô tả
+address_id
+Số
+PK, AI
+Mã địa chỉ
+user_id
+Số
+FK → USERS, NN
+Thuộc người dùng nào
+receiver_name
+Chuỗi (100)
+NN
+Tên người nhận
+receiver_phone
+Chuỗi (15)
+NN
+Số điện thoại người nhận
+address_detail
+Chuỗi (255)
+NN
+Địa chỉ chi tiết
+is_default
+Số (0 hoặc 1)
+NN, mặc định 0
+1 là địa chỉ mặc định
+
+Bảng 38. Bảng CATEGORIES - danh mục sản phẩm
+Cột
+Kiểu dữ liệu
+Ràng buộc
+Mô tả
+category_id
+Số
+PK, AI
+Mã danh mục
+parent_id
+Số
+FK → CATEGORIES, cho phép NULL
+Danh mục cha; NULL nếu là cấp cha
+name
+Chuỗi (100)
+NN
+Tên danh mục
+
+Bảng 39. Bảng PRODUCTS - sản phẩm
+Cột
+Kiểu dữ liệu
+Ràng buộc
+Mô tả
+product_id
+Số
+PK, AI
+Mã sản phẩm
+category_id
+Số
+FK → CATEGORIES, NN
+Danh mục (cấp con)
+name
+Chuỗi (150)
+NN
+Tên sản phẩm, ví dụ Điều hòa 1 chiều Inverter
+brand
+Chuỗi (50)
+NN
+Hãng sản xuất
+description
+Chuỗi
+cho phép NULL
+Mô tả, thông số
+warranty_months
+Số
+NN, từ 0 đến 60
+Số tháng bảo hành
+track_serial
+Số (0 hoặc 1)
+NN, mặc định 0
+1 là có số seri riêng từng chiếc (ti vi, điều hòa, tủ lạnh)
+is_visible
+Số (0 hoặc 1)
+NN, mặc định 1
+1 là hiển thị, 0 là ẩn
+
+Bảng 40. Bảng PRODUCT_VARIANTS - biến thể sản phẩm
+Cột
+Kiểu dữ liệu
+Ràng buộc
+Mô tả
+variant_id
+Số
+PK, AI
+Mã biến thể
+product_id
+Số
+FK → PRODUCTS, NN
+Thuộc sản phẩm nào
+spec
+Chuỗi (50)
+NN
+Thông số phân biệt biến thể: cỡ màn hình, công suất, dung tích (ví dụ 55 inch, 12.000 BTU, 1,8 lít)
+color
+Chuỗi (30)
+NN
+Màu sắc
+price
+Số
+NN, ≥ 0
+Giá bán (VNĐ)
+stock_qty
+Số
+NN, ≥ 0
+Số lượng tồn
+
+Bảng 41. Bảng PRODUCT_IMAGES - ảnh sản phẩm
+Cột
+Kiểu dữ liệu
+Ràng buộc
+Mô tả
+image_id
+Số
+PK, AI
+Mã ảnh
+product_id
+Số
+FK → PRODUCTS, NN
+Ảnh của sản phẩm nào
+image_path
+Chuỗi (255)
+NN
+Đường dẫn tệp ảnh trong thư mục images
+sort_order
+Số
+NN, mặc định 0
+Thứ tự hiển thị
+
+Bảng 42. Bảng CART_ITEMS - giỏ hàng
+Cột
+Kiểu dữ liệu
+Ràng buộc
+Mô tả
+cart_item_id
+Số
+PK, AI
+Mã dòng giỏ hàng
+user_id
+Số
+FK → USERS, NN
+Giỏ của người dùng nào
+variant_id
+Số
+FK → PRODUCT_VARIANTS, NN
+Biến thể trong giỏ
+quantity
+Số
+NN, > 0
+Số lượng; cặp (user_id, variant_id) là duy nhất
+
+Bảng 43. Bảng ORDERS - đơn hàng
+Cột
+Kiểu dữ liệu
+Ràng buộc
+Mô tả
+order_id
+Số
+PK, AI
+Mã đơn hàng
+user_id
+Số
+FK → USERS, NN
+Người đặt
+coupon_id
+Số
+FK → COUPONS, cho phép NULL
+Mã khuyến mãi đã áp dụng
+status
+Chuỗi (20)
+NN
+Chờ xác nhận, Đã xác nhận, Đang giao, Hoàn thành, Đã hủy
+discount_amount
+Số
+NN, ≥ 0, mặc định 0
+Số tiền giảm giá
+total_amount
+Số
+NN, ≥ 0
+Tổng tiền sau giảm giá
+receiver_name
+Chuỗi (100)
+NN
+Tên người nhận tại thời điểm đặt
+receiver_phone
+Chuỗi (15)
+NN
+Số điện thoại người nhận
+ship_address
+Chuỗi (255)
+NN
+Địa chỉ giao hàng tại thời điểm đặt
+created_at
+Ngày
+NN
+Thời điểm tạo đơn
+
+Bảng 44. Bảng ORDER_ITEMS - chi tiết đơn hàng
+Cột
+Kiểu dữ liệu
+Ràng buộc
+Mô tả
+order_item_id
+Số
+PK, AI
+Mã dòng đơn hàng
+order_id
+Số
+FK → ORDERS, NN
+Thuộc đơn hàng nào
+variant_id
+Số
+FK → PRODUCT_VARIANTS, NN
+Biến thể được mua
+quantity
+Số
+NN, > 0
+Số lượng (bằng 1 với sản phẩm có số seri, theo BR-11)
+unit_price
+Số
+NN, ≥ 0
+Đơn giá tại thời điểm mua
+serial_no
+Chuỗi (20)
+UNIQUE, cho phép NULL
+Số seri của chiếc đã giao; nhân viên nhập khi giao hàng; để trống với quạt và nồi cơm điện
+
+Bảng 45. Bảng PAYMENTS - thanh toán
+Cột
+Kiểu dữ liệu
+Ràng buộc
+Mô tả
+payment_id
+Số
+PK, AI
+Mã giao dịch thanh toán
+order_id
+Số
+FK → ORDERS, NN
+Thanh toán của đơn nào
+method
+Chuỗi (20)
+NN
+COD (khi nhận hàng) hoặc BANK (chuyển khoản)
+amount
+Số
+NN, ≥ 0
+Số tiền phải thanh toán
+status
+Chuỗi (20)
+NN
+Chưa thanh toán hoặc Đã thanh toán
+paid_at
+Ngày
+cho phép NULL
+Thời điểm thanh toán
+
+Bảng 46. Bảng COUPONS - mã khuyến mãi
+Cột
+Kiểu dữ liệu
+Ràng buộc
+Mô tả
+coupon_id
+Số
+PK, AI
+Mã khuyến mãi (khóa)
+code
+Chuỗi (30)
+NN, UNIQUE
+Mã khách nhập
+discount_type
+Chuỗi (10)
+NN
+PERCENT (phần trăm) hoặc AMOUNT (số tiền)
+discount_value
+Số
+NN, > 0
+Giá trị giảm
+start_date
+Ngày
+NN
+Ngày bắt đầu
+end_date
+Ngày
+NN, ≥ start_date
+Ngày kết thúc
+is_active
+Số (0 hoặc 1)
+NN, mặc định 1
+1 là đang bật, 0 là đã tắt
+
+Bảng 47. Bảng WARRANTIES - bảo hành
+Cột
+Kiểu dữ liệu
+Ràng buộc
+Mô tả
+warranty_id
+Số
+PK, AI
+Mã bảo hành
+order_item_id
+Số
+FK → ORDER_ITEMS, NN, UNIQUE
+Dòng đơn hàng được bảo hành
+start_date
+Ngày
+NN
+Ngày bắt đầu (ngày đơn Hoàn thành)
+end_date
+Ngày
+NN, ≥ start_date
+Ngày hết hạn
+status
+Chuỗi (20)
+NN
+Còn hạn hoặc Hết hạn
+
+4.3. Các báo cáo
+Hệ thống có ba báo cáo dành cho Quản trị viên, hiển thị trên màn hình dưới dạng bảng. Dữ liệu lấy từ các đơn có trạng thái Hoàn thành (BR-12).
+Bảng 48. Danh sách báo cáo
+Mã
+Tên báo cáo
+Điều kiện chọn
+Các cột hiển thị
+Nguồn dữ liệu
+BC-01
+Doanh thu theo ngày
+Từ ngày, đến ngày
+Ngày; số đơn; doanh thu (VNĐ); dòng tổng cuối bảng
+ORDERS, PAYMENTS
+BC-02
+Doanh thu theo tháng
+Năm
+Tháng (1 đến 12); số đơn; doanh thu (VNĐ); dòng tổng cả năm
+ORDERS, PAYMENTS
+BC-03
+Sản phẩm bán chạy
+Từ ngày, đến ngày
+10 dòng đầu: hạng; tên sản phẩm; số lượng bán; doanh thu (VNĐ)
+ORDER_ITEMS, PRODUCT_VARIANTS, PRODUCTS
+
+Doanh thu của một đơn là total_amount của đơn đó, được tính vào ngày paid_at của bản ghi thanh toán. Số liệu của ba báo cáo phải khớp với tổng thủ công từ danh sách đơn Hoàn thành trong cùng khoảng thời gian.
+4.4. Thu thập dữ liệu, tính toàn vẹn, lưu trữ và xử lý dữ liệu
+4.4.1. Thu thập dữ liệu
+Dữ liệu sản phẩm, biến thể, danh mục, ảnh do Nhân viên và Quản trị viên nhập qua trang quản trị. Dữ liệu ban đầu do cửa hàng cung cấp (TBD-04).
+Dữ liệu tài khoản, địa chỉ, giỏ hàng và đơn hàng do Khách hàng nhập khi sử dụng website.
+Số seri do Nhân viên nhập khi giao hàng; bản ghi bảo hành do hệ thống tự tạo.
+4.4.2. Tính toàn vẹn dữ liệu
+Bảng 49. Yêu cầu toàn vẹn dữ liệu
+Mã
+Yêu cầu
+DAT-01
+Số lượng tồn (stock_qty) luôn lớn hơn hoặc bằng 0; hệ thống kiểm tra trước khi cập nhật.
+DAT-02
+Đơn giá trong ORDER_ITEMS giữ nguyên giá tại thời điểm đặt dù giá sản phẩm thay đổi sau đó.
+DAT-03
+Cột serial_no, email, code (mã khuyến mãi) không được trùng; hệ thống kiểm tra trước khi lưu.
+DAT-04
+Các khóa ngoại (user_id, product_id, variant_id, order_id...) được kiểm tra khi lưu; không xóa bản ghi cha khi còn bản ghi con (sản phẩm, biến thể, mã khuyến mãi đã dùng không xóa mà chỉ ẩn hoặc tắt).
+DAT-05
+Các thao tác nhiều bước (tạo đơn, xác nhận đơn, hủy đơn, hoàn thành đơn) được tính toán trên bản sao dữ liệu và chỉ ghi vào localStorage một lần ở cuối: hoặc thực hiện đủ tất cả bước, hoặc không thực hiện bước nào.
+DAT-06
+Dữ liệu người dùng nhập được hiển thị bằng textContent (không dùng innerHTML) và được kiểm tra kiểu, độ dài trước khi lưu.
+DAT-07
+Giá trị cột status của ORDERS, PAYMENTS, WARRANTIES và cột role của USERS chỉ nhận các giá trị đã liệt kê trong từ điển dữ liệu.
+
+4.4.3. Lưu trữ và xử lý dữ liệu
+Dữ liệu lưu dạng JSON, mã hóa UTF-8; thời gian lưu theo múi giờ Việt Nam (UTC+7).
+Hệ thống có chức năng xuất toàn bộ dữ liệu ra một tệp JSON để sao lưu (Quản trị viên bấm "Sao lưu") và nhập lại từ tệp đó; khuyến nghị sao lưu tối thiểu mỗi tuần một lần, giữ ít nhất 4 bản sao lưu gần nhất; thư mục images được sao chép cùng lúc.
+Dữ liệu đơn hàng và bảo hành được lưu không giới hạn thời gian trong phạm vi bài tập; không có chức năng xóa đơn hàng.
+Tài khoản bị khóa vẫn giữ nguyên dữ liệu đơn hàng cũ.
+Mật khẩu không bao giờ được ghi vào tệp nhật ký hoặc hiển thị trên màn hình.
+
+5. CÁC YÊU CẦU GIAO DIỆN BÊN NGOÀI
+5.1. Giao diện người dùng
+5.1.1. Danh sách màn hình
+Bảng 50. Danh sách màn hình chính
+Mã
+Màn hình
+Người dùng
+Use case
+Minh họa
+SCR-01
+Trang chủ, danh sách sản phẩm
+Mọi người dùng
+UC-03
+Hình 11
+SCR-02
+Chi tiết sản phẩm
+Mọi người dùng
+UC-03
+Hình 12
+SCR-03
+Đăng ký, đăng nhập
+Mọi người dùng
+UC-01, UC-02
+-
+SCR-04
+Giỏ hàng
+Khách hàng
+UC-04
+-
+SCR-05
+Đặt hàng
+Khách hàng
+UC-05
+-
+SCR-06
+Đơn hàng của tôi, chi tiết đơn
+Khách hàng
+UC-06
+-
+SCR-07
+Quản lý đơn hàng
+Nhân viên, Quản trị viên
+UC-07
+Hình 13
+SCR-08
+Quản lý sản phẩm, biến thể, danh mục
+Nhân viên, Quản trị viên
+UC-08
+-
+SCR-09
+Tra cứu bảo hành
+Nhân viên, Quản trị viên
+UC-12
+-
+SCR-10
+Quản lý khuyến mãi
+Quản trị viên
+UC-09
+-
+SCR-11
+Thống kê doanh thu
+Quản trị viên
+UC-10
+-
+SCR-12
+Quản lý tài khoản
+Quản trị viên
+UC-11
+-
+
+5.1.2. Quy tắc chung cho giao diện
+Bảng 51. Các quy tắc giao diện kiểm tra được
+Mã
+Quy tắc
+UI-01
+Mọi trang có phần đầu gồm: tên cửa hàng (liên kết về trang chủ), ô tìm kiếm, liên kết Đăng nhập hoặc tên người dùng, giỏ hàng; và thanh danh mục Ti vi, Điều hòa, Tủ lạnh, Quạt, Nồi cơm điện, Bảo hành.
+UI-02
+Bố cục viết bằng CSS (Flexbox hoặc Grid, media query) và hiển thị không có thanh cuộn ngang ở mọi chiều rộng từ 360 px đến 1920 px.
+UI-03
+Cỡ chữ nội dung tối thiểu 14 px; vùng bấm của nút và liên kết cao tối thiểu 40 px trên màn hình dưới 768 px.
+UI-04
+Giá hiển thị theo định dạng 1.000.000 ₫ (dấu chấm ngăn cách hàng nghìn), ngày theo định dạng dd/MM/yyyy.
+UI-05
+Ô nhập bắt buộc được đánh dấu *; khi sai, thông báo lỗi hiển thị ngay dưới ô sai, bằng tiếng Việt, nêu rõ cần sửa gì (ví dụ "Số điện thoại phải gồm 10 chữ số").
+UI-06
+Hành động không thể hoàn tác (hủy đơn, khóa tài khoản, xóa) phải có hộp thoại xác nhận trước khi thực hiện.
+UI-07
+Sau mỗi thao tác thêm, sửa, xóa hoặc đổi trạng thái, hệ thống hiển thị thông báo thành công hoặc thất bại.
+UI-08
+Từ trang chủ, khách hàng đến được trang đặt hàng qua tối đa 4 lần bấm (chọn sản phẩm, thêm vào giỏ, mở giỏ hàng, thanh toán).
+UI-09
+Trang quản trị có thanh menu bên trái liệt kê các chức năng mà vai trò hiện tại được dùng; chức năng không có quyền không hiển thị.
+UI-10
+Danh sách dài được chia trang với số dòng mỗi trang quy định ở mục 3 và hiển thị trang hiện tại, nút Trước, Sau.
+
+5.1.3. Wireframe
+Các wireframe dưới đây là bản phác bố cục để chủ cửa hàng góp ý (TBD-05); màu sắc, hình ảnh và chữ trong sản phẩm cuối có thể khác nhưng vị trí các thành phần chính phải theo bản phác.
+
+Hình 11. Wireframe trang danh sách sản phẩm (SCR-01)
+
+Hình 12. Wireframe trang chi tiết sản phẩm (SCR-02)
+
+Hình 13. Wireframe trang quản lý đơn hàng (SCR-07)
+5.2. Giao diện phần mềm
+Bảng 52. Giao diện với các thành phần phần mềm
+Thành phần
+Mục đích
+Cách kết nối
+Trình duyệt
+Chạy các trang HTML, CSS, JavaScript và hiển thị cho người dùng
+Mở tệp index.html hoặc địa chỉ GitHub Pages bằng Chrome, Edge, Safari
+localStorage
+Lưu toàn bộ dữ liệu của hệ thống
+Đọc, ghi bằng localStorage.getItem và localStorage.setItem; dữ liệu dạng JSON (JSON.parse, JSON.stringify)
+sessionStorage
+Lưu phiên đăng nhập của người dùng
+Ghi mã người dùng, vai trò, thời điểm đăng nhập khi đăng nhập; xóa khi đăng xuất
+Tệp data.js
+Cung cấp dữ liệu mẫu nạp ở lần mở đầu tiên
+Nhúng bằng thẻ script; nếu localStorage rỗng thì chép dữ liệu mẫu vào
+Thư mục images
+Chứa ảnh sản phẩm
+Thẻ img trỏ tới đường dẫn lưu trong PRODUCT_IMAGES
+
+Hệ thống không có giao diện với cổng thanh toán, đơn vị vận chuyển, email hoặc SMS trong phiên bản V1.0.0.
+5.3. Giao diện phần cứng
+Hệ thống không điều khiển và không đọc dữ liệu từ thiết bị phần cứng đặc thù nào (không dùng máy quét mã vạch, máy in hóa đơn, máy chấm công). Phần cứng chỉ gồm thiết bị của người dùng (máy tính, điện thoại) có trình duyệt. Số seri do nhân viên gõ tay vào ô nhập.
+5.4. Giao diện truyền thông
+Khi đặt lên GitHub Pages, trình duyệt tải các tệp HTML, CSS, JavaScript và ảnh qua giao thức HTTPS; sau khi tải xong, mọi xử lý chạy ngay trong trình duyệt, không gửi dữ liệu người dùng về máy chủ nào.
+Dữ liệu chỉ được thay đổi thông qua các hàm của hệ thống (thêm, sửa, xóa, đổi trạng thái); không sửa trực tiếp localStorage từ giao diện.
+Mã hóa ký tự UTF-8 cho mọi trang và dữ liệu gửi nhận.
+Hệ thống không gửi email, SMS hay thông báo đẩy trong phiên bản này; khách theo dõi đơn bằng cách vào trang "Đơn hàng của tôi", và liên hệ cửa hàng qua số điện thoại hiển thị ở đầu và cuối trang (số điện thoại cấu hình trong tệp data.js, TBD-09).
+
+6. CÁC THUỘC TÍNH CHẤT LƯỢNG
+Các yêu cầu phi chức năng dưới đây đều có con số hoặc điều kiện để kiểm tra. Cách đo được ghi ở cột cuối.
+6.1. Khả năng sử dụng
+Bảng 53. Yêu cầu về khả năng sử dụng
+Mã
+Yêu cầu
+Cách kiểm tra
+NFR-01.1
+Một khách hàng chưa từng dùng website, được cho biết trước tên sản phẩm cần mua, hoàn thành việc đặt hàng (từ trang chủ đến khi hiển thị mã đơn) trong tối đa 5 phút.
+Cho 5 người chưa dùng hệ thống thử; ít nhất 4 người hoàn thành trong 5 phút
+NFR-01.2
+Mỗi màn hình chức năng chính của khách hàng đáp ứng quy tắc UI-01 đến UI-10.
+Rà soát từng màn hình theo danh sách UI
+NFR-01.3
+Nhân viên xác nhận một đơn hàng từ lúc mở danh sách đơn trong tối đa 3 lần bấm.
+Đếm số lần bấm khi chạy thử
+NFR-01.4
+Thông báo lỗi phải nêu rõ nguyên nhân và cách sửa, không hiển thị mã lỗi kỹ thuật hoặc nội dung lỗi của cơ sở dữ liệu cho người dùng.
+Nhập dữ liệu sai ở mỗi form và kiểm tra thông báo
+NFR-01.5
+Các nhãn, nút và thông báo dùng thống nhất một thuật ngữ cho một khái niệm (ví dụ luôn dùng "Giỏ hàng", "Đặt hàng", "Biến thể").
+Rà soát toàn bộ giao diện
+
+6.2. Hiệu suất
+Bảng 54. Yêu cầu về hiệu suất
+Mã
+Yêu cầu
+Cách kiểm tra
+NFR-02.1
+Trang danh sách sản phẩm tải xong trong tối đa 3 giây trên kết nối 4G, với cơ sở dữ liệu có 500 biến thể.
+Đo bằng công cụ Network của Chrome (DevTools) ở chế độ giả lập 4G khi đặt trên GitHub Pages
+NFR-02.2
+Tìm kiếm, lọc và sắp xếp danh sách sản phẩm hiển thị kết quả trong tối đa 1 giây với dữ liệu có 500 biến thể.
+Nạp 500 biến thể mẫu vào localStorage, đo thời gian bằng DevTools (Performance)
+NFR-02.3
+Tra cứu bảo hành theo số seri trả kết quả trong tối đa 2 giây.
+Đo thời gian từ lúc bấm "Tìm" đến lúc hiển thị kết quả
+NFR-02.4
+Mỗi ảnh hiển thị trong danh sách có dung lượng tối đa 300 KB (nhân viên nén ảnh trước khi chép vào thư mục images).
+Kiểm tra dung lượng ảnh trong thư mục
+NFR-02.5
+Các báo cáo BC-01 đến BC-03 hiển thị trong tối đa 3 giây với 1.000 đơn hàng.
+Chạy thử với dữ liệu mẫu 1.000 đơn (dung lượng localStorage khoảng 5 MB là giới hạn của trình duyệt)
+
+6.3. Độ bảo mật
+Bảng 55. Yêu cầu về bảo mật
+Mã
+Yêu cầu
+Cách kiểm tra
+NFR-03.1
+Mật khẩu hiển thị dạng dấu chấm khi nhập và không hiển thị lại trên bất kỳ màn hình nào; mức bảo mật chỉ phù hợp bài tập vì mật khẩu nằm trong localStorage của trình duyệt.
+Nhập mật khẩu và kiểm tra ô nhập kiểu password; tìm mật khẩu trên mọi trang
+NFR-03.2
+Khi đặt lên GitHub Pages, website truy cập qua HTTPS.
+Mở địa chỉ website và kiểm tra có biểu tượng ổ khóa trên thanh địa chỉ
+NFR-03.3
+Trang quản trị chỉ hiển thị nội dung cho tài khoản có vai trò Nhân viên hoặc Quản trị viên; người dùng không có quyền được chuyển về trang "Không có quyền truy cập", kể cả khi gõ trực tiếp địa chỉ trang.
+Mở tệp trang quản trị khi chưa đăng nhập và khi đăng nhập bằng Khách hàng
+NFR-03.4
+Khách hàng chỉ xem và hủy được đơn của chính mình; đổi mã đơn trên địa chỉ không xem được đơn của người khác.
+Đăng nhập khách A, thử mở chi tiết đơn của khách B bằng mã đơn và kiểm tra bị từ chối
+NFR-03.5
+Dữ liệu người dùng nhập được hiển thị bằng textContent (chống chèn mã script vào trang) và được kiểm tra định dạng trước khi lưu.
+Nhập chuỗi <script>alert(1)</script> vào các ô nhập và kiểm tra hiển thị nguyên văn, không chạy
+NFR-03.6
+Phiên đăng nhập (sessionStorage) hết hiệu lực sau 30 phút không thao tác và khi đóng tab.
+Đăng nhập, để yên quá 30 phút hoặc đóng tab, mở lại trang và kiểm tra bị yêu cầu đăng nhập
+NFR-03.7
+Đường dẫn ảnh chỉ nhận đuôi .jpg, .png và trỏ vào thư mục images.
+Nhập đường dẫn đuôi .js, .exe hoặc ngoài thư mục images; kiểm tra bị từ chối
+
+6.4. Độ an toàn
+Hệ thống không điều khiển thiết bị nên không có rủi ro an toàn về thể chất. Yêu cầu về an toàn tập trung vào việc không làm mất hoặc sai dữ liệu kinh doanh.
+Bảng 56. Yêu cầu về độ an toàn dữ liệu
+Mã
+Yêu cầu
+Cách kiểm tra
+NFR-04.1
+Số lượng tồn không âm; đơn giá trong đơn không đổi khi giá sản phẩm đổi (DAT-01, DAT-02).
+Xác nhận đơn vượt tồn bị từ chối; sửa giá rồi xem đơn cũ
+NFR-04.2
+Khi một bước trong thao tác tạo, xác nhận, hủy đơn bị lỗi, dữ liệu trong localStorage giữ nguyên như trước thao tác (DAT-05).
+Giả lập lỗi (cho một dòng đơn có biến thể không tồn tại) và kiểm tra tồn kho, đơn hàng
+NFR-04.3
+Có chức năng xuất dữ liệu ra tệp JSON và nhập lại; khôi phục được từ bản sao lưu gần nhất.
+Xuất dữ liệu, xóa localStorage, nhập lại tệp và so sánh số bản ghi từng bảng
+NFR-04.4
+Mở hai tab cùng xác nhận một đơn: chỉ một thao tác có hiệu lực; tồn kho chỉ bị trừ một lần.
+Mở hai tab cùng đơn, bấm xác nhận lần lượt ở cả hai tab và kiểm tra stock_qty
+
+6.5. Tính tương thích
+Bảng 57. Yêu cầu về tương thích
+Mã
+Yêu cầu
+Cách kiểm tra
+NFR-05.1
+Hiển thị đúng bố cục trên màn hình có chiều rộng từ 360 px (điện thoại) đến 1920 px (máy tính).
+Chạy thử ở các độ rộng 360, 768, 1366, 1920 px
+NFR-05.2
+Chạy đúng toàn bộ chức năng trên Chrome, Edge và Safari bản mới.
+Chạy bộ kiểm thử chức năng trên cả ba trình duyệt
+NFR-05.3
+Chạy được bằng cách mở tệp index.html trên Windows, macOS và điện thoại, không cần cài thêm phần mềm.
+Chạy thử trên hai hệ điều hành khác nhau
+
+6.6. Khả năng bảo trì
+Bảng 58. Yêu cầu về bảo trì
+Mã
+Yêu cầu
+Cách kiểm tra
+NFR-06.1
+Mã nguồn tổ chức theo thư mục: html (các trang), css (định dạng), js (xử lý), images (ảnh); mỗi chức năng một tệp js; dữ liệu mẫu đặt riêng trong data.js.
+Rà soát mã nguồn
+NFR-06.2
+Tên khóa localStorage, số điện thoại cửa hàng và thông tin tài khoản ngân hàng đặt ở đầu tệp data.js, không viết cố định rải rác trong mã.
+Đổi tệp cấu hình và chạy lại
+NFR-06.3
+Khi có lỗi, hệ thống hiển thị thông báo cho người dùng và ghi nội dung lỗi vào console (console.error); không ghi mật khẩu.
+Gây lỗi và kiểm tra thông báo trên màn hình và trong console của trình duyệt
+NFR-06.4
+Có tệp data.js chứa dữ liệu mẫu của đủ 12 bảng để dựng lại dữ liệu trong tối đa 5 phút.
+Xóa localStorage, mở lại website và kiểm tra dữ liệu mẫu được nạp
+
+7. CÁC YÊU CẦU QUỐC TẾ HÓA VÀ NỘI ĐỊA HÓA
+Phiên bản V1.0.0 chỉ phục vụ khách hàng tại Việt Nam nên không hỗ trợ nhiều ngôn ngữ (quốc tế hóa). Các yêu cầu nội địa hóa gồm:
+Bảng 59. Yêu cầu nội địa hóa
+Mã
+Yêu cầu
+LOC-01
+Toàn bộ giao diện, thông báo và dữ liệu hiển thị bằng tiếng Việt có dấu; hiển thị đúng ký tự (UTF-8).
+LOC-02
+Tiền tệ là đồng Việt Nam, ký hiệu ₫, không có phần thập phân, dấu chấm ngăn cách hàng nghìn (ví dụ 25.990.000 ₫).
+LOC-03
+Ngày hiển thị theo dd/MM/yyyy, giờ theo HH:mm (24 giờ), múi giờ UTC+7.
+LOC-04
+Số điện thoại theo định dạng Việt Nam 10 chữ số bắt đầu bằng 0; địa chỉ nhập dưới dạng văn bản tự do gồm số nhà, đường, phường hoặc xã, quận hoặc huyện, tỉnh hoặc thành phố.
+LOC-05
+Tìm kiếm sản phẩm phải tìm được khi người dùng gõ có dấu hoặc không dấu (ví dụ "ốp lưng" và "op lung"). Yêu cầu này có mức ưu tiên Thấp.
+LOC-06
+Toàn bộ chuỗi chữ trong giao diện đặt trong các trang HTML hoặc một tệp js riêng, để về sau có thể thêm ngôn ngữ khác nếu cần.
+
+8. CÁC YÊU CẦU KHÁC (NẾU CÓ)
+8.1. Yêu cầu pháp lý
+Hệ thống thu thập họ tên, email, số điện thoại, địa chỉ nên phải tuân thủ Nghị định 13/2023/NĐ-CP về bảo vệ dữ liệu cá nhân: ở màn hình đăng ký có ô đánh dấu đồng ý cho cửa hàng xử lý dữ liệu và liên kết đến nội dung chính sách bảo mật; chỉ thu thập các thông tin cần cho việc bán hàng.
+Hệ thống không chia sẻ dữ liệu cá nhân của khách cho bên thứ ba.
+Hóa đơn, chứng từ kế toán vẫn do cửa hàng lập theo quy định hiện hành; website không thay thế hóa đơn.
+8.2. Yêu cầu cài đặt và bàn giao
+Bảng 60. Sản phẩm bàn giao
+STT
+Sản phẩm
+Nội dung
+1
+Tài liệu SRS (tài liệu này)
+Bản Word và tệp draw.io của các sơ đồ
+2
+Mã nguồn
+Thư mục website (HTML, CSS, JavaScript, images) mở bằng Visual Studio Code, đặt trên GitHub
+3
+Tệp dữ liệu mẫu
+Tệp data.js chứa dữ liệu mẫu của 12 bảng (NFR-06.4)
+4
+Bản triển khai
+Địa chỉ GitHub Pages hoặc thư mục chạy trực tiếp bằng trình duyệt
+5
+Hướng dẫn cài đặt, hướng dẫn sử dụng
+Cách mở website, nạp dữ liệu mẫu, sao lưu; hướng dẫn thao tác cho Khách hàng, Nhân viên, Quản trị viên
+6
+Báo cáo kiểm thử
+Kết quả chạy kiểm thử theo các yêu cầu trong tài liệu
+
+8.3. Tiêu chí nghiệm thu
+Tất cả yêu cầu mức ưu tiên Cao đạt khi kiểm thử; yêu cầu mức Trung bình đạt ít nhất 80%.
+Các yêu cầu phi chức năng NFR-02.1, NFR-02.2, NFR-03.1 đến NFR-03.4 và NFR-04.1 đạt theo cách kiểm tra đã nêu.
+Chạy trọn vẹn luồng bán hàng của Hình 4: đăng ký, chọn hàng, đặt đơn, nhân viên xác nhận, nhập số seri, hoàn thành, kiểm tra tồn kho, bảo hành và báo cáo doanh thu cho một đơn mẫu.
+Chủ cửa hàng ký biên bản xác nhận yêu cầu (sản phẩm của công việc số 1 trong kế hoạch).
+
+PHỤ LỤC A. BẢNG THUẬT NGỮ
+Bảng 61. Bảng thuật ngữ
+Thuật ngữ
+Giải thích
+BA (Business Analyst)
+Người phân tích nghiệp vụ: tìm hiểu cửa hàng cần gì và viết thành yêu cầu cho nhóm lập trình
+SRS
+Software Requirements Specification: tài liệu đặc tả yêu cầu phần mềm (tài liệu này)
+AS-IS, TO-BE
+Quy trình hiện tại (chưa có website) và quy trình mong muốn (khi đã có website)
+Tác nhân (actor)
+Người hoặc hệ thống bên ngoài tương tác với website: Khách hàng, Nhân viên, Quản trị viên
+Use case
+Một việc cụ thể mà tác nhân làm với hệ thống để đạt một mục đích, ví dụ "Đặt hàng"
+include, extend
+include: use case con luôn nằm trong use case chính. extend: use case mở rộng, chỉ xảy ra khi có điều kiện
+Biến thể (variant)
+Một tổ hợp thông số (công suất, dung tích hoặc cỡ màn hình) và màu của cùng một mẫu sản phẩm, có giá và tồn kho riêng
+Số seri
+Số định danh in trên từng chiếc ti vi, điều hòa, tủ lạnh, dùng để quản lý bảo hành
+Tồn kho
+Số lượng hàng cửa hàng đang còn để bán
+COD
+Thanh toán khi nhận hàng (Cash On Delivery)
+Mã khuyến mãi (coupon)
+Mã khách nhập để được giảm giá theo phần trăm hoặc số tiền cố định
+ERD
+Entity Relationship Diagram: sơ đồ quan hệ giữa các bảng dữ liệu
+PK, FK
+Khóa chính (xác định duy nhất một dòng) và khóa ngoại (trỏ đến khóa chính của bảng khác)
+3NF
+Dạng chuẩn 3: cách thiết kế bảng để không lưu trùng dữ liệu
+localStorage
+Vùng lưu dữ liệu trong trình duyệt (khoảng 5 MB), dữ liệu còn lại khi tắt trình duyệt
+sessionStorage
+Vùng lưu dữ liệu trong trình duyệt chỉ tồn tại trong một tab, mất khi đóng tab; dùng lưu phiên đăng nhập
+JSON
+Định dạng văn bản để lưu dữ liệu dạng mảng và đối tượng, JavaScript đọc bằng JSON.parse và ghi bằng JSON.stringify
+JavaScript
+Ngôn ngữ lập trình chạy trong trình duyệt, xử lý các thao tác của người dùng
+CSS
+Ngôn ngữ định dạng màu sắc, cỡ chữ và bố cục của trang HTML
+HTML
+Ngôn ngữ đánh dấu mô tả nội dung của trang web
+GitHub Pages
+Dịch vụ miễn phí đặt các tệp HTML, CSS, JavaScript lên Internet để mở bằng địa chỉ web
+HTTPS
+Giao thức truy cập web có mã hóa dữ liệu
+Media query
+Quy tắc CSS đổi bố cục theo chiều rộng màn hình
+Wireframe
+Bản phác bố cục màn hình, chưa có màu sắc và hình ảnh thật
+Transaction (giao dịch)
+Nhóm thao tác cơ sở dữ liệu chạy trọn vẹn hoặc hủy toàn bộ
+XSS
+Kiểu tấn công chèn mã script vào trang qua ô nhập dữ liệu
+
+PHỤ LỤC B. MA TRẬN TRUY VẾT
+Ma trận cho thấy mỗi vấn đề của cửa hàng được giải quyết bởi tính năng, use case, dữ liệu và báo cáo nào. Khi một yêu cầu thay đổi, ma trận giúp biết phần nào bị ảnh hưởng.
+Bảng 62. Ma trận truy vết yêu cầu
+Tính năng
+Tên
+Use case
+Mục
+Bảng dữ liệu, báo cáo chính
+FR-01
+Đăng ký, đăng nhập
+UC-01, UC-02
+3.1
+USERS
+FR-02
+Xem, tìm kiếm, lọc sản phẩm
+UC-03
+3.2
+PRODUCTS, PRODUCT_VARIANTS, CATEGORIES
+FR-03
+Xem chi tiết sản phẩm
+UC-03
+3.2
+PRODUCTS, PRODUCT_VARIANTS, PRODUCT_IMAGES
+FR-04
+Quản lý giỏ hàng
+UC-04
+3.3
+CART_ITEMS
+FR-05
+Đặt hàng và thanh toán
+UC-05
+3.4
+ORDERS, ORDER_ITEMS, PAYMENTS, ADDRESSES, COUPONS
+FR-06
+Theo dõi đơn hàng
+UC-06
+3.5
+ORDERS, ORDER_ITEMS, WARRANTIES
+FR-07
+Xử lý đơn hàng
+UC-07
+3.6
+ORDERS, ORDER_ITEMS, PRODUCT_VARIANTS, PAYMENTS, WARRANTIES
+FR-08
+Quản lý sản phẩm và tồn kho
+UC-08
+3.7
+PRODUCTS, PRODUCT_VARIANTS, PRODUCT_IMAGES, CATEGORIES
+FR-09
+Quản lý khuyến mãi
+UC-09
+3.8
+COUPONS
+FR-10
+Thống kê doanh thu
+UC-10
+3.9
+BC-01, BC-02, BC-03
+FR-11
+Quản lý tài khoản, phân quyền
+UC-11
+3.10
+USERS
+FR-12
+Tra cứu bảo hành
+UC-12
+3.11
+WARRANTIES, ORDER_ITEMS
+
+PHỤ LỤC C. CÁC VẤN ĐỀ CẦN XÁC NHẬN
+Các nội dung sau chưa có đủ thông tin sau các buổi khảo sát tại cửa hàng và cần hỏi chủ cửa hàng ở buổi khảo sát tiếp theo. Cho đến khi có câu trả lời, nhóm dùng giả định ghi ở cột "Giả định tạm".
+Bảng 63. Danh sách vấn đề cần xác nhận
+Mã
+Câu hỏi cho cửa hàng
+Giả định tạm
+Ảnh hưởng
+TBD-01
+Chính sách bảo hành: thời hạn bao nhiêu tháng với từng nhóm hàng (ti vi, điều hòa, tủ lạnh, quạt, nồi cơm điện)? Bảo hành do cửa hàng hay do hãng? Điều kiện bảo hành là gì?
+Thời hạn bảo hành đặt theo từng sản phẩm (warranty_months), chưa có giá trị cố định
+FR-07.6, FR-12, bảng WARRANTIES
+TBD-02
+Cửa hàng đang dùng những hình thức thanh toán nào? Có cần tích hợp VNPay không? Thông tin tài khoản ngân hàng để hiển thị khi khách chuyển khoản?
+Chỉ có thanh toán khi nhận hàng và chuyển khoản; không tích hợp VNPay
+FR-05.3, FR-05.8
+TBD-03
+Website sẽ chạy ở đâu khi triển khai thử (máy chủ của cửa hàng, thuê hosting hay máy của nhóm)? Có tên miền riêng không?
+Chạy trên máy của nhóm hoặc GitHub Pages
+Mục 2.3, NFR-03.2
+TBD-04
+Cửa hàng có bao nhiêu mã hàng (sản phẩm, biến thể)? Ai cung cấp ảnh và thông số? Nhóm hàng và hãng trong Bảng 5 đã đúng chưa?
+Dữ liệu mẫu khoảng 500 biến thể để kiểm thử hiệu năng
+NFR-02.1, mục 4.4.1
+TBD-05
+Chủ cửa hàng có yêu cầu giao diện cụ thể không (logo, màu thương hiệu, bố cục trang chủ)?
+Dùng bố cục wireframe ở mục 5.1.3
+Mục 5.1
+TBD-06
+Cửa hàng có muốn gộp hai chiếc cùng loại thành một dòng đơn và nhập hai số seri không, hay chấp nhận tách mỗi chiếc một dòng?
+Tách mỗi chiếc một dòng đơn (BR-11)
+BR-11, FR-05.7
+TBD-07
+Cửa hàng có bán hàng đã qua sử dụng, hàng trưng bày hoặc hàng thanh lý không? Quạt và nồi cơm điện có cần nhập số seri không?
+Chỉ bán hàng mới; quạt và nồi cơm điện không nhập số seri
+Bảng PRODUCT_VARIANTS, cột track_serial
+TBD-08
+Phí vận chuyển và phí lắp đặt (nhất là điều hòa) có tính vào đơn hàng không? Giao hàng ở những khu vực nào?
+Chưa tính phí vận chuyển và lắp đặt trong tổng tiền; cửa hàng thỏa thuận với khách khi xác nhận đơn
+BR-09, bảng ORDERS
+TBD-08
+Phí vận chuyển và phí lắp đặt (nhất là điều hòa) có tính vào đơn hàng không? Giao hàng ở những khu vực nào?
+Chưa tính phí vận chuyển và lắp đặt trong tổng tiền; cửa hàng thỏa thuận với khách khi xác nhận đơn
+BR-09, bảng ORDERS
+TBD-08
+Phí vận chuyển và phí lắp đặt (nhất là điều hòa) có tính vào đơn hàng không? Giao hàng ở những khu vực nào?
+Chưa tính phí vận chuyển và lắp đặt trong tổng tiền; cửa hàng thỏa thuận với khách khi xác nhận đơn
+BR-09, bảng ORDERS
+TBD-09
+Họ tên, số điện thoại, Zalo của chủ cửa hàng? Cửa hàng hiện bán qua những kênh nào (quầy, điện thoại, Zalo, Facebook)? Có bao nhiêu nhân sự và ai kiêm vai trò nào?
+Hiển thị số điện thoại cửa hàng cấu hình trong data.js; vai trò theo Hình 1
+Mục 2.1.1, mục 5.4

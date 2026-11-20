@@ -1,0 +1,286 @@
+HỆ THỐNG THƯƠNG MẠI ĐIỆN TỬ BÁN LẺ ĐIỆN MÁY PHA HẰNGTÀI LIỆU TỔNG HỢP GIAO DIỆN TỪNG MÀN HÌNHÁNH XẠ CHỨC NĂNG SRS VÀ CẤU TRÚC MÃ NGUỒN
+Showroom: Xóm 8, Đường Đình Xuyên, Gia Lâm, Hà Nội • Hotline: 0988 123 456Phiên bản tài liệu: 5.2 (Cập nhật 16/16 Màn hình chuẩn HTML5/CSS3/JS thuần MPA, Tối ưu UI/UX Trang chủ tinh gọn, Bảo mật đơn hàng PII & 50 Unit Tests)
+─────────────────────────────────────────────────────────────────
+PHẦN I: TÓM TẮT GIAO DIỆN TỪNG MÀN HÌNH & ÁNH XẠ CHỨC NĂNG SRS (16 MÀN HÌNH)
+A. CÁC MÀN HÌNH KHÁCH HÀNG (CLIENT PORTAL)
+1. Header 2 Tầng Tiện Ích Cố Định (AppHeader)
+Vị trí & Chức năng SRS:
+Quy tắc giao diện UI-01, UI-02 | Chức năng NFR-02.2 (Tìm kiếm không dấu) | REQ-002
+Đường dẫn & File:
+Hiển thị cố định ở đỉnh mọi trang Client (/index.html, /product-detail.html...) | File: js/components/header.js
+Đối tượng sử dụng:
+Tất cả khách hàng, khách vãng lai và quản trị viên
+1. Bố cục & Trải nghiệm giao diện (UI/UX): Gồm 2 tầng dính chặt ở đầu trang (sticky top-0 z-40) khi cuộn chuột: Tầng 1 là dải tiện ích xanh đen Deep Navy (#0F172A); Tầng 2 là dải tương tác trắng cao cấp viền mờ. Trên di động được thu gọn thành 2 hàng tinh gọn.
+2. Các thành phần & chức năng trên màn hình:
+Dải Topbar Tầng 1: Số Hotline tư vấn bán hàng 0988 123 456, địa chỉ Showroom tại Gia Lâm, huy hiệu cam kết 100% chính hãng, liên kết Tra cứu bảo hành (/warranty.html), liên kết Kiểm tra đơn hàng (tự động ẩn với Admin/Staff).
+Logo Pha Hằng: Tên 'ĐIỆN MÁY PHA HẰNG' kèm huy hiệu 'Gia Dụng & Điện Lạnh', click chuyển về trang chủ.
+Nút Mega Dropdown Danh Mục: Nút xám nhạt bo góc, bấm mở menu thả xuống hiển thị 5 ngành hàng lớn (Ti vi, Điều hòa, Tủ lạnh, Quạt, Nồi cơm điện) kèm icon đại diện.
+Ô Tìm Kiếm Thông Minh: Ô nhập bo tròn viên thuốc (pill) viền đỏ khi focus, placeholder gợi ý tìm kiếm, nút Tìm kiếm màu đỏ nổi bật.
+Dropdown Gợi Ý Tìm Kiếm Tức Thì (SearchSuggestions): Tự động hiển thị khi gõ phím (debounce 200ms). Hiển thị tối đa 6 sản phẩm khớp cả có dấu và không dấu: ảnh thumbnail, tên máy 2 dòng không bị cắt, giá bán định dạng ₫ kèm chữ 'Từ', tag thương hiệu, nhãn Trả góp 0%, phím mũi tên lên/xuống/Enter điều hướng.
+Nút Giỏ Hàng: Icon giỏ hàng kèm Badge đỏ đếm tổng số lượng máy đang chọn trong giỏ theo thời gian thực (cartStore.count()).
+Menu Tài Khoản: Nút Đăng nhập khi chưa có tài khoản; hoặc tên khách hàng + Menu thả xuống (Đơn hàng của tôi, Tra cứu bảo hành, Đăng xuất).
+3. Thao tác chính của người dùng: Khách hàng bấm mở nhanh 5 ngành hàng; gõ từ khóa nhận gợi ý sản phẩm tức thì; bấm xem giỏ hàng; bấm vào menu tài khoản để kiểm tra đơn hàng.
+────────────────────────────────────────────────────────────
+2. Trang Chủ & Bộ Lọc Đa Ngành Hàng (HomeView - Wireframe Hình 11)
+Vị trí & Chức năng SRS:
+Yêu cầu FR-02 (Bảng 16) | Use Case: UC-03 | Wireframe: Hình 11 | Mã màn hình: SCR-01 | Quy tắc: NFR-02.2, UI-10
+Đường dẫn & File:
+/index.html | File: index.html & js/pages/home.js
+Đối tượng sử dụng:
+Khách hàng mua sắm, khách vãng lai
+1. Bố cục & Trải nghiệm giao diện (UI/UX): Thiết kế tinh gọn, trực diện, loại bỏ hoàn toàn các khối banner và cam kết thừa che lấp sản phẩm (chuẩn 100% template HomeView gốc). Trên di động hiển thị Dải cuộn ngang danh mục 5 ngành hàng; Trên máy tính trực tiếp vào Bố cục 2 cột chuyên nghiệp: Sidebar bộ lọc đa tiêu chí cố định bên trái (Sticky Sidebar 260px) và Lưới sản phẩm responsive bên phải. Mặc định hiển thị phân loại 5 ngành hàng lớn (Grouped Categories View: Ti vi, Điều hòa, Tủ lạnh, Quạt, Nồi cơm), khi lọc/tìm kiếm hiển thị Lưới sản phẩm phẳng (Flat Grid) có phân trang 12 sp/trang theo UI-10.
+2. Các thành phần & chức năng trên màn hình:
+Dải Danh Mục Cuộn Ngang Mobile (mobile-category-scroll): Dải nút icon cuộn mượt mà trên di động cho 5 ngành hàng (Ti vi, Điều hòa, Tủ lạnh, Quạt, Nồi cơm điện), giúp khách hàng thao tác nhanh bằng một tay.
+Khối Phân Nhóm 5 Ngành Hàng Mặc Định (Grouped Categories): Tự động nạp và phân bổ chuẩn xác toàn bộ 18 sản phẩm vào 5 khối lớn (Ti vi 4 sp, Điều hòa 4 sp, Tủ lạnh 4 sp, Quạt 3 sp, Nồi cơm 3 sp) qua thuật toán isProductInCategory(), đi kèm nút 'Xem tất cả' dẫn nhanh vào từng ngành.
+Bộ Lọc Tự Động & Thẻ Lọc Đang Hoạt Động (Auto-filter & Active Chips): Tự động lọc tức thì ngay khi thay đổi bất kỳ dropdown nào mà không cần ấn nút; dropdown Thương hiệu cập nhật động theo ngành hàng; dải thẻ Active Chips cho phép người dùng theo dõi và bấm xóa nhanh từng tiêu chí lọc.
+Thẻ Sản Phẩm (ProductCard): Ảnh thiết bị sắc nét, nhãn Trả góp 0%, tên máy bẻ tối đa 2 dòng không cắt chữ, giá bán màu đỏ định dạng ₫, giá gốc gạch ngang, tag thương hiệu, nút '+ Giỏ hàng' thêm nhanh.
+Thanh Phân Trang (BasePagination): Nút Trước, các số trang 1, 2, 3..., nút Sau (12 máy mỗi trang theo UI-10).
+3. Thao tác chính của người dùng: Khách bấm chọn bộ lọc để thu hẹp sản phẩm mong muốn; bấm đổi cách sắp xếp giá; click vào thẻ sản phẩm để chuyển sang trang chi tiết.
+────────────────────────────────────────────────────────────
+3. Chi Tiết Sản Phẩm & Biến Thể Cấu Hình (ProductDetailView - Wireframe Hình 12)
+Vị trí & Chức năng SRS:
+Yêu cầu FR-03 (Bảng 16) | Use Case: UC-03 | Wireframe: Hình 12 | Mã màn hình: SCR-02 | Quy tắc: BR-10
+Đường dẫn & File:
+/product-detail.html?id=:id | File: product-detail.html & js/pages/productDetail.js
+Đối tượng sử dụng:
+Khách hàng xem cấu hình chi tiết và chọn mua máy
+1. Bố cục & Trải nghiệm giao diện (UI/UX): Chia làm 2 cột chính: Cột trái là Gallery trưng bày ảnh sản phẩm cỡ lớn có tính năng Lightbox phóng to ảnh; Cột phải là khu vực chọn biến thể cấu hình (cơ chế DOM Patching thông minh, không giật lag trang), xem giá và nút mua hàng. Phía dưới là Bảng thông số kỹ thuật chi tiết và ưu đãi đặc quyền. Cố định Mobile Sticky Buy Bar dưới đáy điện thoại.
+2. Các thành phần & chức năng trên màn hình:
+Gallery Hình Ảnh & Lightbox: Ảnh lớn sắc nét, thumbnail phía dưới chuyển ảnh mượt mà, hỗ trợ bấm vào ảnh chính để mở Lightbox Modal xem chi tiết độ phân giải cao.
+Thông Tin Cơ Bản: Tên đầy đủ của máy (model), hãng sản xuất, mã sản phẩm, badge chính hãng 24 tháng.
+Khối Giá Bán & Tiết Kiệm: Giá khuyến mãi chữ lớn màu đỏ định dạng ₫ (UI-04), giá niêm yết gạch ngang, nhãn Tiết kiệm số tiền cụ thể.
+Bộ Chọn Biến Thể & DOM Patching: Chọn kích cỡ màn hình (55 inch...), công suất làm lạnh (9.000 BTU...), dung tích (255L, 1.8L...), màu sắc. Hệ thống ứng dụng kỹ thuật DOM Patching cục bộ chỉ cập nhật các phần tử giá và ảnh mà không dựng lại toàn bộ trang, duy trì trạng thái mượt mà.
+Tình Trạng Kho: Thông báo 'Còn hàng' kèm số lượng sẵn sàng tại kho Gia Lâm.
+Bộ Tăng Giảm Số Lượng (+ / -): Giới hạn không cho mua vượt tồn kho (DAT-01).
+Cụm Nút Mua Hàng: Nút 'MUA NGAY (Giao hàng 2h)' nền đỏ chuyển thẳng sang thanh toán, nút 'Thêm Vào Giỏ' viền đỏ.
+Nút & Modal Tính Trả Góp 0% (InstallmentModal - BR-10): Bấm mở modal tính toán trả góp: chọn số tháng (6, 9, 12 tháng), chọn % trả trước (20%, 30%, 50%), hệ thống tự tính số tiền trả trước và số tiền đóng mỗi tháng, có nút đăng ký mua trả góp ngay.
+Bảng Thông Số Kỹ Thuật Đầy Đủ: Bảng 2 cột liệt kê chi tiết công suất, xuất xứ, năm ra mắt, thời gian bảo hành chính hãng.
+Mobile Sticky Buy Bar: Thanh nút Mua nhanh cố định sát đáy màn hình điện thoại khi khách cuộn xem thông số.
+3. Thao tác chính của người dùng: Khách hàng bấm chọn kích thước hoặc màu sắc máy; bấm Mua ngay để sang thẳng trang Checkout; bấm mở popup tính tiền trả góp mỗi tháng.
+────────────────────────────────────────────────────────────
+4. Giỏ Hàng Mua Sắm (CartView)
+Vị trí & Chức năng SRS:
+Yêu cầu FR-04 (Bảng 18) | Use Case: UC-04 | Mã màn hình: SCR-04 | Bảng dữ liệu: CART
+Đường dẫn & File:
+/cart.html | File: cart.html & js/pages/cart.js
+Đối tượng sử dụng:
+Khách hàng kiểm tra danh sách máy đã chọn
+1. Bố cục & Trải nghiệm giao diện (UI/UX): Bố cục 2 phần rõ ràng: Bên trái là danh sách bảng các sản phẩm trong giỏ; Bên phải là thẻ Tóm tắt đơn hàng (Order Summary) có viền nổi bật.
+2. Các thành phần & chức năng trên màn hình:
+Danh Sách Thiết Bị Trong Giỏ: Ảnh nhỏ, tên máy, cấu hình biến thể đã chọn (kích cỡ, màu sắc), đơn giá ₫, thành tiền.
+Bộ Tăng/Giảm Số Lượng (+ / -): Ô nhập số lượng có nút cộng trừ, tự động khóa không cho tăng quá số lượng tồn kho thực tế (DAT-01).
+Nút Xóa Sản Phẩm: Nút xóa kèm hộp thoại xác nhận modal (UI-06) để chống xóa nhầm.
+Khung Nhập Mã Giảm Giá (Coupon): Ô nhập mã khuyến mãi + nút 'Áp dụng', hiển thị số tiền được trừ theo % hoặc số tiền cố định (mã mẫu PHAHANG50K).
+Bảng Tóm Tắt Thanh Toán: Dòng tạm tính tiền hàng, dòng giảm giá coupon, dòng phí vận chuyển (Miễn phí), dòng Tổng cộng thanh toán in đậm cỡ lớn định dạng ₫.
+Nút 'Tiến Hành Đặt Hàng (Bước 2)': Nút màu đỏ lớn dẫn sang bước thanh toán.
+Trạng Thái Giỏ Trống: Hiển thị hình minh họa và nút quay lại mua sắm nếu chưa có sản phẩm nào.
+3. Thao tác chính của người dùng: Khách hàng tăng giảm số lượng máy; nhập mã voucher giảm giá; bấm nút Tiến hành đặt hàng để sang bước nhập địa chỉ.
+────────────────────────────────────────────────────────────
+5. Đặt Hàng & Thanh Toán (CheckoutView)
+Vị trí & Chức năng SRS:
+Yêu cầu FR-05 (Bảng 20) | Use Case: UC-05 | Mã màn hình: SCR-05 | Quy tắc: BR-01, UI-05, UI-08
+Đường dẫn & File:
+/checkout.html | File: checkout.html & js/pages/checkout.js
+Đối tượng sử dụng:
+Khách hàng hoàn tất đơn hàng (tối đa 4 bước bấm theo UI-08)
+1. Bố cục & Trải nghiệm giao diện (UI/UX): Phía trên là thanh tiến trình 4 bước trực quan (Chọn sản phẩm -> Giỏ hàng -> Thông tin thanh toán -> Hoàn tất đơn). Bố cục 2 cột: Cột trái là Form điền thông tin người nhận & chọn phương thức trả tiền; Cột phải là bảng tóm tắt chi phí đơn hàng.
+2. Các thành phần & chức năng trên màn hình:
+Form Thông Tin Người Nhận & Xác Thực Nội Dòng (js/core/validate.js, UI-05): Ô nhập Họ và tên *, Số điện thoại liên hệ 10 số chuẩn VN *, Địa chỉ giao hàng chi tiết *, Ghi chú đơn hàng. Bắt buộc kiểm tra định dạng và hiển thị thông báo lỗi tiếng Việt nội dòng ngay dưới từng ô nhập theo đúng tiêu chuẩn UI-05.
+Phương Thức Thanh Toán 1 - COD: Trả tiền mặt hoặc quẹt thẻ cho nhân viên kỹ thuật khi bàn giao và lắp đặt máy tận nhà.
+Phương Thức Thanh Toán 2 - Chuyển Khoản VietQR: Tự động hiển thị khung quét mã VietQR tự động 24/7 kèm thông tin số tài khoản MB Bank Pha Hằng, tên chủ tài khoản và số tiền chính xác theo đơn hàng. Tích hợp cụm nút 1-click sao chép nhanh Số tài khoản, Số tiền, Nội dung chuyển khoản vào bộ nhớ tạm (clipboard).
+Cột Tóm Tắt Đơn Hàng: Hiển thị danh sách các máy sẽ mua, mã giảm giá áp dụng, tổng tiền thanh toán cuối cùng.
+Nút 'Hoàn Tất Đặt Hàng (Bước 4)': Nút màu đỏ lớn, bấm tạo đơn thành công, tự động làm sạch giỏ hàng và chuyển sang trang hoàn tất đơn.
+3. Thao tác chính của người dùng: Khách hàng điền địa chỉ giao hàng; chọn hình thức trả tiền (quét mã VietQR hoặc trả khi nhận hàng); bấm nút Hoàn Tất Đặt Hàng.
+────────────────────────────────────────────────────────────
+6. Hoàn Tất Đặt Hàng (OrderSuccessView)
+Vị trí & Chức năng SRS:
+Use Case: UC-05 | Mã màn hình: SCR-05.1 | Quy tắc: UI-08
+Đường dẫn & File:
+/order-success.html?orderCode=:code | File: order-success.html & js/pages/orderSuccess.js
+Đối tượng sử dụng:
+Khách hàng xem biên nhận đặt hàng thành công
+1. Bố cục & Trải nghiệm giao diện (UI/UX): Màn hình thông báo dạng thẻ biên nhận nổi bật ở trung tâm, biểu tượng tích xanh thành công lớn, hiển thị đầy đủ thông tin mã đơn, người nhận, danh sách sản phẩm và tổng tiền.
+2. Các thành phần & chức năng trên màn hình:
+Biểu Tượng Tích Xanh & Tiêu Đề: Lời chúc mừng và cảm ơn khách hàng đã mua sắm tại Điện Máy Pha Hằng.
+Bảng Chi Tiết Biên Nhận: Mã đơn hàng (VD: PH-1004), thời gian đặt, tên người nhận, số điện thoại, địa chỉ nhận hàng, phương thức thanh toán.
+Bảng Sản Phẩm Trong Đơn: Tên model máy, phân loại cấu hình, số lượng, đơn giá và tổng tiền thanh toán.
+Cụm Nút Điều Hướng: Nút 'Tra cứu đơn hàng' dẫn tới /my-orders.html và nút 'Tiếp tục mua sắm' dẫn về trang chủ.
+3. Thao tác chính của người dùng: Khách hàng lưu lại mã đơn hàng để tra cứu tiến độ giao hàng và bảo hành.
+────────────────────────────────────────────────────────────
+7. Lịch Sử Đơn Hàng Của Tôi (MyOrdersView)
+Vị trí & Chức năng SRS:
+Yêu cầu FR-06 (Bảng 22) | Use Case: UC-06 | Mã màn hình: SCR-06 | Quy tắc: BR-05, BR-11
+Đường dẫn & File:
+/my-orders.html | File: my-orders.html & js/pages/myOrders.js
+Đối tượng sử dụng:
+Dành cho khách hàng kiểm tra đơn mua và tiến độ giao lắp (tự động điều hướng Admin sang /admin/orders.html)
+1. Bố cục & Trải nghiệm giao diện (UI/UX): Gồm tiêu đề lịch sử đơn, thanh tra cứu nhanh theo mã đơn và SĐT, phân tách rõ ràng giữa chế độ Khách hàng đã đăng nhập (bảo mật đơn cá nhân) và Khách vãng lai (tra cứu an toàn, che mờ dữ liệu cá nhân PII theo Nghị định 13/2023/NĐ-CP).
+2. Các thành phần & chức năng trên màn hình:
+Tra Cứu Khách Vãng Lai & Che Mờ Dữ Liệu PII (Nghị định 13/2023/NĐ-CP): Yêu cầu nhập đúng cả Mã đơn hàng (VD: PH-1001) và Số điện thoại đặt hàng; thông tin nhạy cảm của khách hàng được che mờ tự động (SĐT dạng 098***1222, địa chỉ dạng Hà N***) nhằm ngăn chặn việc lộ lọt thông tin cá nhân.
+Thẻ Đơn Hàng: Mã đơn hàng màu đỏ nổi bật, ngày giờ đặt mua, badge trạng thái xử lý đơn (Chờ xác nhận, Đang giao hàng, Hoàn tất, Đã hủy).
+Danh Sách Thiết Bị Trong Đơn: Tên sản phẩm, cấu hình biến thể, số lượng, đơn giá.
+Hiển Thị Số Seri Xuất Kho (Serial Number - BR-11): Với Ti vi, Điều hòa, Tủ lạnh đã xuất kho, Số Seri hiển thị dạng badge xanh lá có biểu tượng khiên bảo hành '🛡️ Số Seri: SN-xxx (Đã kích hoạt BH)', bấm trực tiếp dẫn sang trang tra cứu bảo hành chính hãng.
+Nút 'Hủy Đơn Hàng Này' (BR-05): Nút màu đỏ chỉ xuất hiện khi đơn hàng đang ở trạng thái Chờ xác nhận (PENDING), bấm hủy mở modal xác nhận (UI-06).
+3. Thao tác chính của người dùng: Khách hàng theo dõi tiến độ xử lý đơn hàng; xem mã số seri máy đã xuất kho để đối chiếu bảo hành; hủy đơn hàng nếu có nhu cầu.
+────────────────────────────────────────────────────────────
+8. Tra Cứu Bảo Hành Điện Tử Chính Hãng (WarrantyLookupView - Wireframe Hình 14)
+Vị trí & Chức năng SRS:
+Yêu cầu FR-12 (Bảng 34) | Use Case: UC-12 | Wireframe: Hình 14 | Mã màn hình: SCR-07 | Quy tắc: NFR-02.3
+Đường dẫn & File:
+/warranty.html | File: warranty.html & js/pages/warranty.js
+Đối tượng sử dụng:
+Khách hàng tra cứu bảo hành điện tử, không bắt buộc đăng nhập
+1. Bố cục & Trải nghiệm giao diện (UI/UX): Thiết kế dạng cổng dịch vụ tập trung ở giữa trang: Phía trên là thanh tìm kiếm trung tâm lớn; Ở giữa là kết quả hồ sơ bảo hành; Phía dưới là cẩm nang hướng dẫn vị trí dán tem seri.
+2. Các thành phần & chức năng trên màn hình:
+Thanh Tra Cứu Trung Tâm: Ô nhập Số seri thiết bị (Serial Number / IMEI) hoặc Số điện thoại mua hàng + nút 'Tra Cứu Ngay'.
+Bảng Kết Quả Bảo Hành Chi Tiết: Tên thiết bị & Model, Phiên bản, Mã đơn hàng xuất kho, Số Seri in đậm, Tên chủ sở hữu & SĐT, Ngày kích hoạt, Ngày hết hạn, Badge trạng thái '✓ Còn Bảo Hành Chính Hãng' (xanh) hoặc '✕ Hết Hạn Bảo Hành' (đỏ).
+Cẩm Nang Hướng Dẫn Vị Trí Tem Seri (Wireframe Hình 14): 3 khối minh họa vị trí tem dán trên Ti vi (sau lưng máy), Điều hòa (hông dàn lạnh và dàn nóng), Tủ lạnh (vách bên trong ngăn mát).
+Thông Tin Trạm Kỹ Thuật: Địa chỉ trạm tiếp nhận ủy quyền tại Showroom Pha Hằng (Xóm 8, Đường Đình Xuyên, Gia Lâm, Hà Nội) và số tổng đài miễn phí bảo hành tận nhà 0988 123 456.
+3. Thao tác chính của người dùng: Khách hàng nhập số seri hoặc số điện thoại để tra cứu xem máy của mình còn bảo hành chính hãng bao lâu.
+────────────────────────────────────────────────────────────
+9. Đăng Nhập & Đăng Ký Khách Hàng (LoginView & RegisterView)
+Vị trí & Chức năng SRS:
+Yêu cầu FR-01 (Bảng 14) | Use Case: UC-01 & UC-02 | Mã màn hình: SCR-03 | Luật: Section 8.1 Nghị định 13/2023/NĐ-CP, FR-01.4
+Đường dẫn & File:
+/login.html & /register.html | File: login.html, register.html & js/pages/auth.js
+Đối tượng sử dụng:
+Khách hàng mua sắm đăng nhập hoặc tạo tài khoản mới (tách cổng riêng với Admin theo DEC-001)
+1. Bố cục & Trải nghiệm giao diện (UI/UX): Khung form nhập liệu thanh lịch đặt ở vị trí trung tâm màn hình, có nút chuyển đổi qua lại giữa Đăng nhập và Đăng ký.
+2. Các thành phần & chức năng trên màn hình:
+Form Đăng Nhập (/login.html): Ô nhập Email *, Mật khẩu *, nút Đăng Nhập, liên kết chuyển sang đăng ký và cổng nhân viên.
+Form Đăng Ký (/register.html): Họ và tên *, Email *, Số điện thoại 10 số *, Mật khẩu (tối thiểu 8 ký tự theo FR-01.4) *.
+Checkbox Đồng Thuận Dữ Liệu Cá Nhân (Nghị định 13/2023/NĐ-CP - Section 8.1 SRS): Checkbox bắt buộc đồng ý cho phép Điện Máy Pha Hằng thu thập và xử lý dữ liệu phục vụ giao hàng và bảo hành thiết bị; chặn đăng ký nếu chưa tích chọn.
+Thông Báo Lỗi Tiếng Việt: Báo lỗi chi tiết ngay dưới ô nhập nếu thiếu trường hoặc sai định dạng (UI-05).
+3. Thao tác chính của người dùng: Khách hàng đăng nhập để quản lý đơn hàng; khách mới điền form và tích đồng thuận bảo vệ dữ liệu để tạo tài khoản.
+────────────────────────────────────────────────────────────
+B. CÁC MÀN HÌNH QUẢN TRỊ & VẬN HÀNH (ADMIN & STAFF PORTAL)
+10. Đăng Nhập Cổng Quản Trị (AdminLoginView)
+Vị trí & Chức năng SRS:
+Yêu cầu FR-01 (Bảng 14) | Use Case: UC-02 | Mã màn hình: SCR-03 | Quyết định: DEC-001 (Tách biệt cổng)
+Đường dẫn & File:
+/admin/login.html | File: admin/login.html & js/pages/adminLogin.js
+Đối tượng sử dụng:
+Chỉ dành riêng cho Quản trị viên (ADMIN) và Nhân viên bán hàng & kho (STAFF)
+1. Bố cục & Trải nghiệm giao diện (UI/UX): Nằm tại route bảo mật độc lập /admin/login.html, phong cách Dashboard công vụ với tone màu đen Navy - cam đỏ sang trọng.
+2. Các thành phần & chức năng trên màn hình:
+Tiêu đề: Logo Tia Sét + nhãn 'ĐIỆN MÁY PHA HẰNG - CỔNG DÀNH CHO ADMIN & NHÂN VIÊN'.
+Ô nhập Email công vụ: Hòm thư nhân viên (*admin@phahang.vn* hoặc *staff@phahang.vn*).
+Ô nhập Mật khẩu quản trị: Mật khẩu bảo mật nội bộ.
+Nút 'Đăng Nhập Quản Trị': Nút màu đỏ Carmine nổi bật.
+Cơ chế bảo vệ: Từ chối các tài khoản có vai trò Khách hàng (CUSTOMER) nếu cố tình đăng nhập vào cổng này.
+3. Thao tác chính của người dùng: Nhân viên và quản trị viên đăng nhập vào hệ thống để bắt đầu ca làm việc.
+────────────────────────────────────────────────────────────
+11. Menu Thanh Bên Quản Trị (AdminSidebar)
+Vị trí & Chức năng SRS:
+Quy tắc giao diện UI-09 (Menu phân quyền tự động theo role) | Quyết định DEC-001, TASK-018
+Đường dẫn & File:
+Hiển thị cố định bên trái toàn bộ các trang /admin/* | File: js/components/adminLayout.js
+Đối tượng sử dụng:
+Quản trị viên và Nhân viên
+1. Bố cục & Trải nghiệm giao diện (UI/UX): Thanh điều hướng dọc 250px bên trái màn hình quản trị, nền xanh đen Navy (#0F172A), phân cách viền mờ với khu vực nội dung chính.
+2. Các thành phần & chức năng trên màn hình:
+Tiêu đề hệ thống: Logo Tia Sét + nhãn PHA HẰNG - CỔNG QUẢN TRỊ.
+Danh sách Menu điều hướng: 📊 Tổng Quan (Dashboard), 📦 Quản Lý Sản Phẩm, 📑 Quản Lý Đơn Hàng, 🛡️ Quản Lý Bảo Hành (Mới), 👥 Tài Khoản & Phân Quyền, 🎟️ Quản Lý Voucher.
+Trạng thái Active Menu: Tab đang chọn được tô nền xám đậm, chữ trắng in đậm và thanh viền đỏ Carmine bên trái.
+Khu vực Footer (TASK-018): Nút Đăng xuất màu đỏ sang trọng, loại bỏ nút 'Về Cửa Hàng Bán Lẻ' để tránh nhầm lẫn vai trò.
+3. Thao tác chính của người dùng: Người dùng bấm chuyển qua lại giữa các phân hệ quản lý; bấm Đăng xuất khi hết ca làm việc.
+────────────────────────────────────────────────────────────
+12. Thống Kê Doanh Thu & Tổng Quan (DashboardView - UC-10)
+Vị trí & Chức năng SRS:
+Yêu cầu FR-10 (Bảng 30) | Use Case: UC-10 | Mã màn hình: SCR-10 | Báo cáo mục 4.3 SRS
+Đường dẫn & File:
+/admin/index.html | File: admin/index.html & js/pages/adminDashboard.js
+Đối tượng sử dụng:
+Chỉ dành riêng cho Quản trị viên (ADMIN)
+1. Bố cục & Trải nghiệm giao diện (UI/UX): Bảng điều khiển kinh doanh tổng thể: Hàng 4 thẻ chỉ số KPI trên cùng, tiếp theo là 2 bảng thống kê chi tiết (Doanh thu theo 5 ngành hàng & Top 5 sản phẩm bán chạy) và Bảng đơn hàng mới nhất.
+2. Các thành phần & chức năng trên màn hình:
+Thẻ KPI 1 - Tổng Doanh Thu: Số tiền bán hàng tích lũy định dạng ₫ rõ ràng, kèm nhãn Đơn hoàn tất & thanh toán.
+Thẻ KPI 2 - Đơn Chờ Duyệt: Số lượng đơn hàng mới đặt đang chờ gọi điện xác nhận và xuất kho.
+Thẻ KPI 3 - Tổng Sản Phẩm: Tổng số model máy hiện có sẵn thuộc 5 ngành hàng điện máy.
+Thẻ KPI 4 - Khách Hàng: Số lượng người dùng đã đăng ký tài khoản mua sắm.
+Bảng Doanh Thu Theo 5 Ngành Hàng (Mục 11 & Báo cáo 4.3 SRS): Đóng góp doanh thu chi tiết từ Ti vi, Điều hòa, Tủ lạnh, Quạt và Nồi cơm điện.
+Bảng Xếp Hạng Top 5 Sản Phẩm Bán Chạy (Mục 11 SRS): Tên thiết bị, hãng sản xuất, số lượng đã bán ra, tổng doanh số thu được.
+Bảng Đơn Hàng Mới Nhất: Liệt kê các đơn hàng mới nhất kèm trạng thái và số tiền.
+3. Thao tác chính của người dùng: Quản trị viên theo dõi kết quả kinh doanh; kiểm tra đơn chờ duyệt; xem báo cáo doanh số theo từng ngành hàng.
+────────────────────────────────────────────────────────────
+13. Quản Lý & Xét Duyệt Đơn Hàng (OrderListView - Wireframe Hình 13)
+Vị trí & Chức năng SRS:
+Yêu cầu FR-07 (Bảng 24) | Use Case: UC-07 | Wireframe: Hình 13 | Mã màn hình: SCR-09 | Quy tắc: BR-01, BR-03, BR-11, FR-07.5
+Đường dẫn & File:
+/admin/orders.html | File: admin/orders.html & js/pages/adminOrders.js
+Đối tượng sử dụng:
+Quản trị viên và Nhân viên xử lý đơn hàng
+1. Bố cục & Trải nghiệm giao diện (UI/UX): Màn hình nghiệp vụ cốt lõi chuẩn xác theo Wireframe Hình 13 SRS: Hộp hướng dẫn quy trình màu vàng ở trên, thanh lọc trạng thái đơn, bảng danh sách đơn và Modal chi tiết gán số seri.
+2. Các thành phần & chức năng trên màn hình:
+Hộp Ghi Chú Quy Trình Nghiệp Vụ Màu Vàng (Wireframe Hình 13): Hướng dẫn nhân viên 3 bước chuẩn: (1) Kiểm tra chi tiết đơn -> (2) Bắt buộc gán Số Seri cho Tivi, Điều hòa, Tủ lạnh trước khi xuất kho giao hàng -> (3) Cập nhật trạng thái hoàn tất để kích hoạt bảo hành điện tử.
+Thanh Bộ Lọc Trạng Thái Đơn: Các tab lọc: Tất cả đơn, Chờ duyệt (Pending), Đang giao (Shipping), Đã hoàn tất (Completed), Đã hủy (Cancelled).
+Bảng Danh Sách Đơn Hàng: Mã đơn, Tên người nhận & SĐT, Ngày tạo, Hình thức thanh toán (COD / Chuyển khoản VietQR), Badge trạng thái, Nút 'Chi tiết', Nút 'Duyệt', Nút 'Xong'.
+Modal Xử Lý Đơn Hàng Chi Tiết (BaseModal): Hiển thị đầy đủ thông tin giao hàng, danh sách từng thiết bị trong đơn, đơn giá và số lượng.
+Khu Vực Gán Số Seri Thiết Bị (FR-07.5, BR-11): Với Ti vi, Điều hòa, Tủ lạnh, hiển thị nhãn Số Seri đã gán hoặc nút '+ Gán Số Seri Máy' / 'Đổi'. Với quạt và nồi cơm hiển thị 'Không yêu cầu seri'. Bắt buộc gán đủ số seri mới cho phép bấm nút 'Xuất Kho Giao Hàng'.
+Tự Động Kích Hoạt Bảo Hành: Ngay khi nhân viên gán Số Seri, hệ thống tự động sinh hồ sơ bảo hành điện tử chính hãng 2 năm vào bảng WARRANTIES để khách tra cứu.
+3. Thao tác chính của người dùng: Nhân viên mở modal chi tiết đơn; bấm nhập mã Số Seri in trên tem máy; bấm Xuất kho giao hàng; cập nhật Hoàn tất khi giao lắp xong.
+────────────────────────────────────────────────────────────
+14. Sản Phẩm & Quản Lý Tồn Kho (ProductListView - UC-08)
+Vị trí & Chức năng SRS:
+Yêu cầu FR-08 (Bảng 26) | Use Case: UC-08 | Mã màn hình: SCR-08 | Quy tắc: DAT-01 (Tồn kho không âm)
+Đường dẫn & File:
+/admin/products.html | File: admin/products.html & js/pages/adminProducts.js
+Đối tượng sử dụng:
+Quản trị viên và Nhân viên quản lý kho
+1. Bố cục & Trải nghiệm giao diện (UI/UX): Gồm thanh tìm kiếm nhanh, nút '+ Thêm Sản Phẩm Mới', bảng dữ liệu sản phẩm, Modal thêm/sửa sản phẩm và xóa sản phẩm có hộp thoại xác nhận.
+2. Các thành phần & chức năng trên màn hình:
+Nút 'Thêm Sản Phẩm Mới': Bấm mở modal thêm model sản phẩm điện máy mới vào hệ thống.
+Thanh Tìm Kiếm Nhanh: Tìm kiếm tức thì theo tên sản phẩm hoặc thương hiệu.
+Bảng Dữ Liệu Sản Phẩm: ID, Ảnh đại diện, Tên sản phẩm, Thương hiệu, Ngành hàng (5 ngành), Giá từ / Tồn kho (DAT-01: tồn kho >= 0), Nút 'Sửa', Nút 'Xóa'.
+Modal Thêm / Sửa Sản Phẩm: Nhập Tên sản phẩm *, Hãng sản xuất *, Ngành hàng (Ti vi, Điều hòa, Tủ lạnh, Quạt, Nồi cơm điện) *, Giá bán (₫) *, Tồn kho ban đầu *, Link ảnh đại diện, Mô tả chi tiết.
+Hộp Thoại Xác Nhận Xóa (confirmDialog - UI-06): Popup xác nhận thao tác nguy hiểm trước khi xóa vĩnh viễn sản phẩm khỏi kho.
+3. Thao tác chính của người dùng: Nhân viên quản lý kho bấm thêm sản phẩm mới; chỉnh sửa thông tin giá bán và tồn kho; xóa sản phẩm ngừng kinh doanh.
+────────────────────────────────────────────────────────────
+15. Quản Lý Bảo Hành Điện Tử (WarrantyListView - UC-12)
+Vị trí & Chức năng SRS:
+Yêu cầu FR-12 (Bảng 34) | Use Case: UC-12 | Mã màn hình: SCR-07 | Bảng dữ liệu: WARRANTIES
+Đường dẫn & File:
+/admin/warranties.html | File: admin/warranties.html & js/pages/adminWarranties.js
+Đối tượng sử dụng:
+Quản trị viên và Kỹ thuật viên bảo hành tại Showroom
+1. Bố cục & Trải nghiệm giao diện (UI/UX): Bố cục gồm thanh tìm kiếm số seri nhanh, bộ lọc trạng thái bảo hành và bảng dữ liệu các thiết bị đã kích hoạt bảo hành điện tử chính hãng.
+2. Các thành phần & chức năng trên màn hình:
+Thanh Tìm Kiếm Nhanh: Nhập Số Seri (Serial/IMEI), Số điện thoại khách hàng, Tên máy hoặc Mã đơn để tìm hồ sơ bảo hành ngay lập tức.
+Bộ Lọc Trạng Thái: Lọc nhanh giữa 'Tất cả hồ sơ', 'Còn bảo hành (Active)' và 'Đã hết hạn'.
+Bảng Hồ Sơ Bảo Hành Điện Tử: Số Seri thiết bị có icon khiên bảo hành, Tên thiết bị & Model, Tên khách hàng & Số điện thoại, Mã đơn hàng xuất kho, Ngày kích hoạt, Ngày hết hạn, Badge trạng thái Còn bảo hành / Hết hạn.
+Hỗ Trợ Kỹ Thuật Viên: Tra cứu tức thì khi khách hàng mang thiết bị đến showroom hoặc yêu cầu sửa chữa tại nhà tại khu vực Gia Lâm.
+3. Thao tác chính của người dùng: Kỹ thuật viên gõ số seri máy để kiểm tra thiết bị có phải mua chính hãng từ Pha Hằng không và còn trong hạn bảo hành bao lâu.
+────────────────────────────────────────────────────────────
+16. Quản Lý Khuyến Mãi & Voucher (CouponListView - UC-09)
+Vị trí & Chức năng SRS:
+Yêu cầu FR-09 (Bảng 28) | Use Case: UC-09 | Mã màn hình: SCR-11 | Bảng dữ liệu: COUPONS
+Đường dẫn & File:
+/admin/coupons.html | File: admin/coupons.html & js/pages/adminCoupons.js
+Đối tượng sử dụng:
+Chỉ dành cho Quản trị viên (ADMIN)
+1. Bố cục & Trải nghiệm giao diện (UI/UX): Gồm nút 'Tạo Mã Mới', bảng danh sách các mã voucher đang chạy và Modal tạo mã ưu đãi mới.
+2. Các thành phần & chức năng trên màn hình:
+Nút 'Tạo Mã Mới': Bấm mở modal tạo mã ưu đãi khuyến mại.
+Bảng Danh Sách Mã Khuyến Mãi: Mã Voucher (VD: PHAHANG50K, GIADUNG10, TRIAN2026), Hình thức giảm (Số tiền cố định ₫ hoặc Phần trăm %), Mức giảm, Thời gian áp dụng (Ngày bắt đầu - Ngày kết thúc), Trạng thái (Đang áp dụng / Hết hạn).
+Modal Tạo Mã Giảm Giá Mới: Ô nhập Mã voucher *, Chọn loại giảm giá (AMOUNT / PERCENT), Nhập giá trị giảm *, Chọn ngày bắt đầu và ngày kết thúc hiệu lực.
+3. Thao tác chính của người dùng: Quản trị viên tạo chiến dịch mã giảm giá mới; đặt thời hạn khuyến mại; theo dõi các mã đang có hiệu lực.
+────────────────────────────────────────────────────────────
+17. Quản Lý Tài Khoản & Phân Quyền (UserListView - UC-11, FR-11.6)
+Vị trí & Chức năng SRS:
+Yêu cầu FR-11 (Bảng 32) | Use Case: UC-11 | Mã màn hình: SCR-12 | Tính năng: FR-11.6 (Tạo nhân viên trực tiếp)
+Đường dẫn & File:
+/admin/users.html | File: admin/users.html & js/pages/adminUsers.js
+Đối tượng sử dụng:
+Chỉ dành riêng cho Quản trị viên tối cao (ADMIN)
+1. Bố cục & Trải nghiệm giao diện (UI/UX): Gồm tiêu đề phân quyền, nút '+ Thêm Nhân Viên Mới', bảng người dùng toàn hệ thống và Modal tạo tài khoản nhân viên mới trực tiếp.
+2. Các thành phần & chức năng trên màn hình:
+Nút 'Thêm Nhân Viên Mới' (FR-11.6): Nút màu đỏ nổi bật góc trên bên phải, bấm mở modal tạo tài khoản nhân viên trực tiếp.
+Bảng Danh Sách Người Dùng: ID, Họ và tên, Email, Số điện thoại, Chức vụ / Vai trò, Trạng thái (Hoạt động / Đang bị khóa), Thao tác.
+Dropdown Đổi Quyền Nhanh (Role Select): Cho phép Admin thay đổi vai trò trực tiếp trên từng dòng giữa 3 cấp độ: Khách Hàng (CUSTOMER), Nhân Viên (STAFF), Quản Trị Viên (ADMIN) với thông báo toast thành công ngay lập tức.
+Trạng Thái Tài Khoản & Nút Khóa: Nút 'Khóa tài khoản' hoặc 'Mở khóa' đi kèm popup xác nhận thao tác (confirmDialog) để tránh khóa nhầm.
+Modal Tạo Tài Khoản Nhân Viên Mới (FR-11.6 SRS): Ô nhập Họ và tên nhân viên *, Email công vụ (*@phahang.vn*) *, Số điện thoại 10 số *, Phân quyền chức vụ (STAFF / ADMIN) *.
+3. Thao tác chính của người dùng: Quản trị viên đổi quyền hạn cho nhân viên; bấm nút tạo tài khoản nhân viên mới cấp tốc; khóa tài khoản có dấu hiệu bất thường.
+────────────────────────────────────────────────────────────
+PHẦN II: SƠ ĐỒ CẤU TRÚC MÃ NGUỒN (HTML5, CSS3, JS ES MODULES THUẦN - MPA)
+Dự án được xây dựng theo kiến trúc Multi-Page Application (MPA) thuần Web Standards, sử dụng hoàn toàn HTML5, CSS Tailwind CSS (biên dịch tĩnh thông qua CLI, Design Tokens, Responsive Grid 12 cột), thư viện Lucide SVG offline, JavaScript ES6+ (ES Modules) và bộ kiểm thử native của Node.js (node:test). Hệ thống hoàn toàn không phụ thuộc framework nặng hay bundler runtime phức tạp, vận hành siêu tốc và ổn định trên mọi môi trường máy chủ.
+d:\zz\ (Dự án Điện Máy Pha Hằng)├── .project-memory/            # Bộ nhớ ngữ cảnh duy nhất của dự án (context.md Phần A–G)├── admin/                      # Cổng Quản Trị & Vận Hành (UI-09, DEC-001)│   ├── login.html              # Đăng nhập bảo mật riêng cho Admin & Nhân viên│   ├── index.html              # Dashboard tổng quan chỉ số KPI & Doanh thu 5 ngành│   ├── products.html           # Quản lý sản phẩm, giá bán, biến thể & tồn kho (UC-08)│   ├── orders.html             # Quản lý & duyệt xuất kho đơn hàng (gán Số Seri FR-07.5)│   ├── warranties.html         # Quản lý hồ sơ bảo hành điện tử chính hãng (FR-12, UC-12)│   ├── users.html              # Quản lý tài khoản, đổi quyền nhanh (Role Select) & tạo NV│   └── coupons.html            # Quản lý chiến dịch mã giảm giá voucher (UC-09)├── css/                        # Hệ thống CSS hiện đại & Design Tokens│   ├── tokens.css              # Biến màu Carmine Red (#DC2626), Deep Navy (#0F172A), Tokens│   ├── input.css               # Tệp nguồn Tailwind CSS (directives & custom utility classes)│   └── tailwind.css            # Tệp CSS tĩnh đã biên dịch hoàn chỉnh (npm run build:css)├── js/                         # Lõi JavaScript thuần (ES Modules)│   ├── core/                   # Các tiện ích nền tảng lõi│   │   ├── format.js           # Định dạng tiền tệ ₫ (UI-04), ngày tháng, bỏ dấu tiếng Việt (DEC-002)│   │   ├── dom.js              # Hàm esc() chống XSS, query helpers, thao tác DOM│   │   ├── validate.js         # Xác thực form nội dòng UI-05 (email, phone), copy clipboard│   │   ├── store.js            # Reactive Store Pub/Sub đồng bộ LocalStorage & đa tab│   │   └── guard.js            # Bảo vệ route cổng quản trị (requireAdmin, requireClient)│   ├── services/               # Tầng dịch vụ dữ liệu & Mock API│   │   ├── mockData.js         # Dữ liệu hạt giống: 5 ngành hàng, 18 sản phẩm, đơn hàng, bảo hành│   │   ├── mockService.js      # CRUD sản phẩm, giỏ hàng, đơn hàng, tra cứu & gán bảo hành│   │   └── productSearch.js    # Singleton cache gợi ý tìm kiếm tức thì không dấu (REQ-002)│   ├── stores/                 # Quản lý trạng thái ứng dụng toàn cục│   │   ├── cartStore.js        # Giỏ hàng toàn cục (thêm, sửa số lượng, xóa, tính tiền)│   │   └── authStore.js        # Phiên đăng nhập Khách vs Admin độc lập (DEC-001)│   ├── vendor/                 # Thư viện bên thứ ba lưu trữ cục bộ│   │   └── lucide.min.js       # Bộ icon Lucide SVG chạy offline không phụ thuộc CDN│   ├── components/             # Các khối giao diện dùng chung│   │   ├── header.js           # Header 2 tầng tiện ích (UI-01) tích hợp dropdown & search│   │   ├── footer.js           # Footer 4 cột thông tin cửa hàng tại Gia Lâm, Hà Nội│   │   ├── productCard.js      # Thẻ card sản phẩm điện máy chuẩn Wireframe Hình 11│   │   ├── modal.js            # BaseModal & confirmDialog xác nhận thao tác (UI-06)│   │   ├── toast.js            # BaseToast thông báo phản hồi thao tác người dùng (UI-07)│   │   ├── pagination.js       # Phân trang danh sách sản phẩm 12 sp/trang (UI-10)│   │   └── adminLayout.js      # Khung sidebar & topbar quản trị phân quyền (UI-09)│   └── pages/                  # Logic điều khiển từng trang HTML cụ thể (13 files)├── tests/                      # Bộ kiểm thử tự động Node.js native (node:test - 9 test suites, 50 unit tests)│   ├── setup.js                # Giả lập môi trường LocalStorage cho Node.js test runner│   ├── format.test.js          # Test định dạng tiền ₫, ngày tháng, chuẩn hóa tiếng Việt│   ├── product_search.test.js  # Test tìm kiếm có dấu/không dấu, phân bổ 18 sp vào 5 ngành│   ├── cart_store.test.js      # Test thêm, bớt, cập nhật số lượng, làm trống giỏ hàng│   ├── auth_store.test.js      # Test phân quyền Client vs Admin độc lập│   ├── mock_service.test.js    # Test CRUD 5 ngành hàng, lọc đa tiêu chí, tạo đơn hàng│   ├── warranty_and_features.test.js # Test tra cứu bảo hành, gán số seri, tính trả góp 0%│   ├── auth_flow.test.js       # Test luồng đăng ký, đăng nhập khách hàng, validate mật khẩu >= 8 ký tự│   ├── orders_privacy.test.js  # Test bảo mật đơn cá nhân & che mờ PII khách vãng lai│   └── validate.test.js        # Test hàm kiểm tra email, số điện thoại & lỗi nội dòng UI-05├── index.html                  # Trang chủ bán lẻ 5 ngành hàng điện máy (SCR-01, Hình 11)├── product-detail.html         # Trang chi tiết máy, DOM patching, trả góp 0% (Hình 12)├── cart.html                   # Trang giỏ hàng & áp dụng voucher ưu đãi (SCR-04)├── checkout.html               # Trang đặt hàng ≤ 4 bước, thanh toán VietQR (SCR-05)├── order-success.html          # Trang hoàn tất đặt hàng thành công (SCR-05.1)├── my-orders.html              # Trang tra cứu đơn hàng & số seri xuất kho (SCR-06)├── warranty.html               # Trang tra cứu bảo hành điện tử chính hãng (SCR-07, Hình 14)├── login.html                  # Trang đăng nhập tài khoản khách hàng (SCR-03)├── register.html               # Trang đăng ký tài khoản (Nghị định 13/2023/NĐ-CP)├── tailwind.config.js          # Cấu hình Tailwind CSS (màu sắc brand Carmine Red, Navy)└── package.json                # Cấu hình scripts ("npm test" chạy 50 tests, "build:css")

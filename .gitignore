@@ -1,0 +1,8 @@
+node_modules/
+build/
+.gradle/
+target/
+.idea/
+.vscode/
+*.log
+Backend/src/main/resources/application.properties 

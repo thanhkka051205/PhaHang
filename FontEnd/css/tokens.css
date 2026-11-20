@@ -1,0 +1,68 @@
+/**
+ * Design Tokens - Cửa Hàng Điện Máy Pha Hằng
+ * Phong cách: Chuỗi Bán Lẻ Điện Máy Hiện Đại (Modern Tech Carmine & Deep Slate)
+ * Cảm hứng: Tinh hoa trải nghiệm bán lẻ CellphoneS kết hợp đặc thù Thiết Bị Gia Đình
+ * Gam màu chủ đạo: Đỏ Carmine Công Nghệ (#DC2626, #B91C1C) & Deep Slate Navy (#0F172A, #1E293B)
+ */
+:root {
+  /* Brand Carmine Red Colors (WCAG AA Compliant > 4.5:1 on white) */
+  --c-brand: #DC2626;
+  --c-brand-hover: #B91C1C;
+  --c-brand-active: #991B1B;
+  --c-brand-surface: #FEF2F2;
+  --c-brand-border: #FECACA;
+  --c-brand-subtle: #FEE2E2;
+
+  /* Accent Amber / Gold (Trả góp, Khuyến mãi đặc biệt) */
+  --c-accent: #D97706;
+  --c-accent-hover: #B45309;
+  --c-accent-surface: #FFFBEB;
+
+  /* Slate Navy (Header, Navigation, Chữ tiêu đề trang trọng) */
+  --c-navy: #0F172A;
+  --c-navy-surface: #1E293B;
+  --c-navy-subtle: #334155;
+
+  /* Base Semantic Surfaces */
+  --c-bg: #F8FAFC;
+  --c-surface: #FFFFFF;
+  --c-surface-card: #FFFFFF;
+  --c-surface-subtle: #F1F5F9;
+  --c-border: #E2E8F0;
+  --c-border-strong: #CBD5E1;
+
+  /* Typography */
+  --c-text: #0F172A;
+  --c-text-muted: #64748B;
+  --c-text-subtle: #94A3B8;
+  --c-price: #DC2626; /* Đỏ Carmine công nghệ nổi bật rõ ràng */
+
+  /* Functional Status */
+  --c-success: #16A34A;
+  --c-success-surface: #F0FDF4;
+  --c-success-border: #BBF7D0;
+
+  --c-warning: #D97706;
+  --c-warning-surface: #FFFBEB;
+  --c-warning-border: #FDE68A;
+
+  --c-danger: #DC2626;
+  --c-danger-surface: #FEF2F2;
+  --c-danger-border: #FECACA;
+
+  /* Shadows */
+  --sh-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+  --sh-card: 0 1px 3px 0 rgba(15, 23, 42, 0.08), 0 1px 2px -1px rgba(15, 23, 42, 0.08);
+  --sh-card-hover: 0 12px 24px -4px rgba(220, 38, 38, 0.12), 0 8px 12px -6px rgba(15, 23, 42, 0.08);
+  --sh-btn-brand: 0 4px 14px rgba(220, 38, 38, 0.3);
+
+  /* Border Radii */
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-card: 16px;
+  --r-pill: 9999px;
+
+  /* Gradients */
+  --g-header: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+  --g-flash: linear-gradient(135deg, #DC2626 0%, #EA580C 100%);
+}
