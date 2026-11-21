@@ -3,12 +3,12 @@ package vn.phahang.phahang.service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import vn.phahang.phahang.domain.Coupon;
-import vn.phahang.phahang.dto.ApplyCouponDTO;
 import vn.phahang.phahang.dto.CouponDTO;
 import vn.phahang.phahang.repository.CouponRepository;
 
@@ -21,95 +21,114 @@ public class CouponService {
         this.couponRepository = couponRepository;
     }
 
-    // Tạo mã giảm giá mới
-    @Transactional
-    public CouponDTO createCoupon(CouponDTO postCoupon) {
-        String normalizedCode = postCoupon.getCode().toUpperCase().trim();
-
-        if (couponRepository.existsByCodeIgnoreCase(normalizedCode)) {
-            throw new IllegalArgumentException("Mã giảm giá '" + normalizedCode + "' đã tồn tại trong hệ thống");
-        }
-
-        if (postCoupon.getStartDate() != null && postCoupon.getEndDate() != null
-                && postCoupon.getEndDate().isBefore(postCoupon.getStartDate())) {
-            throw new IllegalArgumentException("Ngày kết thúc không được trước ngày bắt đầu");
-        }
-
-        String type = postCoupon.getDiscountType().toUpperCase().trim();
-        if ("PERCENT".equals(type) && postCoupon.getDiscountValue().compareTo(BigDecimal.valueOf(100)) > 0) {
-            throw new IllegalArgumentException("Giảm giá theo phần trăm phải nằm trong khoảng từ 1 đến 100");
-        }
-
-        Coupon coupon = new Coupon();
-        coupon.setCode(normalizedCode);
-        coupon.setDiscountType(type);
-        coupon.setDiscountValue(postCoupon.getDiscountValue());
-        coupon.setMinOrderAmount(
-                postCoupon.getMinOrderAmount() != null ? postCoupon.getMinOrderAmount() : BigDecimal.ZERO
-        );
-        coupon.setUsageLimit(postCoupon.getUsageLimit());
-        coupon.setStartDate(postCoupon.getStartDate());
-        coupon.setEndDate(postCoupon.getEndDate());
-        coupon.setStatus(postCoupon.getStatus() != null ? postCoupon.getStatus() : true);
-
-        Coupon savedCoupon = couponRepository.save(coupon);
-        return mapToDTO(savedCoupon);
+    // Lấy danh sách mã giảm giá
+    public List<CouponDTO> fetchAllCoupons() {
+        return this.couponRepository.findAll().stream()
+                .map(this::mapToDTO)
+                .toList();
     }
 
-    // Kiểm tra tính hợp lệ của mã giảm giá
-    public CouponDTO validateCode(String code, BigDecimal sumAmount) {
+    // Tạo mã giảm giá mới
+    @Transactional
+    public CouponDTO createCoupon(Coupon postCoupon) {
+        if (this.couponRepository.existsByCodeIgnoreCase(postCoupon.getCode().trim())) {
+            throw new RuntimeException("Mã giảm giá đã tồn tại");
+        }
+
+        postCoupon.setCode(postCoupon.getCode().trim().toUpperCase());
+        Coupon savedCoupon = this.couponRepository.save(postCoupon);
+        return this.mapToDTO(savedCoupon);
+    }
+
+    // Cập nhật mã giảm giá theo code
+    @Transactional
+    public CouponDTO updateCoupon(String code, Coupon reqCoupon) {
+        Coupon currentCoupon = this.couponRepository.findByCodeIgnoreCase(code.trim())
+                .orElseThrow(() -> new RuntimeException("Mã giảm giá không tồn tại"));
+
+        if (reqCoupon.getDiscountType() != null) {
+            currentCoupon.setDiscountType(reqCoupon.getDiscountType());
+        }
+        if (reqCoupon.getDiscountValue() != null) {
+            currentCoupon.setDiscountValue(reqCoupon.getDiscountValue());
+        }
+        if (reqCoupon.getMinOrderAmount() != null) {
+            currentCoupon.setMinOrderAmount(reqCoupon.getMinOrderAmount());
+        }
+        if (reqCoupon.getUsageLimit() != null) {
+            currentCoupon.setUsageLimit(reqCoupon.getUsageLimit());
+        }
+        if (reqCoupon.getStartDate() != null) {
+            currentCoupon.setStartDate(reqCoupon.getStartDate());
+        }
+        if (reqCoupon.getEndDate() != null) {
+            currentCoupon.setEndDate(reqCoupon.getEndDate());
+        }
+        if (reqCoupon.getStatus() != null) {
+            currentCoupon.setStatus(reqCoupon.getStatus());
+        }
+
+        Coupon updated = this.couponRepository.save(currentCoupon);
+        return this.mapToDTO(updated);
+    }
+
+    // Xóa mã giảm giá theo code
+    @Transactional
+    public void deleteCoupon(String code) {
+        Coupon coupon = this.couponRepository.findByCodeIgnoreCase(code.trim())
+                .orElseThrow(() -> new RuntimeException("Mã giảm giá không tồn tại"));
+        this.couponRepository.delete(coupon);
+    }
+
+    // Kiểm tra điều kiện và áp dụng mã giảm giá vào giỏ hàng
+    public CouponDTO applyCouponToCart(String code, BigDecimal sumAmount) {
         if (code == null || code.isBlank()) {
-            throw new IllegalArgumentException("Mã giảm giá không được để trống");
+            throw new RuntimeException("Vui lòng nhập mã giảm giá");
         }
         if (sumAmount == null || sumAmount.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new IllegalArgumentException("Tổng tiền giỏ hàng phải lớn hơn 0!");
+            throw new RuntimeException("Tổng tiền đơn hàng không hợp lệ");
         }
 
-        String normalizedCode = code.toUpperCase().trim();
-        Coupon coupon = couponRepository.findByCodeIgnoreCase(normalizedCode)
-                .orElseThrow(() -> new IllegalArgumentException("Mã giảm giá không tồn tại"));
+        Coupon coupon = this.couponRepository.findByCodeIgnoreCase(code.trim())
+                .orElseThrow(() -> new RuntimeException("Mã giảm giá không tồn tại"));
 
         if (!Boolean.TRUE.equals(coupon.getStatus())) {
-            throw new IllegalArgumentException("Mã giảm giá đang bị tắt");
+            throw new RuntimeException("Mã giảm giá đã bị khóa");
         }
 
         LocalDateTime now = LocalDateTime.now();
         if (coupon.getStartDate() != null && now.isBefore(coupon.getStartDate())) {
-            throw new IllegalArgumentException("Mã giảm giá chưa đến ngày áp dụng");
+            throw new RuntimeException("Mã giảm giá chưa đến ngày áp dụng");
         }
         if (coupon.getEndDate() != null && now.isAfter(coupon.getEndDate())) {
-            throw new IllegalArgumentException("Mã giảm giá đã hết hạn!");
+            throw new RuntimeException("Mã giảm giá đã hết hạn");
         }
-
-        BigDecimal minOrder = coupon.getMinOrderAmount() != null ? coupon.getMinOrderAmount() : BigDecimal.ZERO;
-        if (sumAmount.compareTo(minOrder) < 0) {
-            throw new IllegalArgumentException("Đơn hàng chưa đạt giá trị tối thiểu để áp dụng mã");
+        if (coupon.getMinOrderAmount() != null && sumAmount.compareTo(coupon.getMinOrderAmount()) < 0) {
+            throw new RuntimeException("Đơn hàng chưa đạt giá trị tối thiểu");
         }
-
-        if (coupon.getUsageLimit() != null && coupon.getCouponId() != null) {
-            long usedCount = couponRepository.countUsedByCouponId(coupon.getCouponId());
+        if (coupon.getUsageLimit() != null) {
+            long usedCount = this.couponRepository.countUsedByCouponId(coupon.getCouponId());
             if (usedCount >= coupon.getUsageLimit()) {
-                throw new IllegalArgumentException("Mã giảm giá đã hết lượt sử dụng");
+                throw new RuntimeException("Mã giảm giá đã hết lượt sử dụng");
             }
         }
 
-        return mapToDTO(coupon);
+        return this.applyCoupon(coupon, sumAmount);
     }
 
-    // Áp dụng mã giảm giá vào giỏ hàng / đơn hàng
-    public ApplyCouponDTO applyCouponToCart(String code, BigDecimal sumAmount) {
-        CouponDTO validCoupon = validateCode(code, sumAmount);
+    // Tính số tiền được giảm
+    public CouponDTO applyCoupon(Coupon coupon, BigDecimal sumAmount) {
         BigDecimal discountAmount = BigDecimal.ZERO;
-        String type = validCoupon.getDiscountType().toUpperCase().trim();
+        String type = coupon.getDiscountType();
 
-        if ("PERCENT".equals(type)) {
+        if ("PERCENT".equalsIgnoreCase(type)) {
             discountAmount = sumAmount
-                    .multiply(validCoupon.getDiscountValue())
+                    .multiply(coupon.getDiscountValue())
                     .divide(BigDecimal.valueOf(100), 0, RoundingMode.DOWN);
-        } else if ("AMOUNT".equals(type) || "FIXED".equals(type)) {
-            discountAmount = validCoupon.getDiscountValue();
+        } else if ("AMOUNT".equalsIgnoreCase(type) || "FIXED".equalsIgnoreCase(type)) {
+            discountAmount = coupon.getDiscountValue();
         } else {
-            throw new IllegalArgumentException("Loại giảm giá không hợp lệ!");
+            throw new RuntimeException("Loại giảm giá không hợp lệ");
         }
 
         if (discountAmount.compareTo(sumAmount) > 0) {
@@ -117,31 +136,21 @@ public class CouponService {
         }
 
         BigDecimal finalAmount = sumAmount.subtract(discountAmount);
-        if (finalAmount.compareTo(BigDecimal.ZERO) < 0) {
-            finalAmount = BigDecimal.ZERO;
-        }
 
-        ApplyCouponDTO response = new ApplyCouponDTO();
-        response.setCode(validCoupon.getCode());
-        response.setSumAmount(sumAmount);
-        response.setDiscountAmount(discountAmount);
-        response.setFinalAmount(finalAmount);
-
-        return response;
+        CouponDTO dto = this.mapToDTO(coupon);
+        dto.setDiscountAmount(discountAmount);
+        dto.setFinalAmount(finalAmount);
+        return dto;
     }
 
     // Chuyển đổi Entity sang DTO
     public CouponDTO mapToDTO(Coupon coupon) {
         CouponDTO dto = new CouponDTO();
-        dto.setCouponId(coupon.getCouponId());
-        dto.setCode(coupon.getCode() != null ? coupon.getCode().toUpperCase().trim() : null);
+        dto.setCode(coupon.getCode());
         dto.setDiscountType(coupon.getDiscountType());
         dto.setDiscountValue(coupon.getDiscountValue());
         dto.setMinOrderAmount(coupon.getMinOrderAmount());
         dto.setUsageLimit(coupon.getUsageLimit());
-        dto.setStartDate(coupon.getStartDate());
-        dto.setEndDate(coupon.getEndDate());
-        dto.setStatus(coupon.getStatus());
         return dto;
     }
 }
