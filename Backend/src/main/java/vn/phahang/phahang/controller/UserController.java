@@ -35,6 +35,12 @@ public class UserController {
         this.passwordEncoder = passwordEncoder;
     }
 
+    @PostMapping("/users")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<RestResponse<UserResponseDTO>> createUserByAdmin(@Valid @RequestBody User postUser) throws IdInvalidException {
+        return createUserByAdmin(postUser);
+    }
+    
     // 1. Tạo user mới
     @PostMapping("/users/register")
     //@PreAuthorize("hasRole('ADMIN')")
