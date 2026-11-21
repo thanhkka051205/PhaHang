@@ -236,9 +236,6 @@ export const mockService = {
     if (typeof apiClient?.createCoupon === "function") {
       return await apiClient.createCoupon(payload);
     }
-    if (typeof apiClient?.post === "function") {
-      return await apiClient.post("/coupons", payload);
-    }
     throw new Error("Lỗi tạo Coupon");
   },
 

@@ -350,4 +350,16 @@ export const apiClient = {
       };
     }
   },
+
+  async createCoupon(couponData) {
+    return (
+      await request("/coupons"),
+      {
+        method: "POST",
+        body: couponData,
+        requireAuth: true,
+        scope: "admin",
+      }
+    );
+  },
 };
