@@ -19,25 +19,22 @@ public class AddressController {
     private final UserRepository userRepository;
 
     // Constructor injection
-    public AddressController(
-            AddressService addressService,
-            UserRepository userRepository) {
+    public AddressController(AddressService addressService, UserRepository userRepository) {
         this.addressService = addressService;
         this.userRepository = userRepository;
     }
 
-    // API 14: Lấy tất cả địa chỉ
+    // API: Lấy tất cả địa chỉ
     // GET /api/addresses
     @GetMapping
     public ResponseEntity<List<AddressResponseDTO>> getAllAddresses() {
-
         List<AddressResponseDTO> result = addressService.getAllAddresses().stream()
             .map(addressService::convertToDTO)
             .toList();
         return ResponseEntity.ok(result);
     }
 
-    // API 15: Lấy địa chỉ theo ID
+    // API: Lấy địa chỉ theo ID
     // GET /api/addresses/{id}
     @GetMapping("/{id}")
     public ResponseEntity<AddressResponseDTO> getAddressById(@PathVariable Integer id) {
@@ -47,7 +44,7 @@ public class AddressController {
             .orElse(ResponseEntity.notFound().build());
     }
 
-    // API 16: Thêm địa chỉ mới
+    // API: Thêm địa chỉ mới
     // POST /api/addresses
     @PostMapping
     public ResponseEntity<AddressResponseDTO> createAddress(@RequestBody Address address) {
@@ -56,7 +53,7 @@ public class AddressController {
             addressService.convertToDTO(savedAddress));
     }
 
-    // API 17: Cập nhật địa chỉ
+    // API: Cập nhật địa chỉ
     // PUT /api/addresses/{id}
     @PutMapping("/{id}")
     public ResponseEntity<AddressResponseDTO> updateAddress(
@@ -83,7 +80,7 @@ public class AddressController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // API 18: Xóa địa chỉ
+    // API: Xóa địa chỉ
     // DELETE /api/addresses/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAddress(
@@ -97,20 +94,18 @@ public class AddressController {
         return ResponseEntity.noContent().build();
     }
 
-    // API 19: Lấy danh sách địa chỉ theo người dùng
+    // API: Lấy danh sách địa chỉ theo người dùng
     // GET /api/addresses/user/{userId}
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<AddressResponseDTO>> getAddressesByUserId(
-            @PathVariable Integer userId) {
+    public ResponseEntity<List<AddressResponseDTO>> getAddressesByUserId(@PathVariable Integer userId) {
         // Kiểm tra người dùng có tồn tại không
         if (userRepository.findById(userId).isEmpty()) {
             return ResponseEntity.notFound().build();
         }
         // Lấy danh sách địa chỉ
-        List<AddressResponseDTO> result =
-                addressService.getAddressesByUserId(userId).stream()
-                        .map(addressService::convertToDTO)
-                        .toList();
+        List<AddressResponseDTO> result = addressService.getAddressesByUserId(userId).stream()
+            .map(addressService::convertToDTO)
+            .toList();
         return ResponseEntity.ok(result);
     }
 }

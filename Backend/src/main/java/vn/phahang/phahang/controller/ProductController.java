@@ -23,7 +23,7 @@ public class ProductController {
     }
 
     // API: Lấy danh sách sản phẩm có phân trang và lọc
-    // GET /api/products?page=0&size=12&sort=asc
+    // GET /api/products?page=0&size=12&sort=newest
     @GetMapping
     public ResponseEntity<Page<ProductResponseDTO>> getAllProducts(
             @RequestParam(required = false) String keyword,
@@ -33,12 +33,16 @@ public class ProductController {
             @RequestParam(required = false) String color,
             @RequestParam(required = false) BigDecimal minPrice,
             @RequestParam(required = false) BigDecimal maxPrice,
-            @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "12") int size,
-            @RequestParam(defaultValue = "asc") String sort) {
+            @RequestParam(required = false) Integer page,
+            @RequestParam(required = false) Integer size,
+            @RequestParam(required = false) Integer current,
+            @RequestParam(required = false) Integer pageSize,
+            @RequestParam(defaultValue = "newest") String sort) {
+        int pageNumber = page != null ? page : (current != null ? Math.max(0, current - 1) : 0);
+        int pageLimit = size != null ? size : (pageSize != null ? pageSize : 12);
         Page<ProductResponseDTO> result = productService.getProducts(
                 keyword, brand, categoryId, spec, color,
-                minPrice, maxPrice, page, size, sort);
+                minPrice, maxPrice, pageNumber, pageLimit, sort);
         return ResponseEntity.ok(result);
     }
 

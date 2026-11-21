@@ -42,6 +42,7 @@ public class PaymentService {
         responseDTO.setPaymentMethod(savePayment.getPaymentMethod());
         responseDTO.setAmount(savePayment.getAmount());
         responseDTO.setStatus(savePayment.getStatus());
+        responseDTO.setTransactionCode(savePayment.getTransactionCode());
         responseDTO.setPaidAt(savePayment.getPaidAt());
 
         return responseDTO;

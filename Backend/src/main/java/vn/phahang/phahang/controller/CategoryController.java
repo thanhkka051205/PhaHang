@@ -24,10 +24,9 @@ public class CategoryController {
     // GET /api/categories
     @GetMapping
     public ResponseEntity<List<CategoryResponseDTO>> getAllCategories() {
-        List<CategoryResponseDTO> result =
-                categoryService.getAllCategories().stream()
-                        .map(categoryService::convertToDTO)
-                        .toList();
+        List<CategoryResponseDTO> result = categoryService.getAllCategories().stream()
+            .map(categoryService::convertToDTO)
+            .toList();
         return ResponseEntity.ok(result);
     }
 

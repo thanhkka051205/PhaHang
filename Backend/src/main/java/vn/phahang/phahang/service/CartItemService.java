@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import vn.phahang.phahang.domain.CartItem;
 import vn.phahang.phahang.domain.ProductImage;
@@ -38,8 +39,7 @@ public class CartItemService {
     @Transactional(readOnly = true)
     public CartResponseDTO getCart(String email) {
         User user = getUserByEmail(email);
-        List<CartItem> cartItems =
-                cartItemRepository.findByUser_UserId(user.getUserId());
+        List<CartItem> cartItems =cartItemRepository.findByUser_UserId(user.getUserId());
         List<CartItemResponseDTO> items = new ArrayList<>();
         BigDecimal totalAmount = BigDecimal.ZERO;
         for (CartItem item : cartItems) {
@@ -49,7 +49,9 @@ public class CartItemService {
         }
         CartResponseDTO response = new CartResponseDTO();
         response.setItems(items);
-        response.setTotalItems(items.size());
+        response.setTotalItems(items.stream()
+                .mapToInt(item -> item.getQuantity() != null ? item.getQuantity() : 0)
+                .sum());
         response.setTotalAmount(totalAmount);
         return response;
     }
@@ -106,6 +108,9 @@ public class CartItemService {
                 .map(item -> {
                     Integer quantity = request.getQuantity();
                     Integer stockQty = item.getProductVariant().getStockQty();
+                    if (!Boolean.TRUE.equals(item.getProductVariant().getProduct().getIsVisible())) {
+                        throw new RuntimeException("Sản phẩm hiện không được kinh doanh");
+                    }
                     if (quantity == null || quantity < 1) {
                         throw new RuntimeException(
                                 "Số lượng phải lớn hơn hoặc bằng 1");
@@ -123,28 +128,21 @@ public class CartItemService {
     // Xóa một sản phẩm khỏi giỏ hàng
     @Transactional
     public boolean deleteCartItem(String email, Integer cartItemId) {
-
         User user = getUserByEmail(email);
-
         Optional<CartItem> item =
                 cartItemRepository.findByCartItemIdAndUser_UserId(
                         cartItemId, user.getUserId());
-
         if (item.isEmpty()) {
             return false;
         }
-
         cartItemRepository.delete(item.get());
-
         return true;
     }
 
     // Xóa toàn bộ giỏ hàng
     @Transactional
     public void clearCart(String email) {
-
         User user = getUserByEmail(email);
-
         cartItemRepository.deleteByUser_UserId(user.getUserId());
     }
 
@@ -153,37 +151,54 @@ public class CartItemService {
     public CartItemResponseDTO convertToDTO(CartItem item) {
         ProductVariant variant = item.getProductVariant();
         CartItemResponseDTO dto = new CartItemResponseDTO();
+        dto.setId(item.getCartItemId());
         dto.setCartItemId(item.getCartItemId());
         dto.setVariantId(variant.getVariantId());
         dto.setProductId(variant.getProduct().getProductId());
         dto.setProductName(variant.getProduct().getName());
         dto.setSpec(variant.getSpec());
         dto.setColor(variant.getColor());
+        dto.setVariantSpec(variant.getSpec());
+        dto.setVariantColor(variant.getColor());
         dto.setPrice(variant.getPrice());
+        dto.setListPrice(variant.getPrice());
         dto.setQuantity(item.getQuantity());
         // Tính thành tiền của một dòng sản phẩm
-        dto.setSubtotal(
-                variant.getPrice().multiply(
-                        BigDecimal.valueOf(item.getQuantity())));
+        dto.setSubtotal(variant.getPrice().multiply( BigDecimal.valueOf(item.getQuantity())));
         dto.setStockQty(variant.getStockQty());
         dto.setIsVisible(variant.getProduct().getIsVisible());
         // Lấy ảnh đầu tiên của sản phẩm
         List<ProductImage> images =
                 imageRepository.findByProduct_ProductIdOrderBySortOrderAsc(
                         variant.getProduct().getProductId());
-
         if (!images.isEmpty()) {
-            dto.setImage(images.get(0).getImagePath());
+            String imagePath = toPublicImageUrl(images.get(0).getImagePath());
+            dto.setImage(imagePath);
+            dto.setThumbnail(imagePath);
         }
         return dto;
     }
 
+    private String toPublicImageUrl(String imagePath) {
+        if (imagePath == null || imagePath.isBlank()) {
+            return imagePath;
+        }
+        if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+            return imagePath;
+        }
+        try {
+            String path = imagePath.startsWith("/") ? imagePath : "/" + imagePath;
+            return ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path(path)
+                    .toUriString();
+        } catch (IllegalStateException e) {
+            return imagePath;
+        }
+    }
+
     // Tìm người dùng thông qua email trong JWT
     private User getUserByEmail(String email) {
-        User user = userRepository.findByEmail(email).orElse(null);
-        if (user == null) {
-            throw new RuntimeException("Không tìm thấy người dùng");
-        }
-        return user;
-    }
+    return userRepository.findByEmail(email)
+    .orElseThrow(() -> new RuntimeException("Không tìm thấy người dùng"));
+}
 }

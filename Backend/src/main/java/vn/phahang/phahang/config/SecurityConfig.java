@@ -6,6 +6,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Value; 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer; 
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -61,10 +62,11 @@ public class SecurityConfig {
                 //Đường dẫn công khai
                 .requestMatchers("/", "/api/users", "/api/auth/login", "/api/auth/register", "/api/products/**").permitAll()
 
+                // Cho phép mọi người xem ảnh sản phẩm
+                .requestMatchers(HttpMethod.GET, "/uploads/**").permitAll()
                 //Đường dẫn riêng tư
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
                 .requestMatchers("/api/order/**").permitAll()
-                .requestMatchers("/api/auth/**", "/api/coupons/**").permitAll()
 
                 //Bắt buộc login
                 .anyRequest().authenticated()

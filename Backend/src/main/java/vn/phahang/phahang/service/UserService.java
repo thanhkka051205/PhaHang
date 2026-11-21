@@ -1,21 +1,23 @@
 package vn.phahang.phahang.service;
 
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
+
 import vn.phahang.phahang.domain.User;
+import vn.phahang.phahang.dto.Meta;
 import vn.phahang.phahang.dto.UserResponseDTO;
 import vn.phahang.phahang.repository.UserRepository;
-import java.util.List;
+import vn.phahang.phahang.util.error.IdInvalidException;
+import vn.phahang.phahang.dto.ResultPaginationalDTO;
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
     }
 
     // Tạo mới người dùng
@@ -40,26 +42,65 @@ public class UserService {
     }
 
     // Lấy tất cả người dùng
-    public List<User> fetchAllUsers() {
-        return this.userRepository.findAll();
+    public ResultPaginationalDTO fetchAllUsers(Pageable pageable){
+        Page<User> pageUser = this.userRepository.findAll(pageable);
+        ResultPaginationalDTO rs = new ResultPaginationalDTO();
+        Meta mt = new Meta();
+
+        mt.setPage(pageUser.getNumber() + 1);
+        mt.setPageSize(pageUser.getSize());
+
+        mt.setPages(pageUser.getTotalPages());
+        mt.setTotal(pageUser.getTotalElements());
+
+        rs.setMeta(mt);
+        rs.setResult(pageUser.getContent());
+
+        return rs;
     }
 
     // Cập nhật người dùng
-    public User handleUpdateUser(Integer userId, User reqUser) {
+    public User handleUpdateUser(Integer userId, User reqUser, boolean isAdmin) throws IdInvalidException {
         User currentUser = this.fetchUserById(userId);
         if (currentUser == null) {
-            throw new RuntimeException("User ID " + userId + " không tồn tại trong hệ thống.");
+            throw new IdInvalidException("User ID " + userId + " không tồn tại trong hệ thống.");
         }
 
-        currentUser.setPhone(reqUser.getPhone());
-        currentUser.setFullName(reqUser.getFullName());
-        currentUser.setStatus(reqUser.getStatus());
-        currentUser.setPassword(this.passwordEncoder.encode(reqUser.getPassword()));
-        currentUser.setRole(reqUser.getRole().trim().toUpperCase());
+        // Kiểm tra Email mới có trùng không
+        if (reqUser.getEmail() != null && !reqUser.getEmail().equals(currentUser.getEmail())) {
+            if (userRepository.existsByEmail(reqUser.getEmail())) {
+                throw new IdInvalidException("Email đã tồn tại: " + reqUser.getEmail());
+            }
+            currentUser.setEmail(reqUser.getEmail());
+        }
+
+        // Kiểm tra Số điện thoại mới có trùng không
+        if (reqUser.getPhone() != null && !reqUser.getPhone().equals(currentUser.getPhone())) {
+            if (userRepository.existsByPhone(reqUser.getPhone())) {
+                throw new IdInvalidException("Số điện thoại đã tồn tại: " + reqUser.getPhone());
+            }
+            currentUser.setPhone(reqUser.getPhone());
+        }
+
+        if (reqUser.getFullName() != null) {
+            currentUser.setFullName(reqUser.getFullName());
+        }
+        if (reqUser.getPassword() != null && !reqUser.getPassword().isEmpty()) {
+            currentUser.setPassword(reqUser.getPassword());
+        }
+
+        // Chỉ ADMIN mới được đổi Role và Status
+        if (isAdmin) {
+            if (reqUser.getRole() != null && !reqUser.getRole().isBlank()) {
+                currentUser.setRole(reqUser.getRole().trim().toUpperCase());
+            }
+            if (reqUser.getStatus() != null) {
+                currentUser.setStatus(reqUser.getStatus());
+            }
+        }
 
         return this.userRepository.save(currentUser);
     }
-
 
 
     public User handleGetUserByUsername(String username) {
@@ -68,11 +109,15 @@ public class UserService {
 
     public UserResponseDTO convertToDTO(User user) {
         if (user == null) return null;
-        
-        UserResponseDTO dto = new UserResponseDTO();
-        dto.setFullName(user.getFullName());
-        dto.setEmail(user.getEmail());
-        dto.setPhone(user.getPhone());
-        return dto;
+        return new UserResponseDTO(
+            user.getUserId(),
+            user.getEmail(),//Dung email lam username login
+            user.getFullName(),
+            user.getEmail(),
+            user.getPhone(),
+            user.getRole(),
+            user.getStatus(),
+            user.getCreatedAt()
+        );
     }
 }

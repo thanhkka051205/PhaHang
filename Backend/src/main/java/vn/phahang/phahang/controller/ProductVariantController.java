@@ -19,9 +19,7 @@ public class ProductVariantController {
     private final ProductVariantService variantService;
     private final ProductRepository productRepository;
 
-    public ProductVariantController(
-            ProductVariantService variantService,
-            ProductRepository productRepository) {
+    public ProductVariantController(ProductVariantService variantService, ProductRepository productRepository) {
         this.variantService = variantService;
         this.productRepository = productRepository;
     }

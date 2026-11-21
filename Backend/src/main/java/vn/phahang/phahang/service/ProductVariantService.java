@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import vn.phahang.phahang.domain.Product;
 import vn.phahang.phahang.domain.ProductVariant;
@@ -34,6 +35,7 @@ public class ProductVariantService {
         return variantRepository.findByProduct_ProductId(productId);
     }
     // Thêm phiên bản
+    @Transactional
     public ProductVariant createVariant(ProductVariantRequestDTO request) {
         Product product = productRepository.findById(request.getProductId())
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm"));
@@ -46,6 +48,7 @@ public class ProductVariantService {
         return variantRepository.save(variant);
     }
     // Cập nhật phiên bản
+    @Transactional
     public Optional<ProductVariant> updateVariant(Integer id, ProductVariantRequestDTO request) {
         return variantRepository.findById(id).map(variant -> {
             Product product = productRepository.findById(request.getProductId())
@@ -59,18 +62,23 @@ public class ProductVariantService {
         });
     }
     // Xóa phiên bản
+    @Transactional
     public void deleteVariant(Integer id) {
         variantRepository.deleteById(id);
     }
     // Chuyển Entity sang DTO
+    @Transactional(readOnly = true)
     public ProductVariantResponseDTO convertToDTO(ProductVariant variant) {
         ProductVariantResponseDTO dto = new ProductVariantResponseDTO();
+        dto.setId(variant.getVariantId());
         dto.setVariantId(variant.getVariantId());
         dto.setProductId(variant.getProduct().getProductId());
         dto.setProductName(variant.getProduct().getName());
+        dto.setName(variant.getSpec());
         dto.setSpec(variant.getSpec());
         dto.setColor(variant.getColor());
         dto.setPrice(variant.getPrice());
+        dto.setListPrice(variant.getPrice());
         dto.setStockQty(variant.getStockQty());
         return dto;
     }

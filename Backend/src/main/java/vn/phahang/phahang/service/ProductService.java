@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,7 +58,7 @@ public class ProductService {
     // Thêm sản phẩm
     @Transactional
     public Product createProduct(ProductRequestDTO request) {
-        Category category = categoryRepository.findById(request.getCategoryId())
+        Category category = categoryRepository.findById(request.resolveCategoryId())
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy danh mục"));
         Product product = new Product();
         product.setCategory(category);
@@ -74,7 +75,7 @@ public class ProductService {
     @Transactional
     public Optional<Product> updateProduct(Integer id, ProductRequestDTO request) {
         return productRepository.findById(id).map(product -> {
-            Category category = categoryRepository.findById(request.getCategoryId())
+            Category category = categoryRepository.findById(request.resolveCategoryId())
                     .orElseThrow(() -> new RuntimeException("Không tìm thấy danh mục"));
             product.setCategory(category);
             product.setName(request.getName());
@@ -95,10 +96,10 @@ public class ProductService {
     // Xóa sản phẩm theo ID
     @Transactional
     public void deleteProduct(Integer id) {
-        if (!productRepository.existsById(id)) {
-            throw new RuntimeException("Không tìm thấy sản phẩm");
-        }
-        productRepository.deleteById(id);
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy sản phẩm"));
+        product.setIsVisible(false);
+        productRepository.save(product);
     }
 
     // Lấy danh sách sản phẩm theo ID danh mục
@@ -154,8 +155,9 @@ public class ProductService {
         sortDirection = sortDirection == null
                 ? "asc"
                 : sortDirection.trim().toLowerCase();
-        if (!sortDirection.equals("asc") && !sortDirection.equals("desc")) {
-            throw new IllegalArgumentException("Chiều sắp xếp chỉ nhận asc hoặc desc");
+        if (!sortDirection.equals("asc") && !sortDirection.equals("desc")
+                && !sortDirection.equals("newest")) {
+            throw new IllegalArgumentException("Chiều sắp xếp không hợp lệ");
         }
         // Kiểm tra ID danh mục
         if (categoryId != null && categoryId <= 0) {
@@ -206,27 +208,42 @@ public class ProductService {
     // Chuyển Entity sang DTO danh sách sản phẩm
     public ProductResponseDTO convertToDTO(Product product) {
         ProductResponseDTO dto = new ProductResponseDTO();
+        dto.setId(product.getProductId());
         dto.setProductId(product.getProductId());
         dto.setName(product.getName());
         dto.setBrand(product.getBrand());
+        dto.setDescription(product.getDescription());
+        dto.setWarrantyMonths(product.getWarrantyMonths());
+        dto.setTrackSerial(product.getTrackSerial());
+        dto.setIsVisible(product.getIsVisible());
         if (product.getCategory() != null) {
             dto.setCategoryId(product.getCategory().getCategoryId());
             dto.setCategoryName(product.getCategory().getName());
         }
-        // Lấy ảnh đầu tiên của sản phẩm
-        List<ProductImage> images = imageRepository.findByProduct_ProductIdOrderBySortOrderAsc(product.getProductId());
+        List<ProductImage> productImages = imageRepository
+                .findByProduct_ProductIdOrderBySortOrderAsc(product.getProductId());
+        List<String> images = productImages.stream()
+                .limit(5)
+                .map(image -> toPublicImageUrl(image.getImagePath()))
+                .toList();
+        dto.setImages(images);
         if (!images.isEmpty()) {
-            dto.setImage(images.get(0).getImagePath());
+            dto.setImage(images.get(0));
+            dto.setImageUrl(images.get(0));
+            dto.setThumbnail(images.get(0));
         }
-        // Lấy danh sách biến thể của sản phẩm
         List<ProductVariant> variants = variantRepository.findByProduct_ProductId(product.getProductId());
-        // Lấy giá thấp nhất của sản phẩm
+        List<ProductVariantResponseDTO> variantDTOs = variants.stream()
+                .map(this::convertVariantToDTO)
+                .toList();
+        dto.setVariants(variantDTOs);
         BigDecimal minPrice = variants.stream()
                 .map(ProductVariant::getPrice)
                 .filter(price -> price != null)
                 .min(BigDecimal::compareTo)
                 .orElse(null);
         dto.setPrice(minPrice);
+        dto.setOriginalPrice(minPrice);
         return dto;
     }
 
@@ -243,31 +260,53 @@ public class ProductService {
             dto.setCategoryName(product.getCategory().getName());
         }
 
-        // Lấy tối đa 5 hình ảnh theo thứ tự sắp xếp
         List<String> images = imageRepository
                 .findByProduct_ProductIdOrderBySortOrderAsc(product.getProductId())
                 .stream()
                 .limit(5)
-                .map(ProductImage::getImagePath)
+                .map(image -> toPublicImageUrl(image.getImagePath()))
                 .toList();
         dto.setImages(images);
 
-        // Lấy danh sách phiên bản sản phẩm
-        List<ProductVariant> variants = variantRepository.findByProduct_ProductId(product.getProductId());
-        List<ProductVariantResponseDTO> variantDTOs = variants.stream()
-                .map(variant -> {
-                    ProductVariantResponseDTO variantDTO = new ProductVariantResponseDTO();
-                    variantDTO.setVariantId(variant.getVariantId());
-                    variantDTO.setProductId(product.getProductId());
-                    variantDTO.setProductName(product.getName());
-                    variantDTO.setSpec(variant.getSpec());
-                    variantDTO.setColor(variant.getColor());
-                    variantDTO.setPrice(variant.getPrice());
-                    variantDTO.setStockQty(variant.getStockQty());
-                    return variantDTO;
-                })
+        List<ProductVariantResponseDTO> variants = variantRepository
+                .findByProduct_ProductId(product.getProductId())
+                .stream()
+                .map(this::convertVariantToDTO)
                 .toList();
-        dto.setVariants(variantDTOs);
+        dto.setVariants(variants);
         return dto;
     }
+
+    private ProductVariantResponseDTO convertVariantToDTO(ProductVariant variant) {
+        ProductVariantResponseDTO dto = new ProductVariantResponseDTO();
+        dto.setId(variant.getVariantId());
+        dto.setVariantId(variant.getVariantId());
+        dto.setProductId(variant.getProduct().getProductId());
+        dto.setProductName(variant.getProduct().getName());
+        dto.setName(variant.getSpec());
+        dto.setSpec(variant.getSpec());
+        dto.setColor(variant.getColor());
+        dto.setPrice(variant.getPrice());
+        dto.setListPrice(variant.getPrice());
+        dto.setStockQty(variant.getStockQty());
+        return dto;
+    }
+
+    private String toPublicImageUrl(String imagePath) {
+        if (imagePath == null || imagePath.isBlank()) {
+            return imagePath;
+        }
+        if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+            return imagePath;
+        }
+        try {
+            String path = imagePath.startsWith("/") ? imagePath : "/" + imagePath;
+            return ServletUriComponentsBuilder.fromCurrentContextPath()
+                    .path(path)
+                    .toUriString();
+        } catch (IllegalStateException e) {
+            return imagePath;
+        }
+    }
+
 }

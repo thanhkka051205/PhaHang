@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Điện Máy Pha Hằng - Siêu Thị Điện Máy, Điện Tử, Gia Dụng Chính Hãng</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/tailwind.css">
+  <script src="/js/vendor/lucide.min.js"></script>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚡</text></svg>">
+</head>
+<body class="bg-[#F8FAFC] text-[#0F172A] font-sans antialiased min-w-[360px]">
+  <!-- Header 2 tầng (UI-01, REQ-002) -->
+  <div id="app-header"></div>
+
+  <!-- Main Content Container -->
+  <main class="edge-container py-5 space-y-6">
+    <!-- Dải danh mục cuộn ngang nhanh trên Mobile (lg:hidden) -->
+    <div id="mobile-category-scroll" class="lg:hidden flex items-center gap-2 overflow-x-auto no-scrollbar scroll-smooth pb-1 -mt-1">
+      <a href="/index.html?category=1" class="quick-mobile-cat inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold shrink-0 shadow-2xs border bg-white text-slate-700 border-slate-200 hover:border-[#DC2626] transition-colors" data-category="1">
+        <i data-lucide="tv" class="w-3.5 h-3.5"></i>
+        <span>Ti vi</span>
+      </a>
+      <a href="/index.html?category=2" class="quick-mobile-cat inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold shrink-0 shadow-2xs border bg-white text-slate-700 border-slate-200 hover:border-[#DC2626] transition-colors" data-category="2">
+        <i data-lucide="wind" class="w-3.5 h-3.5"></i>
+        <span>Điều hòa</span>
+      </a>
+      <a href="/index.html?category=3" class="quick-mobile-cat inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold shrink-0 shadow-2xs border bg-white text-slate-700 border-slate-200 hover:border-[#DC2626] transition-colors" data-category="3">
+        <i data-lucide="snowflake" class="w-3.5 h-3.5"></i>
+        <span>Tủ lạnh</span>
+      </a>
+      <a href="/index.html?category=4" class="quick-mobile-cat inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold shrink-0 shadow-2xs border bg-white text-slate-700 border-slate-200 hover:border-[#DC2626] transition-colors" data-category="4">
+        <i data-lucide="fan" class="w-3.5 h-3.5"></i>
+        <span>Quạt</span>
+      </a>
+      <a href="/index.html?category=5" class="quick-mobile-cat inline-flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold shrink-0 shadow-2xs border bg-white text-slate-700 border-slate-200 hover:border-[#DC2626] transition-colors" data-category="5">
+        <i data-lucide="utensils-crossed" class="w-3.5 h-3.5"></i>
+        <span>Nồi cơm</span>
+      </a>
+    </div>
+
+    <!-- Nút mở Drawer Bộ lọc trên Mobile -->
+    <div class="flex lg:hidden items-center justify-between bg-white p-3 rounded-xl border border-slate-200 shadow-xs">
+      <div class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+        <i data-lucide="sliders-horizontal" class="w-4 h-4 text-[#DC2626]"></i>
+        <span>Bộ lọc & Tìm kiếm</span>
+      </div>
+      <button
+        type="button"
+        id="btn-mobile-filter-open"
+        class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#DC2626] text-white font-bold text-xs shadow-xs cursor-pointer"
+      >
+        <i data-lucide="filter" class="w-3.5 h-3.5"></i>
+        <span>Lọc sản phẩm</span>
+      </button>
+    </div>
+
+    <!-- BỐ CỤC 2 CỘT (Sidebar Trái 260px + Lưới sản phẩm Phải theo Hình 11) -->
+    <div id="product-section" class="scroll-mt-24 flex flex-col lg:flex-row gap-6 items-start">
+      <!-- CỘT 1: SIDEBAR BỘ LỌC (Desktop Sidebar 260px) -->
+      <aside class="hidden lg:block w-[260px] shrink-0 bg-white rounded-2xl border border-slate-200 p-5 shadow-xs sticky top-24">
+        <div class="flex items-center justify-between pb-3.5 border-b border-slate-100 mb-4">
+          <div class="flex items-center gap-2 font-black text-slate-900 text-sm">
+            <i data-lucide="sliders-horizontal" class="w-4 h-4 text-[#DC2626]"></i>
+            <span>Bộ Lọc Sản Phẩm</span>
+          </div>
+          <button
+            type="button"
+            id="btn-desktop-reset-filter"
+            class="text-[11px] text-[#DC2626] hover:underline font-bold flex items-center gap-1 cursor-pointer"
+          >
+            <i data-lucide="rotate-ccw" class="w-3 h-3"></i>
+            <span>Thiết lập lại</span>
+          </button>
+        </div>
+
+        <form id="filter-form-desktop" class="space-y-4 text-xs">
+          <!-- BƯỚC 1: Ngành hàng -->
+          <div class="space-y-1.5">
+            <label class="font-bold text-slate-800 block text-xs flex items-center justify-between">
+              <span class="flex items-center gap-1.5">
+                <span class="w-4 h-4 rounded-full bg-red-100 text-[#DC2626] text-[10px] flex items-center justify-center font-bold">1</span>
+                <span>Ngành Hàng</span>
+              </span>
+            </label>
+            <select id="filter-category" class="w-full h-9 rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-semibold focus:border-[#DC2626] outline-hidden">
+              <option value="">Tất cả ngành hàng</option>
+              <option value="1">Ti vi Smart 4K & OLED</option>
+              <option value="2">Điều hòa Inverter</option>
+              <option value="3">Tủ lạnh & Side-by-side</option>
+              <option value="4">Quạt làm mát</option>
+              <option value="5">Nồi cơm điện & Cao tần</option>
+            </select>
+          </div>
+
+          <!-- BƯỚC 2: Hãng sản xuất -->
+          <div class="space-y-1.5">
+            <label class="font-bold text-slate-800 block text-xs flex items-center gap-1.5">
+              <span class="w-4 h-4 rounded-full bg-red-100 text-[#DC2626] text-[10px] flex items-center justify-center font-bold">2</span>
+              <span>Thương Hiệu</span>
+            </label>
+            <select id="filter-brand" class="w-full h-9 rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-semibold focus:border-[#DC2626] outline-hidden">
+              <option value="">Tất cả thương hiệu</option>
+              <option value="Sony">Sony</option>
+              <option value="Samsung">Samsung</option>
+              <option value="LG">LG</option>
+              <option value="Daikin">Daikin</option>
+              <option value="Panasonic">Panasonic</option>
+              <option value="Casper">Casper</option>
+              <option value="Aqua">Aqua</option>
+              <option value="Toshiba">Toshiba</option>
+              <option value="Senko">Senko</option>
+              <option value="Cuckoo">Cuckoo</option>
+            </select>
+          </div>
+
+          <!-- BƯỚC 3: Mức giá -->
+          <div class="space-y-1.5">
+            <label class="font-bold text-slate-800 block text-xs flex items-center gap-1.5">
+              <span class="w-4 h-4 rounded-full bg-red-100 text-[#DC2626] text-[10px] flex items-center justify-center font-bold">3</span>
+              <span>Khoảng Giá</span>
+            </label>
+            <select id="filter-price" class="w-full h-9 rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-semibold focus:border-[#DC2626] outline-hidden">
+              <option value="">Tất cả mức giá</option>
+              <option value="0-2000000">Dưới 2 triệu</option>
+              <option value="2000000-5000000">Từ 2 - 5 triệu</option>
+              <option value="5000000-10000000">Từ 5 - 10 triệu</option>
+              <option value="10000000-999999999">Trên 10 triệu</option>
+            </select>
+          </div>
+
+          <!-- BƯỚC 4: Sắp xếp -->
+          <div class="space-y-1.5">
+            <label class="font-bold text-slate-800 block text-xs flex items-center gap-1.5">
+              <span class="w-4 h-4 rounded-full bg-red-100 text-[#DC2626] text-[10px] flex items-center justify-center font-bold">4</span>
+              <span>Sắp Xếp</span>
+            </label>
+            <select id="filter-sort" class="w-full h-9 rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-semibold focus:border-[#DC2626] outline-hidden">
+              <option value="newest">Mới nhất</option>
+              <option value="price_asc">Giá: Thấp đến cao</option>
+              <option value="price_desc">Giá: Cao đến thấp</option>
+              <option value="name_asc">Tên sản phẩm A-Z</option>
+            </select>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full h-10 rounded-xl bg-[#DC2626] hover:bg-[#B91C1C] text-white font-bold text-xs shadow-xs transition-colors cursor-pointer mt-2"
+          >
+            Áp Dụng Bộ Lọc
+          </button>
+        </form>
+      </aside>
+
+      <!-- CỘT 2: KHU VỰC HIỂN THỊ SẢN PHẨM -->
+      <section class="flex-1 min-w-0 w-full">
+        <!-- Tiêu đề & Đếm số sản phẩm khi lọc -->
+        <div id="filter-header" class="hidden flex items-center justify-between pb-3 mb-3 border-b border-slate-200">
+          <div class="flex items-center gap-2">
+            <h2 id="filter-title" class="text-base sm:text-lg font-black text-slate-900 tracking-tight">
+              Kết Quả Tìm Kiếm & Lọc
+            </h2>
+            <span id="product-count-badge" class="px-2 py-0.5 rounded-full text-xs font-bold bg-red-50 text-[#DC2626] border border-red-200">
+              0 sản phẩm
+            </span>
+          </div>
+          <a href="/index.html" class="text-xs font-bold text-[#DC2626] hover:underline flex items-center gap-1">
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+            <span>Xem tất cả</span>
+          </a>
+        </div>
+
+        <!-- Dải thẻ lọc đang hoạt động (Active Filter Chips) -->
+        <div id="active-chips-container" class="hidden flex flex-wrap items-center gap-2 mb-4"></div>
+
+        <!-- Khung hiển thị các nhóm ngành hàng (Grouped View khi ở trang chủ mặc định) -->
+        <div id="grouped-categories-container" class="space-y-8"></div>
+
+        <!-- Lưới sản phẩm phẳng khi lọc hoặc tìm kiếm -->
+        <div id="flat-product-grid" class="hidden grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4"></div>
+
+        <!-- Trạng thái trống (Không tìm thấy sản phẩm) -->
+        <div id="empty-state" class="hidden text-center py-16 bg-white rounded-2xl border border-slate-200 p-8 shadow-xs">
+          <div class="w-16 h-16 rounded-2xl bg-red-50 text-[#DC2626] flex items-center justify-center mx-auto mb-4 border border-red-100">
+            <i data-lucide="package-open" class="w-8 h-8"></i>
+          </div>
+          <h3 class="text-base font-bold text-slate-900 mb-1">Không tìm thấy sản phẩm phù hợp</h3>
+          <p class="text-xs text-slate-500 max-w-sm mx-auto mb-4">
+            Vui lòng thử xóa bớt điều kiện lọc hoặc nhập từ khóa tìm kiếm khác.
+          </p>
+          <a href="/index.html" class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#DC2626] text-white font-bold text-xs shadow-xs hover:bg-[#B91C1C] transition-colors">
+            <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+            <span>Xem Tất Cả Sản Phẩm</span>
+          </a>
+        </div>
+
+        <!-- Phân trang theo FR-02.5 & UI-10 -->
+        <div id="pagination-container" class="mt-8"></div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Mobile Filter Drawer Modal -->
+  <div id="mobile-filter-drawer" class="hidden fixed inset-0 z-50 flex justify-end bg-slate-900/60 backdrop-blur-xs select-none">
+    <div class="w-full max-w-xs bg-white h-full p-5 overflow-y-auto flex flex-col justify-between shadow-2xl">
+      <div>
+        <div class="flex items-center justify-between pb-3.5 border-b border-slate-100 mb-4">
+          <div class="flex items-center gap-2 font-black text-slate-900 text-sm">
+            <i data-lucide="sliders-horizontal" class="w-4 h-4 text-[#DC2626]"></i>
+            <span>Bộ Lọc Sản Phẩm</span>
+          </div>
+          <button type="button" id="btn-mobile-filter-close" class="p-1.5 rounded-xl hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors cursor-pointer">
+            <i data-lucide="x" class="w-5 h-5"></i>
+          </button>
+        </div>
+
+        <form id="filter-form-mobile" class="space-y-4 text-xs">
+          <div class="space-y-1.5">
+            <label class="font-bold text-slate-800 block text-xs">1. Ngành Hàng</label>
+            <select id="mobile-filter-category" class="w-full h-9 rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-semibold focus:border-[#DC2626] outline-hidden">
+              <option value="">Tất cả ngành hàng</option>
+              <option value="1">Ti vi Smart 4K & OLED</option>
+              <option value="2">Điều hòa Inverter</option>
+              <option value="3">Tủ lạnh & Side-by-side</option>
+              <option value="4">Quạt làm mát</option>
+              <option value="5">Nồi cơm điện & Cao tần</option>
+            </select>
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="font-bold text-slate-800 block text-xs">2. Thương Hiệu</label>
+            <select id="mobile-filter-brand" class="w-full h-9 rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-semibold focus:border-[#DC2626] outline-hidden">
+              <option value="">Tất cả thương hiệu</option>
+              <option value="Sony">Sony</option>
+              <option value="Samsung">Samsung</option>
+              <option value="LG">LG</option>
+              <option value="Daikin">Daikin</option>
+              <option value="Panasonic">Panasonic</option>
+              <option value="Casper">Casper</option>
+              <option value="Aqua">Aqua</option>
+              <option value="Toshiba">Toshiba</option>
+              <option value="Senko">Senko</option>
+              <option value="Cuckoo">Cuckoo</option>
+            </select>
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="font-bold text-slate-800 block text-xs">3. Mức Giá</label>
+            <select id="mobile-filter-price" class="w-full h-9 rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-semibold focus:border-[#DC2626] outline-hidden">
+              <option value="">Tất cả mức giá</option>
+              <option value="0-2000000">Dưới 2 triệu</option>
+              <option value="2000000-5000000">Từ 2 - 5 triệu</option>
+              <option value="5000000-10000000">Từ 5 - 10 triệu</option>
+              <option value="10000000-999999999">Trên 10 triệu</option>
+            </select>
+          </div>
+
+          <div class="space-y-1.5">
+            <label class="font-bold text-slate-800 block text-xs">4. Sắp Xếp</label>
+            <select id="mobile-filter-sort" class="w-full h-9 rounded-xl border border-slate-200 bg-slate-50 px-3 text-xs font-semibold focus:border-[#DC2626] outline-hidden">
+              <option value="newest">Mới nhất</option>
+              <option value="price_asc">Giá: Thấp đến cao</option>
+              <option value="price_desc">Giá: Cao đến thấp</option>
+              <option value="name_asc">Tên sản phẩm A-Z</option>
+            </select>
+          </div>
+
+          <button
+            type="submit"
+            class="w-full h-10 rounded-xl bg-[#DC2626] hover:bg-[#B91C1C] text-white font-bold text-xs shadow-xs transition-colors cursor-pointer mt-4"
+          >
+            Áp Dụng
+          </button>
+        </form>
+      </div>
+
+      <div class="pt-4 border-t border-slate-100">
+        <a href="/index.html" class="block text-center py-2 text-xs font-bold text-slate-500 hover:text-[#DC2626]">
+          Xóa toàn bộ bộ lọc
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div id="app-footer"></div>
+
+  <!-- Script Chính -->
+  <script type="module" src="/js/pages/home.js"></script>
+</body>
+</html>
