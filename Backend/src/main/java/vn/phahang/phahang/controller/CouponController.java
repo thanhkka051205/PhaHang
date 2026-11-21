@@ -33,20 +33,17 @@ public class CouponController {
         this.couponService = couponService;
     }
 
-    // 1. Lấy tất cả mã giảm giá (Khớp với getCoupons ở Frontend)
     @GetMapping
     public ResponseEntity<List<CouponDTO>> getAllCoupons() {
         return ResponseEntity.ok(this.couponService.fetchAllCoupons());
     }
 
-    // 2. Tạo mới Coupon (Khớp với createCoupon ở Frontend)
     @PostMapping
     public ResponseEntity<CouponDTO> createCoupon(@Valid @RequestBody Coupon postCoupon) {
         CouponDTO dto = this.couponService.createCoupon(postCoupon);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
-    // 3. Cập nhật Coupon theo code (Khớp với updateCoupon ở Frontend)
     @PutMapping("/{code}")
     public ResponseEntity<CouponDTO> updateCoupon(
             @PathVariable("code") String code,
@@ -54,14 +51,12 @@ public class CouponController {
         return ResponseEntity.ok(this.couponService.updateCoupon(code, reqCoupon));
     }
 
-    // 4. Xóa Coupon theo code (Khớp với deleteCoupon ở Frontend)
     @DeleteMapping("/{code}")
     public ResponseEntity<Void> deleteCoupon(@PathVariable("code") String code) {
         this.couponService.deleteCoupon(code);
         return ResponseEntity.noContent().build();
     }
 
-    // 5. Áp dụng mã giảm giá (Khớp với applyCoupon ở Frontend)
     @PostMapping("/apply")
     public ResponseEntity<RestResponse<CouponDTO>> applyCoupon(
             @RequestParam("code") String code,
