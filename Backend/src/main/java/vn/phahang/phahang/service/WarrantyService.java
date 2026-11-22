@@ -25,7 +25,6 @@ public class WarrantyService {
     // Tạo mới phiếu bảo hành
     // API = POST /api/warranties
     public WarrantyDTO createWarranty(WarrantyDTO warrantyDTO) {
-        //Lấy orderItem
         OrderItem orderItem = orderItemRepository.findById(warrantyDTO.getOrderItemId())
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy OrderItem"));
 

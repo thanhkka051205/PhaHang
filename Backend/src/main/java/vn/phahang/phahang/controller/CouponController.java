@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
-import vn.phahang.phahang.domain.Coupon;
-import vn.phahang.phahang.domain.RestResponse;
 import vn.phahang.phahang.dto.CouponDTO;
 import vn.phahang.phahang.service.CouponService;
 
@@ -33,42 +32,56 @@ public class CouponController {
         this.couponService = couponService;
     }
 
+    //Lấy danh sách mã giảm giá
+    // API GET /api/coupons
     @GetMapping
     public ResponseEntity<List<CouponDTO>> getAllCoupons() {
-        return ResponseEntity.ok(this.couponService.fetchAllCoupons());
+        return ResponseEntity.ok(this.couponService.getAllCoupons());
     }
 
+    // Tìm mã giảm giá
+    // API GET /api/coupons/{code}
+    @GetMapping("/{code}")
+    public ResponseEntity<CouponDTO> getCouponByCode(@PathVariable("code") String code) {
+        return ResponseEntity.ok(this.couponService.getCouponByCode(code));
+    }
+
+    //Tạo mã giảm giá
+    // API POST /api/coupons
     @PostMapping
-    public ResponseEntity<CouponDTO> createCoupon(@Valid @RequestBody Coupon postCoupon) {
-        CouponDTO dto = this.couponService.createCoupon(postCoupon);
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
+    public ResponseEntity<CouponDTO> createCoupon(@Valid @RequestBody CouponDTO couponDTO) {
+        CouponDTO dto = this.couponService.createCoupon(couponDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(dto);
     }
 
+    // Cập nhật mã giảm giá
+    // API PUT /api/coupons/{code}
     @PutMapping("/{code}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
     public ResponseEntity<CouponDTO> updateCoupon(
             @PathVariable("code") String code,
-            @RequestBody Coupon reqCoupon) {
-        return ResponseEntity.ok(this.couponService.updateCoupon(code, reqCoupon));
+            @RequestBody CouponDTO couponDTO){
+        return ResponseEntity.ok(this.couponService.updateCoupon(code, couponDTO));
     }
 
+    // Xóa mã giảm giá theo code
+    // API DEL /api/coupons/{code}
     @DeleteMapping("/{code}")
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
     public ResponseEntity<Void> deleteCoupon(@PathVariable("code") String code) {
         this.couponService.deleteCoupon(code);
         return ResponseEntity.noContent().build();
     }
 
+    // Áp dụng mã giảm giá
+    // API POST /api/coupons/apply
     @PostMapping("/apply")
-    public ResponseEntity<RestResponse<CouponDTO>> applyCoupon(
+    public ResponseEntity<CouponDTO> applyCoupon(
             @RequestParam("code") String code,
             @RequestParam("sumAmount") BigDecimal sumAmount) {
 
         CouponDTO result = this.couponService.applyCouponToCart(code, sumAmount);
-
-        RestResponse<CouponDTO> res = new RestResponse<>();
-        res.setStatusCode(HttpStatus.OK.value());
-        res.setData(result);
-        res.setMessage("Áp dụng mã giảm giá thành công!");
-
-        return ResponseEntity.ok(res);
+        return ResponseEntity.ok(result);
     }
 }

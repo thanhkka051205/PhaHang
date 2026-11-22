@@ -62,6 +62,7 @@ public class SecurityConfig {
                 // công khai
                 .requestMatchers(
                         "/",
+                        "/error",
                         "/api/auth/login",
                         "/api/auth/register",
                         "/api/auth/refresh",
@@ -93,7 +94,7 @@ public class SecurityConfig {
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
         JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
-        grantedAuthoritiesConverter.setAuthorityPrefix("ROLE_");
+        grantedAuthoritiesConverter.setAuthorityPrefix("");
         grantedAuthoritiesConverter.setAuthoritiesClaimName("thanhkka");
 
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
