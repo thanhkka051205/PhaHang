@@ -76,7 +76,7 @@ public class SecurityConfig {
 
                 // rieng tu
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                .requestMatchers("/api/orders/**", "/api/order/**", "/api/order-items/**", "/api/users/**").authenticated()
+                .requestMatchers("/api/orders/**", "/api/order/**", "/api/order-items/**", "/api/users/**", "/api/payments/**").authenticated()
 
                 .anyRequest().authenticated()
             )
