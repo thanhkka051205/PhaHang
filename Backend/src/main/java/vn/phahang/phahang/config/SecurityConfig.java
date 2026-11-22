@@ -59,7 +59,6 @@ public class SecurityConfig {
             .cors(Customizer.withDefaults())
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                // công khai
                 .requestMatchers(
                         "/",
                         "/error",
@@ -70,13 +69,18 @@ public class SecurityConfig {
                         "/api/products/**",
                         "/api/product-variants/**",
                         "/api/coupons/**",
-                        "/api/warranties",
-                        "/api/warranties/**"
+                        "/api/warranties/lookup"
                 ).permitAll()
 
-                // rieng tu
-                .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                .requestMatchers("/api/orders/**", "/api/order/**", "/api/order-items/**", "/api/users/**", "/api/payments/**").authenticated()
+                .requestMatchers("/api/admin/**").hasAnyAuthority("ADMIN", "ROLE_ADMIN")
+                .requestMatchers(
+                        "/api/orders/**", 
+                        "/api/order/**", 
+                        "/api/order-items/**", 
+                        "/api/users/**", 
+                        "/api/payments/**", 
+                        "/api/warranties/**"
+                ).authenticated()
 
                 .anyRequest().authenticated()
             )

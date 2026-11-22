@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
@@ -30,45 +31,43 @@ public class WarrantyController {
         this.warrantyService = warrantyService;
     }
 
-    // API lấy danh sách
-    // /api/warranties
+    // GET /api/warranties
     @GetMapping
+    @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
     public ResponseEntity<List<WarrantyDTO>> getAllWarranties() {
-        return ResponseEntity.ok(warrantyService.getAllWarranties());
+        return ResponseEntity.ok(this.warrantyService.getAllWarranties());
     }
 
-    // API tạo mới
-    // /api/warranties
+    // GET /api/warranties/lookup?phone=0901000003&serialNo=SN-IPHONE16PRO-8899
+    @GetMapping("/lookup")
+    public ResponseEntity<List<WarrantyDTO>> lookupWarranties(
+            @RequestParam(value = "phone", required = false) String customerPhone,
+            @RequestParam(value = "serialNo", required = false) String serialNo) {
+        return ResponseEntity.ok(this.warrantyService.lookupWarranties(customerPhone, serialNo));
+    }
+
+    // POST /api/warranties
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
     public ResponseEntity<WarrantyDTO> createWarranty(@Valid @RequestBody WarrantyDTO warrantyDTO) {
-        WarrantyDTO createdWarranty = warrantyService.createWarranty(warrantyDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdWarranty);
+        WarrantyDTO created = this.warrantyService.createWarranty(warrantyDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
-    // API tìm kiếm theo ID
-    // /api/warranties/{warrantyId}
-    @GetMapping("/{warrantyId}")
-    public ResponseEntity<WarrantyDTO> getWarrantyById(@PathVariable Integer warrantyId) {
-        WarrantyDTO currentWarranty = warrantyService.getWarrantyById(warrantyId);
-        return ResponseEntity.ok(currentWarranty);
-    }
-
-    // API cập nhật
-    // api/warranties/{warrantyId}
+    // PUT /api/warranties/{warrantyId}
     @PutMapping("/{warrantyId}")
     @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
-    public ResponseEntity<WarrantyDTO> updateWarranty(@PathVariable("warrantyId") Integer warrantyId, @Valid @RequestBody WarrantyDTO warrantyDTO){
-        WarrantyDTO updateWarranty = warrantyService.updateWarranty(warrantyId,warrantyDTO);
-        return ResponseEntity.ok(updateWarranty);
+    public ResponseEntity<WarrantyDTO> updateWarranty(
+            @PathVariable("warrantyId") Integer warrantyId,
+            @Valid @RequestBody WarrantyDTO warrantyDTO) {
+        return ResponseEntity.ok(this.warrantyService.updateWarranty(warrantyId, warrantyDTO));
     }
 
-    // API xoa
-    // api/warranties/{warrantyId}
+    // DELETE /api/warranties/{warrantyId}
     @DeleteMapping("/{warrantyId}")
     @PreAuthorize("hasAnyRole('ADMIN', 'STAFF')")
-    public ResponseEntity<Void> deleteWarranty(@PathVariable("warrantyId") Integer warrantyId){
-        warrantyService.deleteWarranty(warrantyId);
+    public ResponseEntity<Void> deleteWarranty(@PathVariable("warrantyId") Integer warrantyId) {
+        this.warrantyService.deleteWarranty(warrantyId);
         return ResponseEntity.noContent().build();
     }
 }

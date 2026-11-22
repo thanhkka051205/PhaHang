@@ -27,4 +27,10 @@ public class Warranty {
 
     @Column(name = "status", length = 50, nullable = false)
     private String status = "active";
+
+    @Column(name = "phone")
+    private String customerPhone;
+
+    @Column(name = "serial_no")
+    private String serialNo;
 }
