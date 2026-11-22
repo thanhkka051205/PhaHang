@@ -11,5 +11,5 @@ import vn.phahang.phahang.domain.OrderItem;
 public interface OrderItemRepository extends JpaRepository<OrderItem, Integer> {
     // Lấy danh sách chi tiết sản phẩm của một đơn hàng
     List<OrderItem> findByOrder_OrderId(Integer orderId);
-
+    
 }

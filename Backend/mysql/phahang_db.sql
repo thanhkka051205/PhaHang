@@ -1,8 +1,8 @@
 CREATE DATABASE IF NOT EXISTS phahang_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE phahang_db;
 
--- 1. Bảng USERS (Tài khoản người dùng)
-CREATE TABLE USERS (
+-- 1. Bảng users (Tài khoản người dùng)
+CREATE TABLE users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
@@ -13,19 +13,19 @@ CREATE TABLE USERS (
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 
--- 2. Bảng ADDRESSES (Địa chỉ nhận hàng)
-CREATE TABLE ADDRESSES (
+-- 2. Bảng addresses (Địa chỉ nhận hàng)
+CREATE TABLE addresses (
     address_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     receiver_name VARCHAR(100) NOT NULL,
     receiver_phone VARCHAR(15) NOT NULL,
     address_detail VARCHAR(255) NOT NULL,
     is_default BOOLEAN NOT NULL DEFAULT FALSE,
-    FOREIGN KEY (user_id) REFERENCES USERS(user_id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- 3. Bảng COUPONS (Mã khuyến mãi)
-CREATE TABLE COUPONS (
+-- 3. Bảng coupons (Mã khuyến mãi)
+CREATE TABLE coupons (
     coupon_id INT AUTO_INCREMENT PRIMARY KEY,
     code VARCHAR(30) NOT NULL UNIQUE,
     discount_type VARCHAR(20) NOT NULL, -- PERCENT hoặc AMOUNT
@@ -37,16 +37,16 @@ CREATE TABLE COUPONS (
     status BOOLEAN NOT NULL DEFAULT TRUE
 ) ENGINE=InnoDB;
 
--- 4. Bảng CATEGORIES (Danh mục sản phẩm 2 cấp)
-CREATE TABLE CATEGORIES (
+-- 4. Bảng categories (Danh mục sản phẩm 2 cấp)
+CREATE TABLE categories (
     category_id INT AUTO_INCREMENT PRIMARY KEY,
     parent_id INT DEFAULT NULL,
     name VARCHAR(100) NOT NULL,
-    FOREIGN KEY (parent_id) REFERENCES CATEGORIES(category_id) ON DELETE SET NULL
+    FOREIGN KEY (parent_id) REFERENCES categories(category_id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
--- 5. Bảng PRODUCTS (Sản phẩm)
-CREATE TABLE PRODUCTS (
+-- 5. Bảng products (Sản phẩm)
+CREATE TABLE products (
     product_id INT AUTO_INCREMENT PRIMARY KEY,
     category_id INT NOT NULL,
     name VARCHAR(150) NOT NULL,
@@ -55,20 +55,20 @@ CREATE TABLE PRODUCTS (
     warranty_months INT NOT NULL DEFAULT 0,
     track_serial BOOLEAN NOT NULL DEFAULT FALSE,
     is_visible BOOLEAN NOT NULL DEFAULT TRUE,
-    FOREIGN KEY (category_id) REFERENCES CATEGORIES(category_id) ON DELETE RESTRICT
+    FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
--- 6. Bảng PRODUCT_IMAGES (Ảnh sản phẩm)
-CREATE TABLE PRODUCT_IMAGES (
+-- 6. Bảng product_images (Ảnh sản phẩm)
+CREATE TABLE product_images (
     image_id INT AUTO_INCREMENT PRIMARY KEY,
     product_id INT NOT NULL,
     image_path VARCHAR(255) NOT NULL,
     sort_order INT NOT NULL DEFAULT 0,
-    FOREIGN KEY (product_id) REFERENCES PRODUCTS(product_id) ON DELETE CASCADE
+    FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- 7. Bảng PRODUCT_VARIANTS (Biến thể sản phẩm & tồn kho)
-CREATE TABLE PRODUCT_VARIANTS (
+-- 7. Bảng product_variants (Biến thể sản phẩm & tồn kho)
+CREATE TABLE product_variants (
     variant_id INT AUTO_INCREMENT PRIMARY KEY,
     product_id INT NOT NULL,
     spec VARCHAR(100),
@@ -76,22 +76,22 @@ CREATE TABLE PRODUCT_VARIANTS (
     price DECIMAL(12, 2) NOT NULL,
     stock_qty INT NOT NULL DEFAULT 0,
     min_stock_alert INT NOT NULL DEFAULT 2,
-    FOREIGN KEY (product_id) REFERENCES PRODUCTS(product_id) ON DELETE CASCADE
+    FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- 8. Bảng CART_ITEMS (Giỏ hàng)
-CREATE TABLE CART_ITEMS (
+-- 8. Bảng cart_items (Giỏ hàng)
+CREATE TABLE cart_items (
     cart_item_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     variant_id INT NOT NULL,
     quantity INT NOT NULL DEFAULT 1,
     CONSTRAINT uq_cart_user_variant UNIQUE (user_id, variant_id),
-    FOREIGN KEY (user_id) REFERENCES USERS(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (variant_id) REFERENCES PRODUCT_VARIANTS(variant_id) ON DELETE CASCADE
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (variant_id) REFERENCES product_variants(variant_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- 9. Bảng ORDERS (Đơn hàng)
-CREATE TABLE ORDERS (
+-- 9. Bảng orders (Đơn hàng)
+CREATE TABLE orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     coupon_id INT DEFAULT NULL,
@@ -102,63 +102,63 @@ CREATE TABLE ORDERS (
     receiver_phone VARCHAR(15) NOT NULL,
     ship_address VARCHAR(255) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES USERS(user_id) ON DELETE RESTRICT,
-    FOREIGN KEY (coupon_id) REFERENCES COUPONS(coupon_id) ON DELETE SET NULL
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE RESTRICT,
+    FOREIGN KEY (coupon_id) REFERENCES coupons(coupon_id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
--- 10. Bảng ORDER_ITEMS (Chi tiết đơn hàng)
-CREATE TABLE ORDER_ITEMS (
+-- 10. Bảng order_items (Chi tiết đơn hàng)
+CREATE TABLE order_items (
     order_item_id INT AUTO_INCREMENT PRIMARY KEY,
     order_id INT NOT NULL,
     variant_id INT NOT NULL,
     quantity INT NOT NULL,
     unit_price DECIMAL(12, 2) NOT NULL,
     serial_no VARCHAR(20) UNIQUE DEFAULT NULL,
-    FOREIGN KEY (order_id) REFERENCES ORDERS(order_id) ON DELETE CASCADE,
-    FOREIGN KEY (variant_id) REFERENCES PRODUCT_VARIANTS(variant_id) ON DELETE RESTRICT
+    FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE,
+    FOREIGN KEY (variant_id) REFERENCES product_variants(variant_id) ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
--- 11. Bảng PAYMENTS (Thanh toán)
-CREATE TABLE PAYMENTS (
+-- 11. Bảng payments (Thanh toán)
+CREATE TABLE payments (
     payment_id INT AUTO_INCREMENT PRIMARY KEY,
     order_id INT NOT NULL,
     method VARCHAR(50) NOT NULL, -- COD hoặc BANK
     amount DECIMAL(12, 2) NOT NULL,
     status VARCHAR(50) NOT NULL DEFAULT 'unpaid', -- Chưa thanh toán hoặc Đã thanh toán
     paid_at TIMESTAMP NULL DEFAULT NULL,
-    FOREIGN KEY (order_id) REFERENCES ORDERS(order_id) ON DELETE CASCADE
+    FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- 12. Bảng WARRANTIES (Bảo hành)
-CREATE TABLE WARRANTIES (
+-- 12. Bảng warranties (Bảo hành)
+CREATE TABLE warranties (
     warranty_id INT AUTO_INCREMENT PRIMARY KEY,
     order_item_id INT NOT NULL UNIQUE,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     status VARCHAR(50) NOT NULL DEFAULT 'active', -- Còn hạn hoặc Hết hạn
-    FOREIGN KEY (order_item_id) REFERENCES ORDER_ITEMS(order_item_id) ON DELETE CASCADE
+    FOREIGN KEY (order_item_id) REFERENCES order_items(order_item_id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 
--- 13. INVENTORY_LOGS (Lịch sử biến động tồn kho)
-CREATE TABLE INVENTORY_LOGS (
+-- 13. Bảng inventory_logs (Lịch sử biến động tồn kho)
+CREATE TABLE inventory_logs (
     log_id INT AUTO_INCREMENT PRIMARY KEY,
     variant_id INT NOT NULL,
     order_id INT DEFAULT NULL,
     change_qty INT NOT NULL, -- số âm: trừ tồn, số dương: cộng tồn / nhập hàng
     reason VARCHAR(100) NOT NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (variant_id) REFERENCES PRODUCT_VARIANTS(variant_id) ON DELETE CASCADE,
-    FOREIGN KEY (order_id) REFERENCES ORDERS(order_id) ON DELETE SET NULL
+    FOREIGN KEY (variant_id) REFERENCES product_variants(variant_id) ON DELETE CASCADE,
+    FOREIGN KEY (order_id) REFERENCES orders(order_id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
 
--- 14. PRODUCT_SERIALS (Lưu vết số seri - hỗ trợ ghi nhận cả seri tự tạo lúc giao hàng)
-CREATE TABLE PRODUCT_SERIALS (
+-- 14. Bảng product_serials (Lưu vết số seri - hỗ trợ ghi nhận cả seri tự tạo lúc giao hàng)
+CREATE TABLE product_serials (
     serial_id INT AUTO_INCREMENT PRIMARY KEY,
     variant_id INT NOT NULL,
     order_item_id INT DEFAULT NULL,
     serial_no VARCHAR(20) NOT NULL UNIQUE,
     status VARCHAR(30) NOT NULL DEFAULT 'SOLD', -- SOLD, IN_STOCK, DEFECTIVE
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (variant_id) REFERENCES PRODUCT_VARIANTS(variant_id) ON DELETE CASCADE,
-    FOREIGN KEY (order_item_id) REFERENCES ORDER_ITEMS(order_item_id) ON DELETE SET NULL
+    FOREIGN KEY (variant_id) REFERENCES product_variants(variant_id) ON DELETE CASCADE,
+    FOREIGN KEY (order_item_id) REFERENCES order_items(order_item_id) ON DELETE SET NULL
 ) ENGINE=InnoDB;
