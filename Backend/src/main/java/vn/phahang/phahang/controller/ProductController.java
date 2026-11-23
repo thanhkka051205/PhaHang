@@ -49,7 +49,7 @@ public class ProductController {
     // API: Lấy sản phẩm theo ID
     // GET /api/products/{id}
     @GetMapping("/{id}")
-    public ResponseEntity<ProductResponseDTO> getProductById(@PathVariable("id") Integer id) {
+    public ResponseEntity<ProductResponseDTO> getProductById(@PathVariable Integer id) {
         return productService.getProductById(id)
                 .map(productService::convertToDTO)
                 .map(ResponseEntity::ok)
@@ -59,7 +59,7 @@ public class ProductController {
     // API: Lấy chi tiết sản phẩm
     // GET /api/products/{id}/detail
     @GetMapping("/{id}/detail")
-    public ResponseEntity<ProductDetailResponseDTO> getProductDetail(@PathVariable("id") Integer id) {
+    public ResponseEntity<ProductDetailResponseDTO> getProductDetail(@PathVariable Integer id) {
         return productService.getProductById(id)
                 .map(productService::convertToDetailDTO)
                 .map(ResponseEntity::ok)
@@ -78,7 +78,7 @@ public class ProductController {
     // PUT /api/products/{id}
     @PutMapping("/{id}")
     public ResponseEntity<?> updateProduct(
-            @PathVariable("id") Integer id,
+            @PathVariable Integer id,
             @Valid @RequestBody ProductRequestDTO request) {
 
         return productService.updateProduct(id, request)
@@ -90,7 +90,7 @@ public class ProductController {
     // API: Xóa sản phẩm
     // DELETE /api/products/{id}
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable("id") Integer id) {
+    public ResponseEntity<Void> deleteProduct(@PathVariable Integer id) {
         if (!productService.existsProduct(id)) {
             return ResponseEntity.notFound().build();
         }

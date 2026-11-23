@@ -35,7 +35,7 @@ public class ProductImageController {
     // API: Lấy ảnh theo ID
     // GET /api/product-images/id/{id}
     @GetMapping("/id/{id}")
-    public ResponseEntity<ProductImageResponseDTO> getImageById(@PathVariable("id")Integer id) {
+    public ResponseEntity<ProductImageResponseDTO> getImageById(@PathVariable Integer id) {
         return imageService.getImageById(id)
                 .map(imageService::convertToDTO)
                 .map(ResponseEntity::ok)
@@ -45,7 +45,7 @@ public class ProductImageController {
     // API: Lấy danh sách ảnh theo sản phẩm
     // GET /api/product-images/product/{productId}
     @GetMapping("/product/{productId}")
-    public ResponseEntity<List<ProductImageResponseDTO>> getImagesByProductId(@PathVariable("productId")Integer productId) {
+    public ResponseEntity<List<ProductImageResponseDTO>> getImagesByProductId(@PathVariable Integer productId) {
         List<ProductImageResponseDTO> images = imageService
                 .getImagesByProductId(productId)
                 .stream()
@@ -91,7 +91,7 @@ public class ProductImageController {
     // API: Cập nhật thông tin ảnh
     // PUT /api/product-images/{id}
     @PutMapping("/{id}")
-    public ResponseEntity<ProductImageResponseDTO> updateImage(@PathVariable("id")Integer id, @Valid @RequestBody ProductImageRequestDTO request) {
+    public ResponseEntity<ProductImageResponseDTO> updateImage(@PathVariable Integer id, @Valid @RequestBody ProductImageRequestDTO request) {
         return imageService.updateImage(id, request)
                 .map(imageService::convertToDTO)
                 .map(ResponseEntity::ok)
@@ -101,7 +101,7 @@ public class ProductImageController {
     // API: Xóa ảnh
     // DELETE /api/product-images/{id}
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteImage(@PathVariable("id")Integer id) {
+    public ResponseEntity<Void> deleteImage(@PathVariable Integer id) {
         if (imageService.getImageById(id).isEmpty()) {
             return ResponseEntity.notFound().build();
         }

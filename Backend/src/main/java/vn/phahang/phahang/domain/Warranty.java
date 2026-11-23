@@ -9,14 +9,13 @@ import java.time.LocalDate;
 @Table(name = "warranties")
 @Data
 public class Warranty {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "warranty_id")
     private Integer warrantyId;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "order_item_id", nullable = false, unique = true)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "order_item_id", nullable = false)
     private OrderItem orderItem;
 
     @Column(name = "start_date", nullable = false)
@@ -25,12 +24,6 @@ public class Warranty {
     @Column(name = "end_date", nullable = false)
     private LocalDate endDate;
 
-    @Column(name = "status", length = 50, nullable = false)
+    @Column(name = "status", length = 50)
     private String status = "active";
-
-    @Column(name = "phone")
-    private String customerPhone;
-
-    @Column(name = "serial_no")
-    private String serialNo;
 }

@@ -209,7 +209,7 @@ public class ProductImageService {
         }
     }
 
-    // Thêm ảnh bằng đường dẫn có sẵn (giữ chức năng cũ)
+    // Thêm ảnh bằng đường dẫn có sẵn
     public ProductImage createImage(ProductImageRequestDTO request) {
         // Kiểm tra sản phẩm có tồn tại hay không
         Product product = productRepository.findById(request.getProductId())
@@ -277,7 +277,7 @@ public class ProductImageService {
         imageRepository.delete(image);
     }
 
-    // Chuyển Entity sang DTO
+    // Chuyển ProductImage sang ProductImageResponseDTO
     public ProductImageResponseDTO convertToDTO(ProductImage image) {
         ProductImageResponseDTO dto = new ProductImageResponseDTO();
         dto.setImageId(image.getImageId());

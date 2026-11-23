@@ -5,8 +5,6 @@ import java.util.stream.Collectors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -57,21 +55,7 @@ public class GlobalException {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(res);
     }
 
-    // 4. Xử lý lỗi sai thông tin đăng nhập (401 Unauthorized)
-    @ExceptionHandler(value = {
-        UsernameNotFoundException.class,
-        BadCredentialsException.class
-    })
-    public ResponseEntity<RestResponse<Object>> handleLoginException(Exception ex) {
-        RestResponse<Object> res = new RestResponse<>();
-        res.setStatusCode(HttpStatus.UNAUTHORIZED.value());
-        res.setError(ex.getMessage());
-        res.setMessage("Email hoặc mật khẩu không chính xác!");
-        
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(res);
-    }
-
-    // 5. Xử lý tất cả các lỗi hệ thống còn lại (Lỗi 500)
+    // 4. Xử lý tất cả các lỗi hệ thống còn lại (Lỗi 500)
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<RestResponse<Object>> handleAllExceptions(Exception ex) {
         RestResponse<Object> res = new RestResponse<>();

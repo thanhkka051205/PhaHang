@@ -20,13 +20,13 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     // Kiểm tra danh mục có sản phẩm hay không
     boolean existsByCategory_CategoryId(Integer categoryId);
 
-    // Tìm kiếm sản phẩm theo tên hoặc thương hiệu (giữ phương thức cũ)
+    // Tìm kiếm sản phẩm theo tên hoặc thương hiệu
     @Query("SELECT p FROM Product p WHERE " +
             "LOWER(p.name) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
             "OR LOWER(p.brand) LIKE LOWER(CONCAT('%', :keyword, '%'))")
     List<Product> searchProducts(@Param("keyword") String keyword);
 
-    // Lọc sản phẩm theo thương hiệu, danh mục và khoảng giá (giữ phương thức cũ)
+    // Lọc sản phẩm theo thương hiệu, danh mục và khoảng giá
     @Query(value = """
             SELECT p.*
             FROM products p

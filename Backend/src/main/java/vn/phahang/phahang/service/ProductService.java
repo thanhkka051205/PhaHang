@@ -247,7 +247,7 @@ public class ProductService {
         return dto;
     }
 
-    // Chuyển Entity sang DTO chi tiết sản phẩm
+    // Chuyển đổi Product sang ProductDetailResponseDTO
     public ProductDetailResponseDTO convertToDetailDTO(Product product) {
         ProductDetailResponseDTO dto = new ProductDetailResponseDTO();
         dto.setProductId(product.getProductId());
@@ -277,6 +277,7 @@ public class ProductService {
         return dto;
     }
 
+    // Chuyển đổi ProductVariant sang ProductVariantResponseDTO
     private ProductVariantResponseDTO convertVariantToDTO(ProductVariant variant) {
         ProductVariantResponseDTO dto = new ProductVariantResponseDTO();
         dto.setId(variant.getVariantId());
@@ -292,6 +293,7 @@ public class ProductService {
         return dto;
     }
 
+    // Chuyển đường dẫn ảnh thành URL công khai
     private String toPublicImageUrl(String imagePath) {
         if (imagePath == null || imagePath.isBlank()) {
             return imagePath;

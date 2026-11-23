@@ -37,7 +37,7 @@ public class AddressController {
     // API: Lấy địa chỉ theo ID
     // GET /api/addresses/{id}
     @GetMapping("/{id}")
-    public ResponseEntity<AddressResponseDTO> getAddressById(@PathVariable("id")Integer id) {
+    public ResponseEntity<AddressResponseDTO> getAddressById(@PathVariable Integer id) {
         return addressService.getAddressById(id)
             .map(addressService::convertToDTO)
             .map(ResponseEntity::ok)
@@ -57,7 +57,7 @@ public class AddressController {
     // PUT /api/addresses/{id}
     @PutMapping("/{id}")
     public ResponseEntity<AddressResponseDTO> updateAddress(
-        @PathVariable("id")Integer id,
+        @PathVariable Integer id,
         @RequestBody Address address) {
         return addressService.getAddressById(id)
             .map(existingAddress -> {
@@ -84,7 +84,7 @@ public class AddressController {
     // DELETE /api/addresses/{id}
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAddress(
-            @PathVariable("id")Integer id) {
+            @PathVariable Integer id) {
         // Kiểm tra địa chỉ có tồn tại không
         if (addressService.getAddressById(id).isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -97,7 +97,7 @@ public class AddressController {
     // API: Lấy danh sách địa chỉ theo người dùng
     // GET /api/addresses/user/{userId}
     @GetMapping("/user/{userId}")
-    public ResponseEntity<List<AddressResponseDTO>> getAddressesByUserId(@PathVariable("userId")Integer userId) {
+    public ResponseEntity<List<AddressResponseDTO>> getAddressesByUserId(@PathVariable Integer userId) {
         // Kiểm tra người dùng có tồn tại không
         if (userRepository.findById(userId).isEmpty()) {
             return ResponseEntity.notFound().build();

@@ -19,15 +19,24 @@ public class Payment {
     @JoinColumn(name = "order_id", nullable = false, unique = true)
     private Order order;
 
-    @Column(name = "method", nullable = false, length = 50)
-    private String method;
+    @Column(name = "payment_method", nullable = false, length = 50)
+    private String paymentMethod;
 
-    @Column(name = "amount", nullable = false, precision = 12, scale = 2)
+    @Column(name = "amount", nullable = false, precision = 15, scale = 2)
     private BigDecimal amount;
 
     @Column(name = "status", nullable = false, length = 50)
-    private String status = "unpaid";
+    private String status = "UNPAID";
+
+    @Column(name = "transaction_code", length = 100)
+    private String transactionCode;
 
     @Column(name = "paid_at")
     private LocalDateTime paidAt;
+
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @Column(name = "updated_at", nullable = false)
+    private LocalDateTime updatedAt;
 }

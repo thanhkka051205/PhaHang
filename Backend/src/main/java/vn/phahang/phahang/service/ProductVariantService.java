@@ -66,7 +66,7 @@ public class ProductVariantService {
     public void deleteVariant(Integer id) {
         variantRepository.deleteById(id);
     }
-    // Chuyển Entity sang DTO
+    // Chuyển ProductVariant sang ProductVariantResponseDTO
     @Transactional(readOnly = true)
     public ProductVariantResponseDTO convertToDTO(ProductVariant variant) {
         ProductVariantResponseDTO dto = new ProductVariantResponseDTO();

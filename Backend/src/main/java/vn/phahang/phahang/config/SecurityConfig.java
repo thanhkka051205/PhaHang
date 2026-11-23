@@ -3,26 +3,27 @@ package vn.phahang.phahang.config;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Value; 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.Customizer;
+import org.springframework.security.config.Customizer; 
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity; 
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtException;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
+// import org.springframework.security.oauth2.server.resource.web.access.BearerTokenAccessDeniedHandler;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
-
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 import com.nimbusds.jose.util.Base64;
 
@@ -42,12 +43,12 @@ public class SecurityConfig {
         this.customAuthenticationEntryPoint = customAuthenticationEntryPoint;
     }
 
-    @Bean
+    @Bean 
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    @Bean
+    
+    @Bean 
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
@@ -57,65 +58,59 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .cors(Customizer.withDefaults())
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers(
-                        "/",
-                        "/error",
-                        "/api/auth/login",
-                        "/api/auth/register",
-                        "/api/auth/refresh",
-                        "/api/categories/**",
-                        "/api/products/**",
-                        "/api/product-variants/**",
-                        "/api/coupons/**",
-                        "/api/warranties/lookup"
-                ).permitAll()
+                //Đường dẫn công khai
+                .requestMatchers("/", "/api/users", "/api/auth/login", "/api/auth/register", "/api/products/**").permitAll()
 
-                .requestMatchers("/api/admin/**").hasAnyAuthority("ADMIN", "ROLE_ADMIN")
-                .requestMatchers(
-                        "/api/orders/**", 
-                        "/api/order/**", 
-                        "/api/order-items/**", 
-                        "/api/users/**", 
-                        "/api/payments/**", 
-                        "/api/warranties/**"
-                ).authenticated()
+                // Cho phép mọi người xem ảnh sản phẩm
+                .requestMatchers(HttpMethod.GET, "/uploads/**").permitAll()
+                //Đường dẫn riêng tư
+                .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                .requestMatchers("/api/order/**").permitAll()
 
+                //Bắt buộc login
                 .anyRequest().authenticated()
             )
+            // .exceptionHandling(exceptions -> exceptions
+            //     .authenticationEntryPoint(this.customAuthenticationEntryPoint)
+            //     .accessDeniedHandler(new BearerTokenAccessDeniedHandler())
+            // )
             .oauth2ResourceServer(oauth2 -> oauth2
-                .jwt(jwt -> jwt
-                    .decoder(jwtDecoder())
-                    .jwtAuthenticationConverter(jwtAuthenticationConverter())
-                )
+                .jwt(Customizer.withDefaults())
                 .authenticationEntryPoint(this.customAuthenticationEntryPoint)
             );
-
+            
         return http.build();
     }
-
+    
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter() {
         JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
-        grantedAuthoritiesConverter.setAuthorityPrefix("");
-        grantedAuthoritiesConverter.setAuthoritiesClaimName("thanhkka");
+        grantedAuthoritiesConverter.setAuthorityPrefix(""); 
+        grantedAuthoritiesConverter.setAuthoritiesClaimName("thanhkka"); 
 
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
         return jwtAuthenticationConverter;
     }
 
-    @Bean
+    @Bean 
     public JwtEncoder jwtEncoder() {
         return new NimbusJwtEncoder(new ImmutableSecret<>(getJwtSecretKey()));
     }
 
     @Bean
     public JwtDecoder jwtDecoder() {
-        return NimbusJwtDecoder.withSecretKey(getJwtSecretKey())
+        NimbusJwtDecoder jwtDecoder = NimbusJwtDecoder.withSecretKey(getJwtSecretKey())
                 .macAlgorithm(SecurityUtil.JWT_ALGORITHM)
                 .build();
+        return token -> {
+            try {
+                return jwtDecoder.decode(token);
+            } catch (JwtException e) {
+                throw new RuntimeException("Invalid JWT token: " + e.getMessage(), e);
+            }
+        };
     }
 
     private SecretKey getJwtSecretKey() {

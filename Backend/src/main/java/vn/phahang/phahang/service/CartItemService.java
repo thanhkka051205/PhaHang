@@ -198,11 +198,7 @@ public class CartItemService {
 
     // Tìm người dùng thông qua email trong JWT
     private User getUserByEmail(String email) {
-        User user = this.userRepository.findByEmail(email);
-        if (user == null) {
-        throw new RuntimeException("Không tìm thấy người dùng...");
-        }
-
-        return user;
-    }
+    return userRepository.findByEmail(email)
+    .orElseThrow(() -> new RuntimeException("Không tìm thấy người dùng"));
+}
 }

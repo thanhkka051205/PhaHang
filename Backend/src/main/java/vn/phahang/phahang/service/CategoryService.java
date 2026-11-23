@@ -84,7 +84,7 @@ public class CategoryService {
         categoryRepository.deleteById(id);
     }
 
-    // Chuyển Entity sang DTO
+    // Chuyển Categorty sang CategoryResponseDTO
     public CategoryResponseDTO convertToDTO(Category category) {
         CategoryResponseDTO dto = new CategoryResponseDTO();
         dto.setCategoryId(category.getCategoryId());
