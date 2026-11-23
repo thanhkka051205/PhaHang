@@ -38,7 +38,7 @@ public class PaymentController {
     }
 
 
-    // API Tạo mới thanh toán COD(sau sẽ gộp vào order hoặc k)
+    // API Tạo mới thanh toán COD
     // POST /api/payments
     @PostMapping
     public ResponseEntity<PaymentDTO> createPayment(@Valid @RequestBody PaymentDTO postPayment) {

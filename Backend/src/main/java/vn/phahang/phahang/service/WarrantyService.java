@@ -43,7 +43,7 @@ public class WarrantyService {
 
     // Lấy danh sách bảo hành 
     // API = GET /api/warranties
-    @Transactional(readOnly = true)
+    @Transactional
     public List<WarrantyDTO> getAllWarranties() {
         return warrantyRepository.findAll()
                 .stream()
@@ -52,7 +52,7 @@ public class WarrantyService {
     }
 
     // Tra cứu bảo hành theo SĐT hoặc Serial
-    @Transactional(readOnly = true)
+    @Transactional
     public List<WarrantyDTO> lookupWarranties(String customerPhone, String serialNo) {
         List<Warranty> warranties = warrantyRepository.lookupWarranties(customerPhone, serialNo);
         return warranties.stream()

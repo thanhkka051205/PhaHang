@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
-import vn.phahang.phahang.domain.User;
 import vn.phahang.phahang.dto.LoginDTO;
+import vn.phahang.phahang.dto.UserResponseDTO;
 import vn.phahang.phahang.service.UserService;
 import vn.phahang.phahang.util.error.SecurityUtil;
 
@@ -42,12 +42,11 @@ public class AuthController {
         // Tạo token
         String accessToken = this.securityUtil.createToken(authentication);
 
-        User currentUserDB = this.userService.handleGetUserByUsername(loginDTO.getUsername());
+        UserResponseDTO currentUserDB = this.userService.handleGetUserByUsername(loginDTO.getUsername());
 
         LoginDTO resLoginDTO = new LoginDTO();
         resLoginDTO.setAccessToken(accessToken);
         if (currentUserDB != null) {
-            currentUserDB.setPassword(null);
             resLoginDTO.setUser(currentUserDB);
         }
 

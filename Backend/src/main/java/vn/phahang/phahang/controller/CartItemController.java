@@ -40,7 +40,7 @@ public class CartItemController {
     // API: Cập nhật số lượng sản phẩm trong giỏ hàng
     // PUT //api/cart/id
     @PutMapping("/{cartItemId}")
-    public ResponseEntity<CartItemResponseDTO> updateCartItem(Authentication authentication, @PathVariable Integer cartItemId, @Valid @RequestBody CartItemUpdateDTO request) {
+    public ResponseEntity<CartItemResponseDTO> updateCartItem(Authentication authentication, @PathVariable("cartItemId")Integer cartItemId, @Valid @RequestBody CartItemUpdateDTO request) {
         return cartItemService.updateCartItem(authentication.getName(), cartItemId, request)
                 .map(cartItem -> ResponseEntity.ok(
                         cartItemService.convertToDTO(cartItem)))
@@ -49,7 +49,7 @@ public class CartItemController {
 
     // Xóa một sản phẩm khỏi giỏ hàng
     @DeleteMapping("/{cartItemId}")
-    public ResponseEntity<Void> deleteCartItem(Authentication authentication, @PathVariable Integer cartItemId) {
+    public ResponseEntity<Void> deleteCartItem(Authentication authentication, @PathVariable("cartItemId")Integer cartItemId) {
         boolean deleted = cartItemService.deleteCartItem(
                 authentication.getName(), cartItemId);
         if (!deleted) {

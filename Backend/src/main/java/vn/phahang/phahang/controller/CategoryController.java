@@ -33,7 +33,7 @@ public class CategoryController {
     // API: Lấy danh mục theo ID
     // GET /api/categories/{id}
     @GetMapping("/{id}")
-    public ResponseEntity<CategoryResponseDTO> getCategoryById(@PathVariable Integer id) {
+    public ResponseEntity<CategoryResponseDTO> getCategoryById(@PathVariable("id")Integer id) {
         return categoryService.getCategoryById(id)
                 .map(categoryService::convertToDTO)
                 .map(ResponseEntity::ok)
@@ -52,7 +52,7 @@ public class CategoryController {
     // API: Cập nhật danh mục
     // PUT /api/categories/{id}
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateCategory(@PathVariable Integer id,@Valid @RequestBody CategoryRequestDTO request) {
+    public ResponseEntity<?> updateCategory(@PathVariable("id")Integer id,@Valid @RequestBody CategoryRequestDTO request) {
         return categoryService.updateCategory(id, request)
                 .map(categoryService::convertToDTO)
                 .map(ResponseEntity::ok)
@@ -62,7 +62,7 @@ public class CategoryController {
     // API: Xóa danh mục
     // DELETE /api/categories/{id}
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCategory(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteCategory(@PathVariable("id")Integer id) {
         if (categoryService.getCategoryById(id).isEmpty()) {
             return ResponseEntity.notFound().build();
         }

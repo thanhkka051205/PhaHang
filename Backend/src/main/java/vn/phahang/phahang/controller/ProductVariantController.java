@@ -38,7 +38,7 @@ public class ProductVariantController {
     // API: Lấy phiên bản theo ID
     // GET /api/product-variants/{id}
     @GetMapping("/{id}")
-    public ResponseEntity<ProductVariantResponseDTO> getVariantById(@PathVariable Integer id) {
+    public ResponseEntity<ProductVariantResponseDTO> getVariantById(@PathVariable("id")Integer id) {
         return variantService.getVariantById(id)
             .map(variantService::convertToDTO)
             .map(ResponseEntity::ok)
@@ -48,7 +48,7 @@ public class ProductVariantController {
     // API: Lấy phiên bản theo sản phẩm
     // GET /api/product-variants/product/{productId}
     @GetMapping("/product/{productId}")
-    public ResponseEntity<?> getVariantsByProductId(@PathVariable Integer productId) {
+    public ResponseEntity<?> getVariantsByProductId(@PathVariable("productId")Integer productId) {
         if (!productRepository.existsById(productId)) {
             return ResponseEntity.notFound().build();
         }
@@ -77,7 +77,7 @@ public class ProductVariantController {
     // PUT /api/product-variants/{id}
     @PutMapping("/{id}")
     public ResponseEntity<?> updateVariant(
-            @PathVariable Integer id,
+            @PathVariable("id")Integer id,
             @Valid @RequestBody ProductVariantRequestDTO request) {
 
         try {
@@ -93,7 +93,7 @@ public class ProductVariantController {
     // API: Xóa phiên bản
     // DELETE /api/product-variants/{id}
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteVariant(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteVariant(@PathVariable("id")Integer id) {
         if (variantService.getVariantById(id).isEmpty()) {
             return ResponseEntity.notFound().build();
         }
