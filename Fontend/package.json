@@ -1,0 +1,20 @@
+{
+  "name": "zz",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "npx serve .",
+    "build": "node scripts/build.js",
+    "build:css": "tailwindcss -i shared/styles/input.css -o shared/styles/tailwind.css --minify",
+    "test": "node --test tests/unit/format.test.js tests/services/product_search.test.js tests/services/cart_store.test.js tests/services/auth_store.test.js tests/services/mock_service.test.js tests/features/warranty_and_features.test.js tests/features/auth_flow.test.js tests/features/orders_privacy.test.js tests/unit/validate.test.js tests/services/adapters.test.js tests/services/api_client_auth.test.js tests/services/hybrid_auth_fallback.test.js tests/features/seamless_srs_fe.test.js tests/unit/srs_schemas.test.js tests/services/no_mock_guard.test.js"
+  },
+  "dependencies": {
+    "lucide": "^1.69.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.5.2",
+    "tailwindcss": "^3.4.17"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "buildCommand": "node scripts/build.js",
+  "outputDirectory": "dist",
+  "cleanUrls": false,
+  "rewrites": [
+    { "source": "/login", "destination": "/customer/pages/login.html" },
+    { "source": "/register", "destination": "/customer/pages/register.html" },
+    { "source": "/cart", "destination": "/customer/pages/cart.html" },
+    { "source": "/checkout", "destination": "/customer/pages/checkout.html" },
+    { "source": "/order-success", "destination": "/customer/pages/order-success.html" },
+    { "source": "/my-orders", "destination": "/customer/pages/my-orders.html" },
+    { "source": "/warranty", "destination": "/customer/pages/warranty.html" },
+    { "source": "/product-detail", "destination": "/customer/pages/product-detail.html" },
+    { "source": "/staff", "destination": "/staff/pages/index.html" },
+    { "source": "/staff/orders", "destination": "/staff/pages/orders.html" },
+    { "source": "/staff/products", "destination": "/staff/pages/products.html" },
+    { "source": "/staff/warranties", "destination": "/staff/pages/warranties.html" },
+    { "source": "/admin", "destination": "/admin/pages/index.html" },
+    { "source": "/admin/login", "destination": "/admin/pages/login.html" },
+    { "source": "/admin/products", "destination": "/admin/pages/products.html" },
+    { "source": "/admin/orders", "destination": "/admin/pages/orders.html" },
+    { "source": "/admin/warranties", "destination": "/admin/pages/warranties.html" },
+    { "source": "/admin/users", "destination": "/admin/pages/users.html" },
+    { "source": "/admin/coupons", "destination": "/admin/pages/coupons.html" }
+  ]
+}
